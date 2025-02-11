@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For Azalia 💝</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,20 +12,13 @@
     <div class="photo-frame">
         <img src="your-photo.jpg" alt="Our Photo">
     </div>
+
+    <button class="heart-btn" onclick="showLoveMessage()" ontouchend="showLoveMessage()">
+        Click for More Love! 💌
+    </button>
     
-<!-- Add this meta tag in head if missing -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <p id="message"></p>
 
-<!-- Add touch event support -->
-<button class="heart-btn" 
-        onclick="showLoveMessage()" 
-        ontouchend="showLoveMessage()">
-    Click for More Love! 💌
-</button>
-
-<p id="message"></p>
-
-    <!-- Audio controls -->
     <div class="audio-controls">
         <button class="audio-btn" onclick="toggleAudio()">
             <span id="audioText">Play Music</span> 🎵

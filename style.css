@@ -47,56 +47,20 @@ h1 {
 .floating-heart {
     position: absolute;
     font-size: 2em;
-    animation: float 5s infinite linear;
+    animation: float 5s linear forwards;
     pointer-events: none;
     opacity: 0.8;
 }
 
-@keyframes float {
-    0% { transform: translateY(100vh) rotate(0deg) scale(0.5); }
-    100% { transform: translateY(-20vh) rotate(360deg) scale(1.2); opacity: 0; }
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.couple-emoji {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-size: 3em;
-    opacity: 0.7;
-}
-
-h1 {
-    /* Update title */
-    content: "Happy Valentine's Azalia! 💐";
-}
-
-#message {
-    /* Update message text */
-    content: "I love you so much! 🌹💖";
-}
-
-/* Add flower emojis */
 .floating-flower {
     position: absolute;
     font-size: 2em;
-    animation: float 6s infinite linear;
+    animation: flower-float 7s linear forwards;
     pointer-events: none;
     opacity: 0.9;
     z-index: 1;
 }
 
-/* Add photo frame */
 .photo-frame {
     width: 250px;
     height: 250px;
@@ -114,29 +78,6 @@ h1 {
     object-fit: cover;
 }
 
-/* Mobile responsiveness */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 2.5em;
-        margin-top: 1em;
-    }
-    
-    .heart-btn {
-        font-size: 1.5em;
-        padding: 12px 24px;
-    }
-    
-    .photo-frame {
-        width: 200px;
-        height: 200px;
-    }
-    
-    #message {
-        font-size: 1.8em;
-    }
-}
-
-/* Audio controls */
 .audio-controls {
     position: fixed;
     bottom: 20px;
@@ -155,18 +96,10 @@ h1 {
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
-/* Ensure emoji visibility on mobile */
-.floating-heart, .floating-flower {
-    will-change: transform; /* Improve animation performance */
-    user-select: none; /* Prevent text selection */
-    -webkit-tap-highlight-color: transparent; /* Remove mobile tap highlight */
-}
-
-/* Mobile-specific adjustments */
 @media (max-width: 600px) {
     h1 {
-        margin-top: 0.5em;
         font-size: 2.2em;
+        margin-top: 0.5em;
         padding: 0 15px;
     }
     
@@ -176,9 +109,13 @@ h1 {
         margin-top: 1em;
     }
     
+    .photo-frame {
+        width: 200px;
+        height: 200px;
+    }
+    
     #message {
         font-size: 1.5em;
-        padding: 0 15px;
     }
     
     .floating-heart, .floating-flower {
@@ -186,12 +123,23 @@ h1 {
     }
 }
 
-/* Add flower animation */
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg) scale(0.5); }
+    100% { transform: translateY(-30vh) rotate(360deg) scale(1.2); opacity: 0; }
+}
+
 @keyframes flower-float {
     0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
     100% { transform: translateY(-30vh) rotate(360deg); opacity: 0; }
 }
 
-.floating-flower {
-    animation: flower-float 7s linear forwards;
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
