@@ -24,7 +24,7 @@ function createHeartsAndFlowers() {
 }
 
 function createFlower() {
-    const flowers = ['🌸', '🌺', '🌷', '💮', '🏵️', '🌻', '🌼'];
+    const flowers = ['🌸', '🌺', '🌷', '💮', '🏵️', '🌻', '🌼', '🌹', '💐'];
     const flower = document.createElement("div");
     flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
     flower.classList.add("floating-flower");
@@ -38,7 +38,7 @@ function createFlower() {
 }
 
 function createHeart() {
-    const hearts = ['❤️', '💕', '💞', '💓', '💗', '💖', '💘'];
+    const hearts = ['❤️', '💕', '💞', '💓', '💗', '💖', '💘', '🧡', '💛', '💚', '💙', '💜', '💌', '🤍', '🤎'];
     const heart = document.createElement("div");
     heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
     heart.classList.add("floating-heart");
@@ -111,7 +111,7 @@ window.addEventListener('load', () => {
     // Add floating message
     const bubble = document.createElement("div");
     bubble.classList.add("message-bubble");
-    bubble.innerHTML = "That's us! 💑";
+    bubble.innerHTML = "That's us! 💞";
     bubble.style.left = "55%";
     bubble.style.top = "40%";
     document.body.appendChild(bubble);
