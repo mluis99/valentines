@@ -69,18 +69,17 @@ h1 {
     position: relative;
     background: #fff;
     padding: 15px;
-    transform: rotate(-5deg);
     transition: all 0.3s ease;
     filter: drop-shadow(0 0 15px rgba(255, 60, 110, 0.4));
     clip-path: polygon(
         50% 0%,
-        90% 20%,
+        90% 30%,
         100% 60%,
         75% 100%,
-        50% 80%,
+        50% 85%,
         25% 100%,
         0% 60%,
-        10% 20%
+        10% 30%
     );
     display: flex;
     align-items: center;
@@ -94,13 +93,13 @@ h1 {
     object-fit: cover;
     clip-path: polygon(
         50% 0%,
-        90% 20%,
+        90% 30%,
         100% 60%,
         75% 100%,
-        50% 80%,
+        50% 85%,
         25% 100%,
         0% 60%,
-        10% 20%
+        10% 30%
     );
 }
 
@@ -109,12 +108,13 @@ h1 {
     position: absolute;
     font-size: 3em;
     bottom: -40px;
-    right: -30px;
+    left: 50%;
+    transform: translateX(-50%);
     animation: float 3s infinite;
 }
 
 .photo-frame:hover {
-    transform: rotate(0deg) scale(1.05);
+    transform: scale(1.05);
     filter: drop-shadow(0 0 25px rgba(255, 60, 110, 0.6));
 }
 
