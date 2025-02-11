@@ -7,7 +7,7 @@ function showLoveMessage() {
     createHeartsAndFlowers();
     
     // Play audio only once
-    if(!audioPlayed) {
+    if (!audioPlayed) {
         audioElement.play().catch(error => {
             console.log("Audio play failed:", error);
         });
@@ -17,7 +17,7 @@ function showLoveMessage() {
 }
 
 function createHeartsAndFlowers() {
-    for(let i = 0; i < 30; i++) {
+    for (let i = 0; i < 30; i++) {
         createHeart();
         createFlower();
     }
@@ -52,7 +52,7 @@ function createHeart() {
 }
 
 function toggleAudio() {
-    if(audioElement.paused) {
+    if (audioElement.paused) {
         audioElement.play();
         document.getElementById("audioText").innerText = "Pause Music";
     } else {
@@ -77,7 +77,7 @@ function addSparkles() {
     const frame = document.querySelector('.photo-frame');
     const sparkles = ['✨', '🌟', '💫', '⭐'];
     
-    for(let i = 0; i < 8; i++) {
+    for (let i = 0; i < 8; i++) {
         const sparkle = document.createElement("div");
         sparkle.classList.add("sparkle");
         sparkle.innerHTML = sparkles[Math.floor(Math.random() * sparkles.length)];
@@ -88,9 +88,25 @@ function addSparkles() {
     }
 }
 
+// Add floating love notes
+function createLoveNote() {
+    const notes = ["Forever Yours 💕", "You're My Everything 🌹", "Love You to the Moon 🌙", "My Heart Beats for You 💓"];
+    const note = document.createElement("div");
+    note.classList.add("love-note");
+    note.innerHTML = notes[Math.floor(Math.random() * notes.length)];
+    note.style.left = Math.random() * 90 + "vw";
+    note.style.top = Math.random() * 90 + "vh";
+    note.style.fontSize = (Math.random() * 1 + 1) + "em";
+    note.style.animationDuration = (Math.random() * 5 + 5) + "s";
+    document.body.appendChild(note);
+
+    setTimeout(() => note.remove(), 8000);
+}
+
 // Initialize when page loads
 window.addEventListener('load', () => {
     addSparkles();
+    setInterval(createLoveNote, 3000);
     
     // Add floating message
     const bubble = document.createElement("div");
