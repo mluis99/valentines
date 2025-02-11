@@ -113,3 +113,44 @@ h1 {
     height: 100%;
     object-fit: cover;
 }
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2.5em;
+        margin-top: 1em;
+    }
+    
+    .heart-btn {
+        font-size: 1.5em;
+        padding: 12px 24px;
+    }
+    
+    .photo-frame {
+        width: 200px;
+        height: 200px;
+    }
+    
+    #message {
+        font-size: 1.8em;
+    }
+}
+
+/* Audio controls */
+.audio-controls {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 100;
+}
+
+.audio-btn {
+    background: #ff3366;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-family: 'Comic Sans MS', cursive;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
