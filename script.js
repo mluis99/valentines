@@ -1,20 +1,44 @@
 let audioPlayed = false;
 const audioElement = document.getElementById("valentineAudio");
-let heartInterval;
+
+// Improved audio initialization
+function initAudio() {
+    audioElement.volume = 0.7;
+    audioElement.preload = "auto"; // Ensure full file loads
+    audioElement.addEventListener('canplaythrough', () => {
+        console.log("Audio ready to play fully");
+    });
+}
 
 function showLoveMessage() {
-    // Always create elements on click
     createHeartsAndFlowers();
     
-    // Play audio only once
     if (!audioPlayed) {
-        audioElement.play().catch(error => {
-            console.log("Audio play failed:", error);
-        });
-        audioPlayed = true;
-        document.getElementById("audioText").innerText = "Pause Music";
+        audioElement.play()
+            .then(() => {
+                audioPlayed = true;
+                document.getElementById("audioText").innerText = "Pause Music";
+            })
+            .catch(error => {
+                console.log("Audio play failed:", error);
+                // Show error message to user
+                alert("Please click anywhere first to allow audio!");
+            });
     }
 }
+
+function toggleAudio() {
+    if (audioElement.paused) {
+        audioElement.play();
+        document.getElementById("audioText").innerText = "Pause Music";
+    } else {
+        audioElement.pause();
+        document.getElementById("audioText").innerText = "Play Music";
+    }
+}
+
+// Initialize audio properly
+initAudio();
 
 function createHeartsAndFlowers() {
     for (let i = 0; i < 30; i++) {
