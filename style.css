@@ -1,0 +1,77 @@
+body {
+    background: linear-gradient(135deg, #ff99cc, #ff6699);
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    overflow: hidden;
+    margin: 0;
+    min-height: 100vh;
+}
+
+h1 {
+    color: #ff1a1a;
+    font-size: 4em;
+    margin-top: 1.5em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    animation: pulse 2s infinite;
+}
+
+.heart-btn {
+    color: white;
+    background: #ff3366;
+    padding: 15px 30px;
+    font-size: 2em;
+    border-radius: 30px;
+    border: 3px solid white;
+    display: inline-block;
+    margin-top: 2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255,51,102,0.3);
+}
+
+.heart-btn:hover {
+    transform: scale(1.1) rotate(3deg);
+    background: #ff1a53;
+    box-shadow: 0 6px 20px rgba(255,26,83,0.4);
+}
+
+#message {
+    display: none;
+    font-size: 2.5em;
+    margin-top: 2em;
+    color: #ff0066;
+    text-shadow: 1px 1px 2px white;
+    animation: bounce 1s infinite;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 2em;
+    animation: float 5s infinite linear;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg) scale(0.5); }
+    100% { transform: translateY(-20vh) rotate(360deg) scale(1.2); opacity: 0; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.couple-emoji {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 3em;
+    opacity: 0.7;
+}
