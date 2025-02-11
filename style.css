@@ -75,6 +75,12 @@ h1 {
     filter: drop-shadow(0 0 15px rgba(255,60,110,0.4));
 }
 
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .photo-frame::before {
     content: '💖';
     position: absolute;
