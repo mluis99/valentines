@@ -1,76 +1,33 @@
+/* Main Styles */
 body {
     background: linear-gradient(135deg, #ff99cc, #ff6699);
     text-align: center;
     font-family: 'Comic Sans MS', cursive, sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
     margin: 0;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 h1 {
     color: #ff1a1a;
-    font-size: 4em;
-    margin-top: 1.5em;
+    font-size: 3em;
+    margin: 1em 15px 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     animation: pulse 2s infinite;
+    line-height: 1.3;
+    word-wrap: break-word;
 }
 
-.heart-btn {
-    color: white;
-    background: #ff3366;
-    padding: 15px 30px;
-    font-size: 2em;
-    border-radius: 30px;
-    border: 3px solid white;
-    display: inline-block;
-    margin-top: 2em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 51, 102, 0.3);
-}
-
-.heart-btn:hover {
-    transform: scale(1.1) rotate(3deg);
-    background: #ff1a53;
-    box-shadow: 0 6px 20px rgba(255, 26, 83, 0.4);
-}
-
-#message {
-    display: none;
-    font-size: 2.5em;
-    margin-top: 2em;
-    color: #ff0066;
-    text-shadow: 1px 1px 2px white;
-    animation: bounce 1s infinite;
-}
-
-.floating-heart {
-    position: absolute;
-    font-size: 2em;
-    animation: float 5s linear forwards;
-    pointer-events: none;
-    opacity: 0.8;
-}
-
-.floating-flower {
-    position: absolute;
-    font-size: 2em;
-    animation: flower-float 7s linear forwards;
-    pointer-events: none;
-    opacity: 0.9;
-    z-index: 1;
-}
-
-/* CORRECTED HEART FRAME */
+/* Heart-shaped Frame */
 .photo-frame {
-    width: 300px;
-    height: 300px;
-    margin: 2em auto;
-    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 1.5em auto;
     background: #fff;
-    padding: 15px;
-    transition: all 0.3s ease;
-    filter: drop-shadow(0 0 15px rgba(255, 60, 110, 0.4));
+    padding: 12px;
     clip-path: polygon(
         50% 15%,
         85% 0%,
@@ -81,41 +38,137 @@ h1 {
         0% 25%,
         15% 0%
     );
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: glow 2s infinite;
+    position: relative;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 0 15px rgba(255, 60, 110, 0.4));
 }
 
 .photo-frame img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    clip-path: polygon(
-        50% 15%,
-        85% 0%,
-        100% 25%,
-        100% 75%,
-        50% 100%,
-        0% 75%,
-        0% 25%,
-        15% 0%
-    );
+    clip-path: inherit;
 }
 
 .photo-frame::before {
     content: '💖';
     position: absolute;
-    font-size: 3em;
-    bottom: -40px;
+    font-size: 2.5em;
+    bottom: -45px;
     left: 50%;
     transform: translateX(-50%);
     animation: float 3s infinite;
 }
 
-.photo-frame:hover {
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 25px rgba(255, 60, 110, 0.6));
+/* Interactive Button */
+.heart-btn {
+    background: #ff3366;
+    color: white;
+    font-size: 1.5em;
+    padding: 15px 35px;
+    border: 3px solid white;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 1.5em auto;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 51, 102, 0.3);
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* Rest of your existing styles... */
+.heart-btn:hover {
+    transform: scale(1.08) rotate(2deg);
+    background: #ff1a53;
+}
+
+/* Floating Elements */
+.floating-heart, .floating-flower {
+    position: absolute;
+    pointer-events: none;
+    animation: float 5s linear forwards;
+    font-size: 1.8em;
+    opacity: 0.85;
+    z-index: 1;
+}
+
+/* Mobile Optimization */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.8em;
+        margin: 0.8em 10px 0;
+    }
+
+    .photo-frame {
+        width: 180px;
+        height: 180px;
+        margin: 1em auto;
+    }
+
+    .photo-frame::before {
+        font-size: 2em;
+        bottom: -35px;
+    }
+
+    .heart-btn {
+        font-size: 1.2em;
+        padding: 12px 25px;
+        margin: 1em auto;
+    }
+
+    #message {
+        font-size: 1.4em;
+        margin: 1em 10px;
+    }
+
+    .floating-heart, .floating-flower {
+        font-size: 1.5em !important;
+    }
+}
+
+/* Animations */
+@keyframes float {
+    0% { transform: translateY(100vh) scale(0.8); opacity: 1; }
+    100% { transform: translateY(-30vh) scale(1.2); opacity: 0; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes glow {
+    0% { filter: drop-shadow(0 0 10px rgba(255, 60, 110, 0.4)); }
+    50% { filter: drop-shadow(0 0 20px rgba(255, 60, 110, 0.7)); }
+    100% { filter: drop-shadow(0 0 10px rgba(255, 60, 110, 0.4)); }
+}
+
+/* Audio Controls */
+.audio-controls {
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    z-index: 100;
+}
+
+.audio-btn {
+    background: #ff3366;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Message Display */
+#message {
+    display: none;
+    color: #ff0066;
+    text-shadow: 1px 1px 2px white;
+    animation: bounce 1s infinite;
+    margin: 1.5em 15px;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
