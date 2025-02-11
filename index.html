@@ -13,8 +13,17 @@
         <img src="your-photo.jpg" alt="Our Photo">
     </div>
     
-    <button class="heart-btn" onclick="showLoveMessage()">Click for More Love! 💌</button>
-    <p id="message"></p>
+<!-- Add this meta tag in head if missing -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<!-- Add touch event support -->
+<button class="heart-btn" 
+        onclick="showLoveMessage()" 
+        ontouchend="showLoveMessage()">
+    Click for More Love! 💌
+</button>
+
+<p id="message"></p>
 
     <!-- Audio controls -->
     <div class="audio-controls">
