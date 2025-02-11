@@ -71,3 +71,32 @@ audioElement.addEventListener('ended', () => {
 
 // Initial background hearts
 heartInterval = setInterval(createHeart, 100);
+
+// Add sparkles around photo frame
+function addSparkles() {
+    const frame = document.querySelector('.photo-frame');
+    const sparkles = ['✨', '🌟', '💫', '⭐'];
+    
+    for(let i = 0; i < 8; i++) {
+        const sparkle = document.createElement("div");
+        sparkle.classList.add("sparkle");
+        sparkle.innerHTML = sparkles[Math.floor(Math.random() * sparkles.length)];
+        sparkle.style.left = Math.random() * 100 + "%";
+        sparkle.style.top = Math.random() * 100 + "%";
+        sparkle.style.animationDelay = Math.random() * 1 + "s";
+        frame.appendChild(sparkle);
+    }
+}
+
+// Initialize when page loads
+window.addEventListener('load', () => {
+    addSparkles();
+    
+    // Add floating message
+    const bubble = document.createElement("div");
+    bubble.classList.add("message-bubble");
+    bubble.innerHTML = "That's us! 💑";
+    bubble.style.left = "55%";
+    bubble.style.top = "40%";
+    document.body.appendChild(bubble);
+});
