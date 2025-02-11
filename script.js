@@ -1,39 +1,47 @@
-let audioPlayed = false;
-const audioElement = document.getElementById("valentineAudio");
-
-// Initialize audio to prevent autoplay issues
-audioElement.volume = 0.7;
-
-function showLoveMessage() {
-    // Always create hearts/flowers on click
-    createHeartsAndFlowers();
-    
-    // Play audio only once
-    if(!audioPlayed) {
-        audioElement.play();
-        audioPlayed = true;
-        document.getElementById("audioText").innerText = "Pause Music";
-    }
-}
-
 function createHeartsAndFlowers() {
-    for(let i = 0; i < 30; i++) {
+    // Create more elements for better visibility
+    for(let i = 0; i < 40; i++) {
         createHeart();
         createFlower();
     }
 }
 
-function toggleAudio() {
-    if(audioElement.paused) {
-        audioElement.play();
-        document.getElementById("audioText").innerText = "Pause Music";
-    } else {
-        audioElement.pause();
-        document.getElementById("audioText").innerText = "Play Music";
-    }
+function createFlower() {
+    const flowers = ['🌸', '🌺', '🌷', '💮', '🏵️', '🌻', '🌼'];
+    const flower = document.createElement("div");
+    flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+    flower.classList.add("floating-flower");
+    
+    // Mobile-friendly positioning
+    flower.style.left = Math.random() * window.innerWidth + "px";
+    flower.style.fontSize = (Math.random() * 3 + 2) + "em";
+    flower.style.animationDuration = (Math.random() * 4 + 3) + "s";
+    flower.style.zIndex = "1";
+    
+    document.body.appendChild(flower);
+
+    setTimeout(() => flower.remove(), 7000);
 }
 
-// Update audio element initialization in script
-document.getElementById("valentineAudio").addEventListener('ended', function() {
-    document.getElementById("audioText").innerText = "Play Music";
+function createHeart() {
+    const hearts = ['❤️', '💕', '💞', '💓', '💗', '💖', '💘'];
+    const heart = document.createElement("div");
+    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+    heart.classList.add("floating-heart");
+    
+    // Better mobile positioning
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.fontSize = (Math.random() * 3 + 2) + "em";
+    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    heart.style.zIndex = "1";
+    
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+}
+
+// Initialize with viewport-based positioning
+window.addEventListener('resize', () => {
+    clearInterval(heartInterval);
+    heartInterval = setInterval(createHeart, 100);
 });
