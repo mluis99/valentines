@@ -75,3 +75,41 @@ h1 {
     font-size: 3em;
     opacity: 0.7;
 }
+
+h1 {
+    /* Update title */
+    content: "Happy Valentine's Azalia! 💐";
+}
+
+#message {
+    /* Update message text */
+    content: "I love you so much! 🌹💖";
+}
+
+/* Add flower emojis */
+.floating-flower {
+    position: absolute;
+    font-size: 2em;
+    animation: float 6s infinite linear;
+    pointer-events: none;
+    opacity: 0.9;
+    z-index: 1;
+}
+
+/* Add photo frame */
+.photo-frame {
+    width: 250px;
+    height: 250px;
+    border: 10px solid white;
+    border-radius: 50%;
+    margin: 2em auto;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    background: #fff;
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
