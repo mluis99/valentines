@@ -27,12 +27,25 @@ html {
     overflow: hidden; /* Hide the images that are not currently visible */
   }
 
-  /* Hide all images by default */
-  .slide {
+/* Slideshow Image */
+.slide {
     display: none;
-    width: 100%;
-    height: auto;
+    width: min(250px, 70vw); /* Keep the same size */
+    height: min(250px, 70vw); /* Keep the same size */
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 15px; /* Apply rounded edges */
+    filter: drop-shadow(0 0 15px rgba(255, 60, 110, 0.4)); /* Optional: keeps the shadow effect */
+    z-index: 5;
   }
+
+  /* Make sure the image inside the slideshow fits */
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fills the space without distortion */
+    border-radius: 15px; /* Ensure the image has rounded edges as well */
+  }  
 
   /* Fade animation for the slideshow */
   .fade {
@@ -241,7 +254,7 @@ html {
     color: #fff;
     font-size: 0.9em;
   }
-  
+
   .footer p {
     margin: 0;
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
