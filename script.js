@@ -46,15 +46,7 @@ function showHeartSlide(index) {
 }
 
 // Love message and effects
-function showLoveMessage() {
-  const button = document.querySelector('.heart-btn');
-    
-    // Add bounce animation
-    button.classList.add('clicked');
-    setTimeout(() => {
-        button.classList.remove('clicked');
-    }, 600);
-  
+function showLoveMessage() {  
   createHeartsAndFlowers();
   
   if (!audioPlayed) {
