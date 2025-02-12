@@ -1,7 +1,6 @@
 let audioPlayed = false;
 const audioElement = document.getElementById("valentineAudio");
 
-// Improved audio initialization
 function initAudio() {
     audioElement.volume = 0.7;
     audioElement.preload = "auto";
@@ -36,7 +35,6 @@ function toggleAudio() {
     }
 }
 
-// Initialize audio
 initAudio();
 
 function createHeartsAndFlowers() {
@@ -70,7 +68,6 @@ function createHeart() {
     setTimeout(() => heart.remove(), 5000);
 }
 
-// Add sparkles
 function addSparkles() {
     const frame = document.querySelector('.photo-frame');
     const sparkles = ['✨', '🌟', '💫', '⭐'];
@@ -85,26 +82,24 @@ function addSparkles() {
     }
 }
 
-// Floating messages
 const notes = [
-    "That's us! 💞",
-    "Forever Yours 💕",
-    "You're My Everything 🌹",
-    "Love You to the Moon 🌙"
+    "YOU'RE MY EVERYTHING 💖", 
+    "THAT'S US! 💞",
+    "LOVE YOU TO THE MOON 🌙",
+    "FOREVER YOURS 🌹"
 ];
 
 function createLoveNote() {
     const note = document.createElement("div");
     note.classList.add("love-note");
     note.innerHTML = notes[Math.floor(Math.random() * notes.length)];
-    note.style.left = Math.random() * 90 + "vw";
-    note.style.fontSize = (Math.random() * 1 + 1.2) + "em";
-    note.style.animationDuration = (Math.random() * 5 + 8) + "s";
+    note.style.left = Math.random() * 85 + "vw";
+    note.style.fontSize = (Math.random() * 0.5 + 1.8) + "em";
+    note.style.animationDuration = (Math.random() * 2 + 8) + "s";
     document.body.appendChild(note);
-    setTimeout(() => note.remove(), 8000);
+    setTimeout(() => note.remove(), 10000);
 }
 
-// Initialize
 window.addEventListener('load', () => {
     addSparkles();
     setInterval(createLoveNote, 2500);
