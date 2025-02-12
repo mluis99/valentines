@@ -21,55 +21,69 @@ function initHeartSlideshow() {
   const slides = document.querySelectorAll('.heart-slide');
   const dotsContainer = document.querySelector('.heart-dots');
   const slideshow = document.querySelector('.heart-slideshow');
+  let slideWidth = slideshow.offsetWidth;
+  let isSwiping = false;
 
-  // Create navigation dots
-  slides.forEach((_, index) => {
-    const dot = document.createElement('div');
-    dot.classList.add('heart-dot');
-    if (index === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => showHeartSlide(index));
-    dotsContainer.appendChild(dot);
+  // Update slide width on resize
+  window.addEventListener('resize', () => {
+    slideWidth = slideshow.offsetWidth;
   });
-
-  // Auto-advance slides every 4 seconds
-  function startSlideInterval() {
-    slideInterval = setInterval(() => {
-      currentHeartSlide = (currentHeartSlide + 1) % slides.length;
-      showHeartSlide(currentHeartSlide);
-    }, 4000);
-  }
-  startSlideInterval();
 
   // Touch event handlers
   slideshow.addEventListener('touchstart', (e) => {
     touchStartX = handleTouch(e);
     touchStartTime = Date.now();
+    isSwiping = true;
     clearInterval(slideInterval);
   });
 
   slideshow.addEventListener('touchmove', (e) => {
+    if (!isSwiping) return;
     touchEndX = handleTouch(e);
+    
+    // Calculate swipe percentage
     const diff = touchStartX - touchEndX;
-    slideshow.style.transform = `translateX(${-diff * 0.3}px)`;
+    const swipePercent = (diff / slideWidth) * 100;
+    
+    // Limit movement to ±30% of slide width
+    const clampedPercent = Math.min(Math.max(swipePercent, -30), 30);
+    slideshow.style.transform = `translateX(${-clampedPercent}%)`;
   });
 
   slideshow.addEventListener('touchend', () => {
+    if (!isSwiping) return;
+    isSwiping = false;
+    
     const diff = touchStartX - touchEndX;
     const velocity = Math.abs(diff) / (Date.now() - touchStartTime);
+    const swipeDistance = Math.abs(diff);
     
-    slideshow.style.transform = 'translateX(0)';
+    // Natural feeling thresholds
+    const distanceThreshold = slideWidth * 0.2; // 20% of slide width
+    const velocityThreshold = 0.4; // Faster swipe
     
-    if (Math.abs(diff) >= swipeThreshold || velocity > 0.3) {
-      currentHeartSlide += diff > 0 ? 1 : -1;
-      currentHeartSlide = (currentHeartSlide + slides.length) % slides.length;
+    let targetSlide = currentHeartSlide;
+    
+    if (swipeDistance > distanceThreshold || velocity > velocityThreshold) {
+      targetSlide += Math.sign(diff) > 0 ? 1 : -1;
     }
     
-    showHeartSlide(currentHeartSlide);
-    startSlideInterval(); // Restart interval after interaction
+    // Smoothly snap to position
+    const direction = targetSlide > currentHeartSlide ? 1 : -1;
+    slideshow.style.transform = `translateX(${direction * 100}%)`;
+    
+    setTimeout(() => {
+      slideshow.style.transition = 'none';
+      slideshow.style.transform = 'translateX(0)';
+      targetSlide = (targetSlide + slides.length) % slides.length;
+      showHeartSlide(targetSlide);
+      setTimeout(() => {
+        slideshow.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      }, 10);
+    }, 300);
+    
+    startSlideInterval();
   });
-
-  // Initialize first slide
-  showHeartSlide(0);
 }
 
 function showHeartSlide(index) {
