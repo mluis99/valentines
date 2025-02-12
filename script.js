@@ -80,7 +80,8 @@ function createFloatingNote() {
   const note = document.createElement("div");
   note.classList.add("floating-note");
   note.innerHTML = messages[Math.floor(Math.random() * messages.length)];
-  note.style.left = Math.random() * window.innerWidth + "px";
+  // Use a percentage-based left position so the note stays within the viewport
+  note.style.left = Math.random() * 90 + 5 + "%";
   note.style.fontSize = (Math.random() * 0.5 + 1.8) + "em";
   // Set a random animation duration between 8 and 10 seconds
   const duration = Math.random() * 2 + 8;
