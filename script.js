@@ -1,6 +1,8 @@
 let audioPlayed = false;
 const audioElement = document.getElementById("valentineAudio");
+let currentHeartSlide = 0;
 
+// Initialize audio and slideshow
 function initAudio() {
   audioElement.volume = 0.7;
   audioElement.preload = "auto";
@@ -9,8 +11,42 @@ function initAudio() {
   });
 }
 
+// Heart Slideshow Functionality
+function initHeartSlideshow() {
+  const slides = document.querySelectorAll('.heart-slide');
+  const dotsContainer = document.querySelector('.heart-dots');
+  
+  // Create navigation dots
+  slides.forEach((_, index) => {
+    const dot = document.createElement('div');
+    dot.classList.add('heart-dot');
+    if(index === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => showHeartSlide(index));
+    dotsContainer.appendChild(dot);
+  });
+
+  // Auto-advance slides every 4 seconds
+  setInterval(() => {
+    currentHeartSlide = (currentHeartSlide + 1) % slides.length;
+    showHeartSlide(currentHeartSlide);
+  }, 4000);
+}
+
+function showHeartSlide(index) {
+  const slides = document.querySelectorAll('.heart-slide');
+  const dots = document.querySelectorAll('.heart-dot');
+  
+  // Update slides and dots
+  slides.forEach(slide => slide.classList.remove('active'));
+  dots.forEach(dot => dot.classList.remove('active'));
+  
+  slides[index].classList.add('active');
+  dots[index].classList.add('active');
+  currentHeartSlide = index;
+}
+
+// Love message and effects
 function showLoveMessage() {
-  // Create floating hearts, flowers, and love notes when the button is clicked
   createHeartsAndFlowers();
   
   if (!audioPlayed) {
@@ -25,12 +61,12 @@ function showLoveMessage() {
       });
   }
   
-  // Prevent scrolling on mobile devices after clicking "Click for More Love"
   if (window.innerWidth <= 600) {
     document.body.style.overflow = "hidden";
   }
 }
 
+// Audio controls
 function toggleAudio() {
   if (audioElement.paused) {
     audioElement.play();
@@ -41,7 +77,9 @@ function toggleAudio() {
   }
 }
 
+// Initialize everything
 initAudio();
+initHeartSlideshow();
 
 function createHeartsAndFlowers() {
   for (let i = 0; i < 30; i++) {
