@@ -106,12 +106,31 @@ function addSparkles() {
 }
 
 window.addEventListener('load', () => {
-  // Create sparkles continuously every 2 seconds
+  // Continuously add sparkles every 2 seconds
   setInterval(addSparkles, 2000);
   // Create a floating love note every 3 seconds
   setInterval(createFloatingNote, 3000);
 });
- 
+
+// Interactive Cursor Effect
+let cursorSymbols = ["❤️", "💕", "💞", "🌸", "🌺", "🌷"];
+let cursorIndex = 0;
+
+function createCursorEffect(e) {
+  const cursorEl = document.createElement("div");
+  cursorEl.classList.add("cursor-effect");
+  cursorEl.innerHTML = cursorSymbols[cursorIndex];
+  cursorIndex = (cursorIndex + 1) % cursorSymbols.length;
+  cursorEl.style.left = e.clientX + "px";
+  cursorEl.style.top = e.clientY + "px";
+  document.body.appendChild(cursorEl);
+  setTimeout(() => {
+    cursorEl.remove();
+  }, 800);
+}
+
+document.addEventListener("click", createCursorEffect);
+
 // Prevent unwanted zooming
 document.addEventListener('dblclick', e => e.preventDefault());
 document.addEventListener('touchstart', e => {
