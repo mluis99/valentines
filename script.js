@@ -10,6 +10,7 @@ function initAudio() {
 }
 
 function showLoveMessage() {
+  // Create floating hearts and flowers when the button is clicked
   createHeartsAndFlowers();
   
   if (!audioPlayed) {
@@ -79,33 +80,12 @@ function addSparkles() {
     sparkle.style.top = Math.random() * 100 + "%";
     sparkle.style.animationDelay = Math.random() * 1 + "s";
     frame.appendChild(sparkle);
-    // Remove sparkle after animation ends
     setTimeout(() => sparkle.remove(), 1500);
   }
 }
 
-const notes = [
-  "YOU'RE MY EVERYTHING 💖", 
-  "THAT'S US! 💞",
-  "LOVE YOU TO THE MOON 🌙",
-  "FOREVER YOURS 🌹",
-  "I MOO YOU 🐄 💖"
-];
-
-function createLoveNote() {
-  const note = document.createElement("div");
-  note.classList.add("love-note");
-  note.innerHTML = notes[Math.floor(Math.random() * notes.length)];
-  note.style.left = Math.random() * 85 + "vw";
-  note.style.fontSize = (Math.random() * 0.5 + 1.8) + "em";
-  note.style.animationDuration = (Math.random() * 2 + 8) + "s";
-  document.body.appendChild(note);
-  setTimeout(() => note.remove(), 10000);
-}
-
 window.addEventListener('load', () => {
   addSparkles();
-  setInterval(createLoveNote, 2500);
 });
 
 // Prevent unwanted zooming

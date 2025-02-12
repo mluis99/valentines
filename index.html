@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For Azalia 💝</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>For Azalia 💝</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Happy Valentine's Azalia! 💐</h1>
-    
-    <div class="background-text-container">
-        <span class="bg-text">THAT'S US! 💞</span>
-        <span class="bg-text">LOVE YOU TO THE MOON 🌙</span>
-        <span class="bg-text">YOU'RE MY EVERYTHING 💖</span>
-    </div>
+  <h1>Happy Valentine's Azalia! 💐</h1>
+  
+  <!-- Background floating love texts -->
+  <div class="background-text-container">
+    <span class="bg-text">THAT'S US! 💞</span>
+    <span class="bg-text">LOVE YOU TO THE MOON 🌙</span>
+    <span class="bg-text">YOU'RE MY EVERYTHING 💖</span>
+  </div>
 
-    <div class="photo-frame">
-        <img src="your-photo.jpg" alt="Our Photo">
-    </div>
+  <div class="photo-frame">
+    <img src="your-photo.jpg" alt="Our Photo">
+  </div>
 
-    <button class="heart-btn" onclick="showLoveMessage()">
-        Click for More Love! 💌
+  <button class="heart-btn" onclick="showLoveMessage()">
+    Click for More Love! 💌
+  </button>
+
+  <div class="audio-controls">
+    <button class="audio-btn" onclick="toggleAudio()">
+      <span id="audioText">Play Music</span> 🎵
     </button>
+  </div>
 
-    <div class="audio-controls">
-        <button class="audio-btn" onclick="toggleAudio()">
-            <span id="audioText">Play Music</span> 🎵
-        </button>
-    </div>
+  <audio id="valentineAudio">
+    <source src="love-song.mp3" type="audio/mpeg">
+    Your browser does not support audio
+  </audio>
 
-    <audio id="valentineAudio">
-        <source src="love-song.mp3" type="audio/mpeg">
-        Your browser does not support audio
-    </audio>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
