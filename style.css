@@ -34,15 +34,28 @@ h1 {
 /* Convert photo-frame to heart-shaped slideshow */
 /* Heart-shaped Slideshow */
 .heart-slideshow {
+    width: min(250px, 70vw);
+    height: min(250px, 70vw);
+    margin: 1.5em auto;
+    position: relative;
     clip-path: polygon(
-        50% 15%, 85% 0%, 100% 25%, 100% 75%, 
-        50% 100%, 0% 75%, 0% 25%, 15% 0%
+        50% 15%,
+        85% 0%,
+        100% 25%,
+        100% 75%,
+        50% 100%,
+        0% 75%,
+        0% 25%,
+        15% 0%
     );
-    background: #fff;
+    
+    /* Temporary debug border */
+    border: 2px solid #ff3366;
+    background: #fff; /* Add white background base */
     filter: drop-shadow(0 0 15px rgba(255, 60, 110, 0.4));
-    overflow: hidden;
     z-index: 5;
     animation: heartbeat 2s infinite;
+    overflow: hidden;
 }
 
 .heart-slide {
@@ -98,16 +111,7 @@ h1 {
 }
 
 /* Rest of your existing styles remain unchanged */
-.heart-btn {
-    background: #ff3366;
-    color: white;
-    border: 3px solid white;
-    border-radius: 30px;
-    box-shadow: 0 4px 15px rgba(255, 51, 102, 0.3);
-    transition: transform 0.3s ease;
-}
-
-.audio-btn {
+.heart-btn, .audio-btn {
     transform: none !important;
 /* Remove any existing animations */
     animation: none;
@@ -134,7 +138,7 @@ h1 {
 }
 
 .heart-btn:active {
-    transform: scale(0.95);
+    animation: bounce 600ms cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
 .heart-btn.clicked {
