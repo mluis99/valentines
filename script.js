@@ -80,9 +80,20 @@ function createFloatingNote() {
   const note = document.createElement("div");
   note.classList.add("floating-note");
   note.innerHTML = messages[Math.floor(Math.random() * messages.length)];
-  // Use a percentage-based left position so the note stays within the viewport
-  note.style.left = Math.random() * 90 + 5 + "%";
-  note.style.fontSize = (Math.random() * 0.5 + 1.8) + "em";
+
+  // Adjust left position and font size based on viewport width
+  let leftPos, fontSize;
+  if (window.innerWidth <= 600) {
+    // For mobile: use a narrower range and smaller font size
+    leftPos = Math.random() * 80 + 10; // between 10% and 90%
+    fontSize = (Math.random() * 0.3 + 1.2);
+  } else {
+    leftPos = Math.random() * 90 + 5;  // between 5% and 95%
+    fontSize = (Math.random() * 0.5 + 1.8);
+  }
+  note.style.left = leftPos + "%";
+  note.style.fontSize = fontSize + "em";
+
   // Set a random animation duration between 8 and 10 seconds
   const duration = Math.random() * 2 + 8;
   note.style.animationDuration = duration + "s";
@@ -112,7 +123,7 @@ window.addEventListener('load', () => {
   setInterval(createFloatingNote, 3000);
 });
 
-// Interactive Cursor Effect
+// Interactive Cursor Effect: cycle through symbols on click
 let cursorSymbols = ["❤️", "💕", "💞", "🌸", "🌺", "🌷"];
 let cursorIndex = 0;
 
