@@ -27,11 +27,24 @@ html {
     overflow: hidden; /* Hide the images that are not currently visible */
   }
   
-  /* Hide all images by default */
-  .slide {
+ /* Slideshow Image */
+.slide {
     display: none;
+    width: min(250px, 70vw); /* Same size as the heart-shaped photo frame */
+    height: min(250px, 70vw); /* Maintain the same aspect ratio */
+    margin: 0 auto;
+    background-color: #fff;
+    clip-path: polygon(50% 15%, 85% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%, 15% 0%);
+    filter: drop-shadow(0 0 15px rgba(255, 60, 110, 0.4));
+    z-index: 5;
+  }
+  
+  /* Make sure the image inside the slideshow fits */
+  .slide img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    clip-path: inherit; /* Match the heart-shaped frame */
   }
   
   /* Fade animation for the slideshow */
