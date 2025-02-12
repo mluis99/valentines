@@ -3,95 +3,72 @@ html {
     touch-action: manipulation;
     overflow-x: hidden;
     width: 100%;
-}
+  }
 
-body {
-    background: 
-        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="40" height="40"><path fill="%23ffd1dc99" d="M16 5c4.2 0 7 3 7 7 0 5-7 13-7 13S9 17 9 12c0-4 2.8-7 7-7z"/></svg>'),
-        linear-gradient(135deg, #ff99cc, #ff6699);
+  body {
+    background: linear-gradient(135deg, #ff99cc, #ff6699);
     text-align: center;
-    font-family: 'Dancing Script', cursive, sans-serif;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
     overflow-x: hidden;
     margin: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
     position: relative;
-    line-height: 1.6;
-}
+  }
 
-/* Enhanced Header */
-h1 {
-    color: #c73b6f;
-    font-family: 'Pacifico', cursive;
-    font-size: clamp(2.5rem, 8vw, 4rem);
-    margin: 1.5rem auto;
-    padding: 2rem 3rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 1.5s ease-out, pulse 3s infinite;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    backdrop-filter: blur(3px);
-    border: 2px solid #ffffff;
-    transform-origin: center;
-    line-height: 1.2;
-    width: fit-content;
-}
-
-/* Slideshow Container */
+  /* Slideshow container */
 .slideshow-container {
     position: relative;
-    max-width: 800px;
-    height: min(400px, 80vw);
-    margin: 2rem auto;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-    border: 3px solid white;
-}
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden; /* Hide the images that are not currently visible */
+  }
 
+/* Slideshow Image */
 .slide {
-    display: block;
+    display: none;
+    width: min(250px, 70vw); /* Keep the same size */
+    height: min(250px, 70vw); /* Keep the same size */
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 15px; /* Apply rounded edges */
+    filter: drop-shadow(0 0 15px rgba(255, 60, 110, 0.4)); /* Optional: keeps the shadow effect */
+    z-index: 5;
+  }
+
+  /* Make sure the image inside the slideshow fits */
+  .slide img {
     width: 100%;
     height: 100%;
-    position: absolute;
-    left: 100%;
-    transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    border-radius: 15px;
-}
+    object-fit: cover; /* Ensures the image fills the space without distortion */
+    border-radius: 15px; /* Ensure the image has rounded edges as well */
+  }  
 
-.slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 15px;
-}
+  /* Fade animation for the slideshow */
+  .fade {
+    animation: fadeEffect 1.5s ease-in-out forwards;
+  }
 
-.slide:first-child {
-    left: 0;
-    transform: translateX(0);
-}
+  /* Animation for the fade effect */
+  @keyframes fadeEffect {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+  }
 
-.slide.active {
-    transform: translateX(-100%);
-}
-
-.slide.next {
-    transform: translateX(-100%);
-}
-
-/* Navigation Dots */
-.dots-container {
+  /* Style for navigation dots */
+  .dots-container {
     text-align: center;
     position: absolute;
     bottom: 15px;
     width: 100%;
-    z-index: 30;
-}
+  }
 
-.dot {
+  .dot {
     height: 15px;
     width: 15px;
     margin: 0 5px;
@@ -100,20 +77,33 @@ h1 {
     display: inline-block;
     transition: background-color 0.6s ease;
     cursor: pointer;
-    border: 2px solid white;
-}
+  }
 
-.dot:hover {
+  .dot:hover {
     background-color: #717171;
-}
+  }
 
-.dot.active {
+  /* Active dot */
+  .active {
     background-color: #ff3366;
-    transform: scale(1.2);
-}
+  }  
 
-/* Photo Frame */
-.photo-frame {
+  /* Headline */
+  h1 {
+    color: #ff1a1a;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    margin: 1em 15px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: pulse 2s infinite;
+    line-height: 1.3;
+    word-wrap: break-word;
+    position: relative;
+    z-index: 10;
+    padding: 0 10px;
+  }
+
+  /* Photo frame (heart shape) */
+  .photo-frame {
     width: min(250px, 70vw);
     height: min(250px, 70vw);
     margin: 1.5em auto;
@@ -122,133 +112,63 @@ h1 {
     clip-path: polygon(50% 15%, 85% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%, 15% 0%);
     filter: drop-shadow(0 0 15px rgba(255, 60, 110, 0.4));
     z-index: 5;
+    /* Heartbeat effect */
     animation: heartbeat 2s infinite;
-}
+  }
 
-.photo-frame img {
+  .photo-frame img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     clip-path: inherit;
-}
+  }
 
-/* Buttons */
-.heart-btn, .audio-btn {
-    background: linear-gradient(145deg, #ff3366, #ff1a4a);
+  /* Buttons (Love and Audio) */
+  .heart-btn, .audio-btn {
+    background: #ff3366;
     color: white;
-    font-family: 'Pacifico', cursive;
-    font-size: clamp(1.3rem, 5vw, 1.8rem);
-    padding: 1rem 2.5rem;
-    border: 3px solid rgba(255,255,255,0.3);
-    border-radius: 50px;
-    margin: 1.5rem auto;
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    padding: clamp(12px, 4vw, 15px) clamp(25px, 6vw, 35px);
+    border: 3px solid white;
+    border-radius: 30px;
+    margin: 1.5em auto;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(255, 51, 102, 0.3);
-    backdrop-filter: blur(2px);
-    border-bottom: 5px solid rgba(0,0,0,0.1);
-    cursor: pointer;
-}
+    box-shadow: 0 4px 15px rgba(255, 51, 102, 0.3);
+    z-index: 20;
+    position: relative;
+    width: fit-content;
+  }
 
-.heart-btn:hover, .audio-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(255, 51, 102, 0.4);
-}
-
-.heart-btn:active, .audio-btn:active {
+  .heart-btn:active, .audio-btn:active {
     transform: scale(0.98);
-}
+  }
 
-/* Audio Controls */
-.audio-controls {
+  .audio-controls {
     position: fixed;
     bottom: 15px;
     left: 15px;
     z-index: 25;
-}
+  }
 
-/* Love Letter Section */
-.love-letter {
-    max-width: 680px;
-    margin: 2.5rem auto;
-    padding: 2.5rem;
-    background: rgba(255, 247, 249, 0.95);
-    border-radius: 20px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-    position: relative;
-    font-size: 1.3rem;
-    border: 2px solid #fff;
-    backdrop-filter: blur(2px);
-}
-
-.love-letter p {
-    margin: 1.2em 0;
-    position: relative;
-    padding-left: 1.5rem;
-}
-
-.love-letter p:before {
-    content: '❤️';
-    position: absolute;
-    left: -0.8rem;
-    top: -0.3rem;
-    opacity: 0.4;
-}
-
-/* Divider */
-.divider {
-    position: relative;
-    margin: 3rem 0;
-    height: 4px;
-}
-
-.divider:before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 60%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        90deg,
-        transparent 0%,
-        transparent 10%,
-        #ff6b8b 10%,
-        #ff6b8b 20%
-    );
-    mask: radial-gradient(circle at center, transparent 40%, #fff 41%);
-}
-
-.divider:after {
-    content: '♥ ♥ ♥';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color: #ff6b8b;
-    font-size: 1.8rem;
-    background: white;
-    padding: 0 1rem;
-}
-
-/* Floating Elements */
-.floating-heart, .floating-flower {
+  /* Floating Hearts, Flowers, and Notes */
+  .floating-heart, .floating-flower {
     position: absolute;
     font-size: 2em;
     pointer-events: none;
     opacity: 0.8;
     z-index: 8;
-}
+  }
 
-.floating-heart {
+  .floating-heart {
     animation: float 5s linear forwards;
-}
+  }
 
-.floating-flower {
+  .floating-flower {
     animation: flower-float 7s linear forwards;
-}
+  }
 
-.floating-note {
+  /* Floating Note Style */
+  .floating-note {
     position: absolute;
     color: #ff0066;
     background: rgba(255, 255, 255, 0.8);
@@ -258,79 +178,84 @@ h1 {
     animation: noteFloat linear forwards;
     pointer-events: none;
     z-index: 10;
-}
+  }
 
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+  @keyframes noteFloat {
+    0% {
+      transform: translateY(100vh) rotate(0deg) scale(0.8);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-30vh) rotate(360deg) scale(1.2);
+      opacity: 0;
+    }
+  }
 
-@keyframes noteFloat {
-    0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 1; }
+  @keyframes float {
+    0%   { transform: translateY(100vh) rotate(0deg) scale(0.8); }
     100% { transform: translateY(-30vh) rotate(360deg) scale(1.2); opacity: 0; }
-}
+  }
 
-@keyframes float {
-    0% { transform: translateY(100vh) rotate(0deg) scale(0.8); }
-    100% { transform: translateY(-30vh) rotate(360deg) scale(1.2); opacity: 0; }
-}
-
-@keyframes flower-float {
-    0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+  @keyframes flower-float {
+    0%   { transform: translateY(100vh) rotate(0deg); opacity: 1; }
     100% { transform: translateY(-30vh) rotate(360deg); opacity: 0; }
-}
+  }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+  @keyframes pulse {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.05); }
     100% { transform: scale(1); }
-}
+  }
 
-@keyframes heartbeat {
+  @keyframes heartbeat {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
-}
+  }
 
-@keyframes sparkleAnim {
-    0% { opacity: 1; transform: scale(1); }
+  @keyframes sparkleAnim {
+    0%   { opacity: 1; transform: scale(1); }
     100% { opacity: 0; transform: scale(2); }
-}
+  }
 
-.sparkle {
+  .sparkle {
     position: absolute;
     font-size: 1.5em;
     animation: sparkleAnim 1.5s ease-out forwards;
     pointer-events: none;
     z-index: 12;
-}
+  }
 
-.cursor-effect {
+  /* Interactive Cursor Effect */
+  .cursor-effect {
     position: fixed;
     pointer-events: none;
     z-index: 100;
     font-size: 2em;
     animation: cursorEffectAnim 0.8s ease-out forwards;
-}
+  }
 
-@keyframes cursorEffectAnim {
-    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-}
+  @keyframes cursorEffectAnim {
+    0% {
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+  }
 
-/* Footer */
-footer {
+  /* Footer Section */
+  .footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
     text-align: center;
-    padding: 2rem;
-    font-family: 'Pacifico', cursive;
     color: #fff;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    margin-top: auto;
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(3px);
-}
+    font-size: 0.9em;
+  }
 
-.footer p {
+  .footer p {
     margin: 0;
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-}
+  }
