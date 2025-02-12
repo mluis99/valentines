@@ -70,28 +70,29 @@ function toggleAudio() {
 
 // Slideshow functionality
 function showSlides() {
-  let slides = document.querySelectorAll('.slide');
-  let dots = document.querySelectorAll('.dot');
+    let slides = document.querySelectorAll(".slide");
   
-  // Hide all slides
-  slides.forEach(slide => {
-    slide.style.display = "none";
-  });
-
-  // Remove active class from all dots
-  dots.forEach(dot => {
-    dot.classList.remove('active');
-  });
-
-  // Show the current slide and add active class to the current dot
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}
-  slides[slideIndex - 1].style.display = "block";
-  dots[slideIndex - 1].classList.add('active');
-
-  // Change slide every 3 seconds
-  setTimeout(showSlides, 3000);
+    slides.forEach((slide) => {
+      slide.classList.remove("active", "next");
+      slide.style.transition = "transform 1s ease";  // Add smooth transition back
+    });
+  
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1; }
+  
+    const currentSlide = slides[slideIndex - 1];
+    currentSlide.classList.add("next"); // Add 'next' to trigger slide-in effect
+  
+    // Move the current slide to the center after transition ends
+    setTimeout(() => {
+      currentSlide.classList.add("active");
+    }, 50); // Small delay for smooth animation
+  
+    setTimeout(showSlides, 3000); // Change image every 3 seconds
 }
+  
+// Initialize Slideshow
+showSlides();
 
 // Function to create hearts and flowers
 function createHeartsAndFlowers() {
