@@ -321,19 +321,25 @@ h1 span {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 767px) {
+    body {
+        justify-content: flex-start;
+        padding-top: 5vh;
+    }
+    
     h1 {
-        font-size: 1.8em;
+        margin: 0.5rem auto 1rem !important;
+        transform: translateY(-10px);
     }
     
     .heart-slideshow {
-        width: 180px;
-        height: 180px;
+        margin: 1rem auto !important;
+        transform: translateY(-15px);
     }
     
-    .heart-btn, .audio-btn {
-        font-size: 1.2em;
-        padding: 12px 25px;
+    .heart-btn {
+        margin: 1rem auto !important;
+        transform: translateY(-20px);
     }
 }
 
