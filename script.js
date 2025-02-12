@@ -1,4 +1,9 @@
 let audioPlayed = false;
+let slideIndex = 0;
+let loveMessageShown = false;
+let audioPlaying = false;
+let floatingHearts = []; // Array to hold floating heart elements
+
 const audioElement = document.getElementById("valentineAudio");
 const slideshowImages = [
   'image1.jpg', // Replace with actual image paths
@@ -37,6 +42,19 @@ function showLoveMessage() {
   if (window.innerWidth <= 600) {
     document.body.style.overflow = "hidden";
   }
+
+  if (!loveMessageShown) {
+    const loveMessage = document.createElement("div");
+    loveMessage.className = "floating-note";
+    loveMessage.innerText = "You are the love of my life, Azalia! 💖";
+    document.body.appendChild(loveMessage);
+    
+    setTimeout(() => {
+      loveMessage.remove();
+    }, 5000);
+    
+    loveMessageShown = true;
+  }
 }
 
 // Function to toggle audio play/pause
@@ -50,7 +68,30 @@ function toggleAudio() {
   }
 }
 
-initAudio();
+// Slideshow functionality
+function showSlides() {
+  let slides = document.querySelectorAll('.slide');
+  let dots = document.querySelectorAll('.dot');
+  
+  // Hide all slides
+  slides.forEach(slide => {
+    slide.style.display = "none";
+  });
+
+  // Remove active class from all dots
+  dots.forEach(dot => {
+    dot.classList.remove('active');
+  });
+
+  // Show the current slide and add active class to the current dot
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex - 1].style.display = "block";
+  dots[slideIndex - 1].classList.add('active');
+
+  // Change slide every 3 seconds
+  setTimeout(showSlides, 3000);
+}
 
 // Function to create hearts and flowers
 function createHeartsAndFlowers() {
@@ -86,35 +127,21 @@ function createHeart() {
   setTimeout(() => heart.remove(), 5000);
 }
 
-// Function to create floating love notes
-function createFloatingNote() {
-  const messages = [
-    "YOU'RE MY EVERYTHING 💖",
-    "THAT'S US! 💞",
-    "LOVE YOU TO THE MOON 🌙",
-    "FOREVER YOURS 🌹",
-    "I MOO YOU 🐄 💖"
-  ];
-  const note = document.createElement("div");
-  note.classList.add("floating-note");
-  note.innerHTML = messages[Math.floor(Math.random() * messages.length)];
+// Trigger floating hearts every 2 seconds
+setInterval(createFloatingHeart, 2000);
 
-  // Adjust left position and font size based on viewport width
-  let leftPos, fontSize;
-  if (window.innerWidth <= 600) {
-    leftPos = Math.random() * 80 + 10; // for mobile
-    fontSize = (Math.random() * 0.3 + 1.2);
-  } else {
-    leftPos = Math.random() * 90 + 5;  // for desktop
-    fontSize = (Math.random() * 0.5 + 1.8);
-  }
-  note.style.left = leftPos + "%";
-  note.style.fontSize = fontSize + "em";
+// Function to create floating hearts (used in `showLoveMessage`)
+function createFloatingHeart() {
+  const heart = document.createElement("div");
+  heart.className = "floating-heart";
+  heart.innerText = "💖";
+  heart.style.left = Math.random() * 100 + "%";
+  heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+  document.body.appendChild(heart);
 
-  const duration = Math.random() * 2 + 8;
-  note.style.animationDuration = duration + "s";
-  document.body.appendChild(note);
-  setTimeout(() => note.remove(), duration * 1000);
+  setTimeout(() => {
+    heart.remove();
+  }, 7000);
 }
 
 // Function to add sparkles
@@ -133,39 +160,42 @@ function addSparkles() {
   }
 }
 
-// Function for Slideshow
+// Function to create floating love notes
+function createFloatingNote() {
+  const messages = [
+    "YOU'RE MY EVERYTHING 💖",
+    "THAT'S US! 💞",
+    "LOVE YOU TO THE MOON 🌙",
+    "FOREVER YOURS 🌹",
+    "I MOO YOU 🐄 💖"
+  ];
+  const note = document.createElement("div");
+  note.classList.add("floating-note");
+  note.innerHTML = messages[Math.floor(Math.random() * messages.length)];
+
+  let leftPos, fontSize;
+  if (window.innerWidth <= 600) {
+    leftPos = Math.random() * 80 + 10; // for mobile
+    fontSize = (Math.random() * 0.3 + 1.2);
+  } else {
+    leftPos = Math.random() * 90 + 5;  // for desktop
+    fontSize = (Math.random() * 0.5 + 1.8);
+  }
+  note.style.left = leftPos + "%";
+  note.style.fontSize = fontSize + "em";
+
+  const duration = Math.random() * 2 + 8;
+  note.style.animationDuration = duration + "s";
+  document.body.appendChild(note);
+  setTimeout(() => note.remove(), duration * 1000);
+}
+
+// Initialize the Slideshow
 function startSlideshow() {
   setInterval(() => {
     currentSlide = (currentSlide + 1) % slideshowImages.length;
     document.getElementById("slideshow").style.backgroundImage = `url(${slideshowImages[currentSlide]})`;
   }, 5000); // Change image every 5 seconds
-}
-
-// Slideshow functionality
-let slideIndex = 0;
-
-function showSlides() {
-  let slides = document.querySelectorAll('.slide');
-  let dots = document.querySelectorAll('.dot');
-  
-  // Hide all slides
-  slides.forEach(slide => {
-    slide.style.display = "none";
-  });
-
-  // Remove active class from all dots
-  dots.forEach(dot => {
-    dot.classList.remove('active');
-  });
-
-  // Show the current slide and add active class to the current dot
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}
-  slides[slideIndex - 1].style.display = "block";
-  dots[slideIndex - 1].classList.add('active');
-
-  // Change slide every 3 seconds
-  setTimeout(showSlides, 3000);
 }
 
 window.addEventListener('load', () => {
