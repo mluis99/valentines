@@ -86,7 +86,8 @@ const notes = [
     "YOU'RE MY EVERYTHING 💖", 
     "THAT'S US! 💞",
     "LOVE YOU TO THE MOON 🌙",
-    "FOREVER YOURS 🌹"
+    "FOREVER YOURS 🌹",
+    "I MOO YOU 🐄 💖"
 ];
 
 function createLoveNote() {
