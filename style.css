@@ -130,7 +130,9 @@ h1 span {
 }
 
 .heart-slide {
+    opacity: 0;
     transition: opacity 0.5s ease-in-out;
+    z-index: 1;
 }
 
 .heart-slide.active {

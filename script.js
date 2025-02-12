@@ -12,9 +12,6 @@ let autoPlayActive = true;
 function initAudio() {
   audioElement.volume = 0.7;
   audioElement.preload = "auto";
-  audioElement.addEventListener('canplaythrough', () => {
-    console.log("Audio ready to play fully");
-  });
 }
 
 // Heart Slideshow Functionality
@@ -23,13 +20,11 @@ function initHeartSlideshow() {
   const dotsContainer = document.querySelector('.heart-dots');
   const slideshow = document.querySelector('.heart-slideshow');
   let slideWidth = slideshow.offsetWidth;
-  let isSwiping = false;
 
   // Create navigation dots
   slides.forEach((_, index) => {
     const dot = document.createElement('div');
     dot.classList.add('heart-dot');
-    if (index === 0) dot.classList.add('active');
     dot.addEventListener('click', () => showHeartSlide(index));
     dotsContainer.appendChild(dot);
   });
@@ -45,70 +40,40 @@ function initHeartSlideshow() {
   }
   startAutoPlay();
 
-  // Update slide width on resize
-  window.addEventListener('resize', () => {
-    slideWidth = slideshow.offsetWidth;
-  });
-
-  // Touch event handlers
+  // Touch handlers
   slideshow.addEventListener('touchstart', (e) => {
     autoPlayActive = false;
-    touchStartX = handleTouch(e);
+    touchStartX = e.touches[0].clientX;
     touchStartTime = Date.now();
-    isSwiping = true;
     clearInterval(slideInterval);
   });
 
   slideshow.addEventListener('touchmove', (e) => {
-    if (!isSwiping) return;
-    touchEndX = handleTouch(e);
-    
-    // Calculate swipe percentage
-    const diff = touchStartX - touchEndX;
-    const swipePercent = (diff / slideWidth) * 100;
-    
-    // Limit movement to ±30% of slide width
-    const clampedPercent = Math.min(Math.max(swipePercent, -30), 30);
-    slideshow.style.transform = `translateX(${-clampedPercent}%)`;
+    if (!autoPlayActive) {
+      touchEndX = e.touches[0].clientX;
+      const diff = touchStartX - touchEndX;
+      slideshow.style.transform = `translateX(${-diff * 0.3}px)`;
+    }
   });
 
   slideshow.addEventListener('touchend', () => {
-    if (!isSwiping) return;
-    isSwiping = false;
-    
-    const diff = touchStartX - touchEndX;
-    const velocity = Math.abs(diff) / (Date.now() - touchStartTime);
-    const swipeDistance = Math.abs(diff);
-    
-    // Natural feeling thresholds
-    const distanceThreshold = slideWidth * 0.2;
-    const velocityThreshold = 0.4;
-    
-    let targetSlide = currentHeartSlide;
-    
-    if (swipeDistance > distanceThreshold || velocity > velocityThreshold) {
-      targetSlide += Math.sign(diff) > 0 ? 1 : -1;
-    }
-    
-    // Smoothly snap to position
-    const direction = targetSlide > currentHeartSlide ? 1 : -1;
-    slideshow.style.transform = `translateX(${direction * 100}%)`;
-    
-    setTimeout(() => {
-      slideshow.style.transition = 'none';
+    if (!autoPlayActive) {
+      const diff = touchStartX - touchEndX;
+      const velocity = Math.abs(diff) / (Date.now() - touchStartTime);
+      
+      if (Math.abs(diff) > swipeThreshold || velocity > 0.3) {
+        currentHeartSlide += diff > 0 ? 1 : -1;
+        currentHeartSlide = (currentHeartSlide + slides.length) % slides.length;
+      }
+      
+      showHeartSlide(currentHeartSlide);
       slideshow.style.transform = 'translateX(0)';
-      targetSlide = (targetSlide + slides.length) % slides.length;
-      showHeartSlide(targetSlide);
+      
       setTimeout(() => {
-        slideshow.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-      }, 10);
-    }, 300);
-
-    // Restart auto-play after 5 seconds
-    setTimeout(() => {
-      autoPlayActive = true;
-      startAutoPlay();
-    }, 5000);
+        autoPlayActive = true;
+        startAutoPlay();
+      }, 5000);
+    }
   });
 
   // Initialize first slide
@@ -118,22 +83,22 @@ function initHeartSlideshow() {
 function showHeartSlide(index) {
   const slides = document.querySelectorAll('.heart-slide');
   const dots = document.querySelectorAll('.heart-dot');
-  const slideshow = document.querySelector('.heart-slideshow');
   
   // Validate index
   index = (index + slides.length) % slides.length;
   
-  slideshow.classList.add('swiping');
+  // Update slides
+  slides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === index);
+    slide.style.zIndex = i === index ? 2 : 1;
+  });
   
-  // Update slides and dots
-  slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
-  dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+  // Update dots
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === index);
+  });
   
   currentHeartSlide = index;
-  
-  setTimeout(() => {
-    slideshow.classList.remove('swiping');
-  }, 300);
 }
 
 // Love message and effects
