@@ -68,13 +68,16 @@ function showLoveMessage() {
 
 // Audio controls
 function toggleAudio() {
-  if (audioElement.paused) {
-    audioElement.play();
-    document.getElementById("audioText").innerText = "Pause Music";
-  } else {
-    audioElement.pause();
-    document.getElementById("audioText").innerText = "Play Music";
-  }
+  const musicGif = document.getElementById("musicGif");
+    if (audioElement.paused) {
+        audioElement.play();
+        document.getElementById("audioText").innerText = "Pause Music";
+        musicGif.classList.add("visible");
+    } else {
+        audioElement.pause();
+        document.getElementById("audioText").innerText = "Play Music";
+        musicGif.classList.remove("visible");
+    }
 }
 
 // Initialize everything

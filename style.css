@@ -262,3 +262,25 @@ h1 {
         padding: 12px 25px;
     }
 }
+
+.music-gif {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: all 0.3s ease;
+    display: none; /* Start hidden */
+}
+
+.music-gif.visible {
+    display: inline-block;
+    opacity: 0.8;
+    animation: floatNote 2s ease-in-out infinite;
+}
+
+@keyframes floatNote {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
