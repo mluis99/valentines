@@ -34,9 +34,10 @@ function initHeartSlideshow() {
     slideInterval = setInterval(() => {
       if (autoPlayActive) {
         currentHeartSlide = (currentHeartSlide + 1) % slides.length;
+        console.log("Auto-play Slide Index:", currentHeartSlide); // Debug log
         showHeartSlide(currentHeartSlide);
       }
-    }, 2000);
+    }, 2000); // 2 seconds interval
   }
   startAutoPlay();
 
@@ -87,10 +88,17 @@ function showHeartSlide(index) {
   // Validate index
   index = (index + slides.length) % slides.length;
   
+  console.log("Showing Slide Index:", index); // Debug log
+  
   // Update slides
   slides.forEach((slide, i) => {
-    slide.classList.toggle('active', i === index);
-    slide.style.zIndex = i === index ? 2 : 1;
+    if (i === index) {
+      slide.classList.add('active');
+      slide.style.zIndex = 2; // Bring the active slide to the front
+    } else {
+      slide.classList.remove('active');
+      slide.style.zIndex = 1; // Send other slides to the back
+    }
   });
   
   // Update dots
