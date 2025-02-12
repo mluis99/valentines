@@ -3,9 +3,9 @@ const audioElement = document.getElementById("valentineAudio");
 let currentHeartSlide = 0;
 let touchStartX = 0;
 let touchEndX = 0;
-const swipeThreshold = 30; // Minimum swipe distance in pixels
+const swipeThreshold = 30;
 let touchStartTime = 0;
-const totalSlides = document.querySelectorAll('.heart-slide').length;
+let slideInterval; // Moved to global scope for better interval control
 
 // Initialize audio
 function initAudio() {
@@ -32,16 +32,19 @@ function initHeartSlideshow() {
   });
 
   // Auto-advance slides every 4 seconds
-  const slideInterval = setInterval(() => {
-    currentHeartSlide = (currentHeartSlide + 1) % slides.length;
-    showHeartSlide(currentHeartSlide);
-  }, 4000);
+  function startSlideInterval() {
+    slideInterval = setInterval(() => {
+      currentHeartSlide = (currentHeartSlide + 1) % slides.length;
+      showHeartSlide(currentHeartSlide);
+    }, 4000);
+  }
+  startSlideInterval();
 
   // Touch event handlers
   slideshow.addEventListener('touchstart', (e) => {
     touchStartX = handleTouch(e);
     touchStartTime = Date.now();
-    clearInterval(slideInterval); // Pause auto-advance during interaction
+    clearInterval(slideInterval);
   });
 
   slideshow.addEventListener('touchmove', (e) => {
@@ -54,38 +57,39 @@ function initHeartSlideshow() {
     const diff = touchStartX - touchEndX;
     const velocity = Math.abs(diff) / (Date.now() - touchStartTime);
     
-    // Reset visual offset
     slideshow.style.transform = 'translateX(0)';
     
-    // Calculate slide change
     if (Math.abs(diff) >= swipeThreshold || velocity > 0.3) {
-      if (diff > 0 || velocity > 0.3) {
-        currentHeartSlide = (currentHeartSlide + 1) % totalSlides;
-      } else {
-        currentHeartSlide = (currentHeartSlide - 1 + totalSlides) % totalSlides;
-      }
+      currentHeartSlide += diff > 0 ? 1 : -1;
+      currentHeartSlide = (currentHeartSlide + slides.length) % slides.length;
     }
     
     showHeartSlide(currentHeartSlide);
+    startSlideInterval(); // Restart interval after interaction
   });
+
+  // Initialize first slide
+  showHeartSlide(0);
 }
 
 function showHeartSlide(index) {
+  const slides = document.querySelectorAll('.heart-slide');
+  const dots = document.querySelectorAll('.heart-dot');
   const slideshow = document.querySelector('.heart-slideshow');
   
-  // Add swiping class during transition
+  // Validate index
+  index = (index + slides.length) % slides.length;
+  
   slideshow.classList.add('swiping');
   
-  slides.forEach(slide => slide.classList.remove('active'));
-  dots.forEach(dot => dot.classList.remove('active'));
+  // Update slides and dots
+  slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+  dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
   
-  slides[index].classList.add('active');
-  dots[index].classList.add('active');
   currentHeartSlide = index;
   
-  // Remove swiping class after transition
   setTimeout(() => {
-      slideshow.classList.remove('swiping');
+    slideshow.classList.remove('swiping');
   }, 300);
 }
 
