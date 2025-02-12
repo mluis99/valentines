@@ -2,7 +2,7 @@ let audioPlayed = false;
 const audioElement = document.getElementById("valentineAudio");
 let currentHeartSlide = 0;
 
-// Initialize audio and slideshow
+// Initialize audio
 function initAudio() {
   audioElement.volume = 0.7;
   audioElement.preload = "auto";
@@ -20,7 +20,7 @@ function initHeartSlideshow() {
   slides.forEach((_, index) => {
     const dot = document.createElement('div');
     dot.classList.add('heart-dot');
-    if(index === 0) dot.classList.add('active');
+    if (index === 0) dot.classList.add('active');
     dot.addEventListener('click', () => showHeartSlide(index));
     dotsContainer.appendChild(dot);
   });
@@ -36,7 +36,6 @@ function showHeartSlide(index) {
   const slides = document.querySelectorAll('.heart-slide');
   const dots = document.querySelectorAll('.heart-dot');
   
-  // Update slides and dots
   slides.forEach(slide => slide.classList.remove('active'));
   dots.forEach(dot => dot.classList.remove('active'));
   
@@ -69,21 +68,24 @@ function showLoveMessage() {
 // Audio controls
 function toggleAudio() {
   const musicGif = document.getElementById("musicGif");
-    if (audioElement.paused) {
-        audioElement.play();
-        document.getElementById("audioText").innerText = "Pause Music";
-        musicGif.classList.add("visible");
-    } else {
-        audioElement.pause();
-        document.getElementById("audioText").innerText = "Play Music";
-        musicGif.classList.remove("visible");
-    }
+  if (audioElement.paused) {
+    audioElement.play().catch(err => console.log("Playback error:", err));
+    document.getElementById("audioText").innerText = "Pause Music";
+    musicGif.classList.add("visible");
+  } else {
+    audioElement.pause();
+    document.getElementById("audioText").innerText = "Play Music";
+    musicGif.classList.remove("visible");
+  }
 }
 
 // Initialize everything
-initAudio();
-initHeartSlideshow();
+window.addEventListener('DOMContentLoaded', () => {
+  initAudio();
+  initHeartSlideshow();
+});
 
+// Hearts and Flowers Animation
 function createHeartsAndFlowers() {
   for (let i = 0; i < 30; i++) {
     createHeart();
@@ -115,6 +117,7 @@ function createHeart() {
   setTimeout(() => heart.remove(), 5000);
 }
 
+// Floating Notes
 function createFloatingNote() {
   const messages = [
     "YOU'RE MY EVERYTHING 💖",
@@ -127,20 +130,17 @@ function createFloatingNote() {
   note.classList.add("floating-note");
   note.innerHTML = messages[Math.floor(Math.random() * messages.length)];
 
-  // Adjust left position and font size based on viewport width
   let leftPos, fontSize;
   if (window.innerWidth <= 600) {
-    // For mobile: use a narrower range and smaller font size
-    leftPos = Math.random() * 80 + 10; // between 10% and 90%
+    leftPos = Math.random() * 80 + 10;
     fontSize = (Math.random() * 0.3 + 1.2);
   } else {
-    leftPos = Math.random() * 90 + 5;  // between 5% and 95%
+    leftPos = Math.random() * 90 + 5;
     fontSize = (Math.random() * 0.5 + 1.8);
   }
   note.style.left = leftPos + "%";
   note.style.fontSize = fontSize + "em";
 
-  // Set a random animation duration between 8 and 10 seconds
   const duration = Math.random() * 2 + 8;
   note.style.animationDuration = duration + "s";
   document.body.appendChild(note);
@@ -162,14 +162,13 @@ function addSparkles() {
   }
 }
 
+// Continuous animations
 window.addEventListener('load', () => {
-  // Continuously add sparkles every 2 seconds
   setInterval(addSparkles, 2000);
-  // Create a floating love note every 3 seconds
   setInterval(createFloatingNote, 3000);
 });
 
-// Interactive Cursor Effect: cycle through symbols on click
+// Interactive Cursor Effect
 let cursorSymbols = ["❤️", "💕", "💞", "🌸", "🌺", "🌷"];
 let cursorIndex = 0;
 
