@@ -106,11 +106,12 @@ function addSparkles() {
 }
 
 window.addEventListener('load', () => {
-  addSparkles();
+  // Create sparkles continuously every 2 seconds
+  setInterval(addSparkles, 2000);
   // Create a floating love note every 3 seconds
   setInterval(createFloatingNote, 3000);
 });
-
+ 
 // Prevent unwanted zooming
 document.addEventListener('dblclick', e => e.preventDefault());
 document.addEventListener('touchstart', e => {
