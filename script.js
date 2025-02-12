@@ -24,6 +24,11 @@ function showLoveMessage() {
         alert("Please click anywhere first to allow audio!");
       });
   }
+  
+  // Prevent scrolling on mobile devices after clicking "Click for More Love"
+  if (window.innerWidth <= 600) {
+    document.body.style.overflow = "hidden";
+  }
 }
 
 function toggleAudio() {
@@ -103,7 +108,7 @@ function createFloatingNote() {
 
 function addSparkles() {
   const frame = document.querySelector('.photo-frame');
-  const sparkles = ['✨', '🌟', '💫', '⭐'];
+  const sparkles = ['✨', '🌟', '💫', '⭐','❤️', '💕', '💞', '🌸', '🌺', '🌷'];
   for (let i = 0; i < 8; i++) {
     const sparkle = document.createElement("div");
     sparkle.classList.add("sparkle");
