@@ -141,9 +141,37 @@ function startSlideshow() {
   }, 5000); // Change image every 5 seconds
 }
 
+// Slideshow functionality
+let slideIndex = 0;
+
+function showSlides() {
+  let slides = document.querySelectorAll('.slide');
+  let dots = document.querySelectorAll('.dot');
+  
+  // Hide all slides
+  slides.forEach(slide => {
+    slide.style.display = "none";
+  });
+
+  // Remove active class from all dots
+  dots.forEach(dot => {
+    dot.classList.remove('active');
+  });
+
+  // Show the current slide and add active class to the current dot
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex - 1].style.display = "block";
+  dots[slideIndex - 1].classList.add('active');
+
+  // Change slide every 3 seconds
+  setTimeout(showSlides, 3000);
+}
+
 window.addEventListener('load', () => {
   // Start slideshow
   startSlideshow();
+  showSlides(); // Start the slideshow function
   // Continuously add sparkles every 2 seconds
   setInterval(addSparkles, 2000);
   // Create a floating love note every 3 seconds
