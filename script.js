@@ -3,7 +3,6 @@ let slideIndex = 0;
 let loveMessageShown = false;
 let audioPlaying = false;
 let floatingHearts = []; // Array to hold floating heart elements
-
 const audioElement = document.getElementById("valentineAudio");
 const slideshowImages = [
   'image1.jpg', // Replace with actual image paths
@@ -42,17 +41,16 @@ function showLoveMessage() {
   if (window.innerWidth <= 600) {
     document.body.style.overflow = "hidden";
   }
-
   if (!loveMessageShown) {
     const loveMessage = document.createElement("div");
     loveMessage.className = "floating-note";
     loveMessage.innerText = "You are the love of my life, Azalia! 💖";
     document.body.appendChild(loveMessage);
-
+    
     setTimeout(() => {
       loveMessage.remove();
     }, 5000);
-
+    
     loveMessageShown = true;
   }
 }
@@ -70,29 +68,25 @@ function toggleAudio() {
 
 // Slideshow functionality
 function showSlides() {
-    let slides = document.querySelectorAll(".slide");
-
-    slides.forEach((slide) => {
-      slide.classList.remove("active", "next");
-      slide.style.transition = "transform 1s ease";  // Add smooth transition back
-    });
+  let slides = document.querySelectorAll('.slide');
+  let dots = document.querySelectorAll('.dot');
   
-    slideIndex++;
-    if (slideIndex > slides.length) { slideIndex = 1; }
-  
-    const currentSlide = slides[slideIndex - 1];
-    currentSlide.classList.add("next"); // Add 'next' to trigger slide-in effect
-  
-    // Move the current slide to the center after transition ends
-    setTimeout(() => {
-      currentSlide.classList.add("active");
-    }, 50); // Small delay for smooth animation
-  
-    setTimeout(showSlides, 3000); // Change image every 3 seconds
+  // Hide all slides
+  slides.forEach(slide => {
+    slide.style.display = "none";
+  });
+  // Remove active class from all dots
+  dots.forEach(dot => {
+    dot.classList.remove('active');
+  });
+  // Show the current slide and add active class to the current dot
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex - 1].style.display = "block";
+  dots[slideIndex - 1].classList.add('active');
+  // Change slide every 3 seconds
+  setTimeout(showSlides, 3000);
 }
-  
-// Initialize Slideshow
-showSlides();
 
 // Function to create hearts and flowers
 function createHeartsAndFlowers() {
@@ -130,7 +124,6 @@ function createHeart() {
 
 // Trigger floating hearts every 2 seconds
 setInterval(createFloatingHeart, 2000);
-
 // Function to create floating hearts (used in `showLoveMessage`)
 function createFloatingHeart() {
   const heart = document.createElement("div");
@@ -139,12 +132,10 @@ function createFloatingHeart() {
   heart.style.left = Math.random() * 100 + "%";
   heart.style.animationDuration = Math.random() * 3 + 4 + "s";
   document.body.appendChild(heart);
-
   setTimeout(() => {
     heart.remove();
   }, 7000);
 }
-
 // Function to add sparkles
 function addSparkles() {
   const frame = document.querySelector('.photo-frame');
@@ -160,7 +151,6 @@ function addSparkles() {
     setTimeout(() => sparkle.remove(), 1500);
   }
 }
-
 // Function to create floating love notes
 function createFloatingNote() {
   const messages = [
@@ -233,3 +223,34 @@ document.addEventListener('dblclick', e => e.preventDefault());
 document.addEventListener('touchstart', e => {
   if (e.touches.length > 1) e.preventDefault();
 }, { passive: false });
+‎style.css
++17
+-20
+Original file line number	Original file line	Diff line number	Diff line change
+@@ -223,29 +223,26 @@ html {
+
+  @keyframes cursorEffectAnim {
+    0% {
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Footer Section */
+  .footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 0.9em;
+  }
+  
+  .footer p {
+    margin: 0;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  }
