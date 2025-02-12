@@ -25,7 +25,7 @@ function initAudio() {
 function showLoveMessage() {
   // Create floating hearts, flowers, and love notes when the button is clicked
   createHeartsAndFlowers();
-  
+
   if (!audioPlayed) {
     audioElement.play()
       .then(() => {
@@ -37,7 +37,7 @@ function showLoveMessage() {
         alert("Please click anywhere first to allow audio!");
       });
   }
-  
+
   // Prevent scrolling on mobile devices after clicking "Click for More Love"
   if (window.innerWidth <= 600) {
     document.body.style.overflow = "hidden";
@@ -48,11 +48,11 @@ function showLoveMessage() {
     loveMessage.className = "floating-note";
     loveMessage.innerText = "You are the love of my life, Azalia! 💖";
     document.body.appendChild(loveMessage);
-    
+
     setTimeout(() => {
       loveMessage.remove();
     }, 5000);
-    
+
     loveMessageShown = true;
   }
 }
@@ -71,7 +71,7 @@ function toggleAudio() {
 // Slideshow functionality
 function showSlides() {
     let slides = document.querySelectorAll(".slide");
-  
+
     slides.forEach((slide) => {
       slide.classList.remove("active", "next");
       slide.style.transition = "transform 1s ease";  // Add smooth transition back
