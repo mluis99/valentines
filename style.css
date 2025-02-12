@@ -99,35 +99,28 @@ html {
     z-index: 25;
   }
   
-  /* Background texts container (centralized) */
-  .background-text-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  /* Floating Note Style */
+  .floating-note {
+    position: absolute;
+    color: #ff0066;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 15px;
+    border-radius: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    animation: noteFloat linear forwards;
     pointer-events: none;
-    z-index: 0;
+    z-index: 10;
   }
   
-  /* Background text style with padding intact and gentle vertical floating */
-  .bg-text {
-    font-size: clamp(2rem, 5vw, 3rem);
-    color: rgba(255, 255, 255, 0.15);
-    font-weight: bold;
-    padding: 20px;
-    margin: 10px;
-    animation: float-bg 6s ease-in-out infinite;
-  }
-  
-  @keyframes float-bg {
-    0%   { transform: translateY(0); }
-    50%  { transform: translateY(-10px); }
-    100% { transform: translateY(0); }
+  @keyframes noteFloat {
+    0% {
+      transform: translateY(100vh) scale(0.8);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-30vh) scale(1.2);
+      opacity: 0;
+    }
   }
   
   @keyframes float {

@@ -10,7 +10,7 @@ function initAudio() {
 }
 
 function showLoveMessage() {
-  // Create floating hearts and flowers when the button is clicked
+  // Create floating hearts, flowers, and love notes when the button is clicked
   createHeartsAndFlowers();
   
   if (!audioPlayed) {
@@ -69,6 +69,26 @@ function createHeart() {
   setTimeout(() => heart.remove(), 5000);
 }
 
+function createFloatingNote() {
+  const messages = [
+    "YOU'RE MY EVERYTHING 💖",
+    "THAT'S US! 💞",
+    "LOVE YOU TO THE MOON 🌙",
+    "FOREVER YOURS 🌹",
+    "I MOO YOU 🐄 💖"
+  ];
+  const note = document.createElement("div");
+  note.classList.add("floating-note");
+  note.innerHTML = messages[Math.floor(Math.random() * messages.length)];
+  note.style.left = Math.random() * window.innerWidth + "px";
+  note.style.fontSize = (Math.random() * 0.5 + 1.8) + "em";
+  // Set a random animation duration between 8 and 10 seconds
+  const duration = Math.random() * 2 + 8;
+  note.style.animationDuration = duration + "s";
+  document.body.appendChild(note);
+  setTimeout(() => note.remove(), duration * 1000);
+}
+
 function addSparkles() {
   const frame = document.querySelector('.photo-frame');
   const sparkles = ['✨', '🌟', '💫', '⭐'];
@@ -86,6 +106,8 @@ function addSparkles() {
 
 window.addEventListener('load', () => {
   addSparkles();
+  // Create a floating love note every 3 seconds
+  setInterval(createFloatingNote, 3000);
 });
 
 // Prevent unwanted zooming
