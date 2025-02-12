@@ -358,20 +358,38 @@ h1 span {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 1rem;
+    padding: 0.75rem 1rem; /* Reduced vertical padding */
     background: rgba(255, 255, 255, 0.9);
     text-align: center;
     font-family: 'Dancing Script', cursive;
-    font-size: 1.2em;
+    font-size: 1.1em; /* Slightly smaller font */
     color: #ff3366;
-    border-top: 2px solid #ffd1e6;
+    border-top: 1px solid #ffd1e6; /* Thinner border */
     backdrop-filter: blur(5px);
     z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    white-space: nowrap; /* Prevent text wrapping */
+    transform: translateY(0);
+    animation: footerSlide 1s ease-out;
+}
+
+@keyframes footerSlide {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
 }
 
 .valentine-footer::before,
 .valentine-footer::after {
     content: '♥';
-    margin: 0 10px;
+    margin: 0 8px; /* Reduced spacing */
+    font-size: 0.9em; /* Smaller hearts */
     animation: pulse 1s infinite;
+}
+
+/* Mobile optimization */
+@media (max-width: 480px) {
+    .valentine-footer {
+        padding: 0.5rem 1rem;
+        font-size: 1em;
+    }
 }
