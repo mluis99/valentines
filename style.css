@@ -124,6 +124,8 @@ h1 span {
     z-index: 5;
     animation: heartbeat 2s infinite;
     overflow: hidden;
+    touch-action: pan-y; /* Enable vertical scroll if needed */
+    transition: transform 0.3s ease-out; /* Default transition */
 }
 
 .heart-slide {
@@ -133,6 +135,7 @@ h1 span {
     opacity: 0;
     transition: opacity 1s ease-in-out;
     padding: 8px;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .heart-slide.active {
@@ -386,4 +389,8 @@ h1 span {
         font-size: 10px !important;
         margin: 0 3px !important;
     }
+}
+
+.heart-slideshow.swiping {
+    transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
 }

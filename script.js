@@ -1,6 +1,11 @@
 let audioPlayed = false;
 const audioElement = document.getElementById("valentineAudio");
 let currentHeartSlide = 0;
+let touchStartX = 0;
+let touchEndX = 0;
+const swipeThreshold = 30; // Minimum swipe distance in pixels
+let touchStartTime = 0;
+const totalSlides = document.querySelectorAll('.heart-slide').length;
 
 // Initialize audio
 function initAudio() {
@@ -15,7 +20,8 @@ function initAudio() {
 function initHeartSlideshow() {
   const slides = document.querySelectorAll('.heart-slide');
   const dotsContainer = document.querySelector('.heart-dots');
-  
+  const slideshow = document.querySelector('.heart-slideshow');
+
   // Create navigation dots
   slides.forEach((_, index) => {
     const dot = document.createElement('div');
@@ -26,15 +32,49 @@ function initHeartSlideshow() {
   });
 
   // Auto-advance slides every 4 seconds
-  setInterval(() => {
+  const slideInterval = setInterval(() => {
     currentHeartSlide = (currentHeartSlide + 1) % slides.length;
     showHeartSlide(currentHeartSlide);
   }, 4000);
+
+  // Touch event handlers
+  slideshow.addEventListener('touchstart', (e) => {
+    touchStartX = handleTouch(e);
+    touchStartTime = Date.now();
+    clearInterval(slideInterval); // Pause auto-advance during interaction
+  });
+
+  slideshow.addEventListener('touchmove', (e) => {
+    touchEndX = handleTouch(e);
+    const diff = touchStartX - touchEndX;
+    slideshow.style.transform = `translateX(${-diff * 0.3}px)`;
+  });
+
+  slideshow.addEventListener('touchend', () => {
+    const diff = touchStartX - touchEndX;
+    const velocity = Math.abs(diff) / (Date.now() - touchStartTime);
+    
+    // Reset visual offset
+    slideshow.style.transform = 'translateX(0)';
+    
+    // Calculate slide change
+    if (Math.abs(diff) >= swipeThreshold || velocity > 0.3) {
+      if (diff > 0 || velocity > 0.3) {
+        currentHeartSlide = (currentHeartSlide + 1) % totalSlides;
+      } else {
+        currentHeartSlide = (currentHeartSlide - 1 + totalSlides) % totalSlides;
+      }
+    }
+    
+    showHeartSlide(currentHeartSlide);
+  });
 }
 
 function showHeartSlide(index) {
-  const slides = document.querySelectorAll('.heart-slide');
-  const dots = document.querySelectorAll('.heart-dot');
+  const slideshow = document.querySelector('.heart-slideshow');
+  
+  // Add swiping class during transition
+  slideshow.classList.add('swiping');
   
   slides.forEach(slide => slide.classList.remove('active'));
   dots.forEach(dot => dot.classList.remove('active'));
@@ -42,6 +82,11 @@ function showHeartSlide(index) {
   slides[index].classList.add('active');
   dots[index].classList.add('active');
   currentHeartSlide = index;
+  
+  // Remove swiping class after transition
+  setTimeout(() => {
+      slideshow.classList.remove('swiping');
+  }, 300);
 }
 
 // Love message and effects
@@ -192,3 +237,15 @@ document.addEventListener('dblclick', e => e.preventDefault());
 document.addEventListener('touchstart', e => {
   if (e.touches.length > 1) e.preventDefault();
 }, { passive: false });
+
+function handleTouch(e) {
+  if (!e.touches) return 0;
+  const touch = e.touches[0];
+  return touch.clientX;
+}
+
+// Initialize everything
+window.addEventListener('DOMContentLoaded', () => {
+  initAudio();
+  initHeartSlideshow();
+});
