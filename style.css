@@ -19,6 +19,19 @@ html {
     position: relative;
   }
   
+  /* Slideshow container */
+  #slideshow {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  
+  /* Headline */
   h1 {
     color: #ff1a1a;
     font-size: clamp(2rem, 6vw, 3.5rem);
@@ -32,22 +45,14 @@ html {
     padding: 0 10px;
   }
   
+  /* Photo frame (heart shape) */
   .photo-frame {
     width: min(250px, 70vw);
     height: min(250px, 70vw);
     margin: 1.5em auto;
     background: #fff;
     padding: 12px;
-    clip-path: polygon(
-      50% 15%,
-      85% 0%,
-      100% 25%,
-      100% 75%,
-      50% 100%,
-      0% 75%,
-      0% 25%,
-      15% 0%
-    );
+    clip-path: polygon(50% 15%, 85% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%, 15% 0%);
     filter: drop-shadow(0 0 15px rgba(255, 60, 110, 0.4));
     z-index: 5;
     /* Heartbeat effect */
@@ -61,6 +66,7 @@ html {
     clip-path: inherit;
   }
   
+  /* Buttons (Love and Audio) */
   .heart-btn, .audio-btn {
     background: #ff3366;
     color: white;
@@ -76,22 +82,8 @@ html {
     width: fit-content;
   }
   
-  .floating-heart {
-    position: absolute;
-    font-size: 2em;
-    animation: float 5s linear forwards;
-    pointer-events: none;
-    opacity: 0.8;
-    z-index: 8;
-  }
-  
-  .floating-flower {
-    position: absolute;
-    font-size: 2em;
-    animation: flower-float 7s linear forwards;
-    pointer-events: none;
-    opacity: 0.9;
-    z-index: 8;
+  .heart-btn:active, .audio-btn:active {
+    transform: scale(0.98);
   }
   
   .audio-controls {
@@ -99,6 +91,23 @@ html {
     bottom: 15px;
     left: 15px;
     z-index: 25;
+  }
+  
+  /* Floating Hearts, Flowers, and Notes */
+  .floating-heart, .floating-flower {
+    position: absolute;
+    font-size: 2em;
+    pointer-events: none;
+    opacity: 0.8;
+    z-index: 8;
+  }
+  
+  .floating-heart {
+    animation: float 5s linear forwards;
+  }
+  
+  .floating-flower {
+    animation: flower-float 7s linear forwards;
   }
   
   /* Floating Note Style */
@@ -179,6 +188,7 @@ html {
     }
   }
   
+  /* Responsive Styles */
   @media (max-width: 600px) {
     h1 {
       font-size: 1.8em;
