@@ -32,6 +32,7 @@ h1 {
 }
 
 /* Convert photo-frame to heart-shaped slideshow */
+/* Heart-shaped Slideshow */
 .heart-slideshow {
     width: min(250px, 70vw);
     height: min(250px, 70vw);
@@ -47,10 +48,14 @@ h1 {
         0% 25%,
         15% 0%
     );
+    
+    /* Temporary debug border */
+    border: 2px solid #ff3366;
+    background: #fff; /* Add white background base */
     filter: drop-shadow(0 0 15px rgba(255, 60, 110, 0.4));
     z-index: 5;
     animation: heartbeat 2s infinite;
-    overflow: hidden; /* Add this */
+    overflow: hidden;
 }
 
 .heart-slide {
@@ -59,25 +64,30 @@ h1 {
     height: 100%;
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    background: #fff;
-    padding: 8px; /* Reduced padding */
+    padding: 8px;
+}
+
+.heart-slide.active {
+    opacity: 1;
+    z-index: 2; /* Ensure active slide is on top */
 }
 
 .heart-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    clip-path: inherit;
     position: absolute;
-    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Center the image */
-    object-position: center center; /* Ensure best part of image is visible */
+    top: 50%;
+    transform: translate(-50%, -50%);
+    /* Temporary debug outline */
+    box-shadow: inset 0 0 0 1px rgba(255,0,0,0.3);
 }
 
+/* Navigation Dots */
 .heart-dots {
     position: absolute;
-    bottom: 10px;
+    bottom: 15px; /* Increased from 10px */
     width: 100%;
     display: flex;
     justify-content: center;
@@ -86,17 +96,18 @@ h1 {
 }
 
 .heart-dot {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.7);
+    border: 1px solid #ff3366;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .heart-dot.active {
     background: #ff3366;
-    transform: scale(1.3);
+    transform: scale(1.4);
 }
 
 /* Rest of your existing styles remain unchanged */
