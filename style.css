@@ -1,3 +1,10 @@
+/* Prevent zoom behaviors */
+html {
+    touch-action: manipulation;
+    overflow-x: hidden;
+    width: 100%;
+}
+
 body {
     background: linear-gradient(135deg, #ff99cc, #ff6699);
     text-align: center;
@@ -8,11 +15,13 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
+    position: relative;
 }
 
 h1 {
     color: #ff1a1a;
-    font-size: 3em;
+    font-size: clamp(2rem, 6vw, 3.5rem);
     margin: 1em 15px 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     animation: pulse 2s infinite;
@@ -20,11 +29,12 @@ h1 {
     word-wrap: break-word;
     position: relative;
     z-index: 10;
+    padding: 0 10px;
 }
 
 .photo-frame {
-    width: 250px;
-    height: 250px;
+    width: min(250px, 70vw);
+    height: min(250px, 70vw);
     margin: 1.5em auto;
     background: #fff;
     padding: 12px;
@@ -38,8 +48,6 @@ h1 {
         0% 25%,
         15% 0%
     );
-    position: relative;
-    transition: transform 0.3s ease;
     filter: drop-shadow(0 0 15px rgba(255, 60, 110, 0.4));
     z-index: 5;
 }
@@ -54,31 +62,22 @@ h1 {
 .heart-btn, .audio-btn {
     background: #ff3366;
     color: white;
-    font-size: 1.5em;
-    padding: 15px 35px;
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    padding: clamp(12px, 4vw, 15px) clamp(25px, 6vw, 35px);
     border: 3px solid white;
     border-radius: 30px;
-    cursor: pointer;
     margin: 1.5em auto;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(255, 51, 102, 0.3);
     z-index: 20;
     position: relative;
-}
-
-.heart-btn:hover, .audio-btn:hover {
-    transform: scale(1.08) rotate(2deg);
-    background: #ff1a53;
+    width: fit-content;
 }
 
 .love-note {
-    position: fixed;
-    z-index: 1;
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
     opacity: 0.9;
-    font-size: 1.8em;
     color: #ff0066;
-    animation: float 10s linear infinite;
-    pointer-events: none;
     background: rgba(255, 255, 255, 0.95);
     padding: 12px 20px;
     border-radius: 20px;
