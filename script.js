@@ -36,7 +36,7 @@ function initHeartSlideshow() {
         currentHeartSlide = (currentHeartSlide + 1) % slides.length;
         showHeartSlide(currentHeartSlide);
       }
-    }, 4000);
+    }, 2000);
   }
   startAutoPlay();
 
