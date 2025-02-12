@@ -130,9 +130,7 @@ h1 span {
 }
 
 .heart-slide {
-    transition: 
-        opacity 0.5s ease-in-out,
-        transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Combined transitions */
+    transition: opacity 0.5s ease-in-out;
 }
 
 .heart-slide.active {

@@ -5,7 +5,8 @@ let touchStartX = 0;
 let touchEndX = 0;
 const swipeThreshold = 30;
 let touchStartTime = 0;
-let slideInterval; // Moved to global scope for better interval control
+let slideInterval;
+let autoPlayActive = true;
 
 // Initialize audio
 function initAudio() {
@@ -24,6 +25,26 @@ function initHeartSlideshow() {
   let slideWidth = slideshow.offsetWidth;
   let isSwiping = false;
 
+  // Create navigation dots
+  slides.forEach((_, index) => {
+    const dot = document.createElement('div');
+    dot.classList.add('heart-dot');
+    if (index === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => showHeartSlide(index));
+    dotsContainer.appendChild(dot);
+  });
+
+  // Auto-play functionality
+  function startAutoPlay() {
+    slideInterval = setInterval(() => {
+      if (autoPlayActive) {
+        currentHeartSlide = (currentHeartSlide + 1) % slides.length;
+        showHeartSlide(currentHeartSlide);
+      }
+    }, 4000);
+  }
+  startAutoPlay();
+
   // Update slide width on resize
   window.addEventListener('resize', () => {
     slideWidth = slideshow.offsetWidth;
@@ -31,6 +52,7 @@ function initHeartSlideshow() {
 
   // Touch event handlers
   slideshow.addEventListener('touchstart', (e) => {
+    autoPlayActive = false;
     touchStartX = handleTouch(e);
     touchStartTime = Date.now();
     isSwiping = true;
@@ -59,8 +81,8 @@ function initHeartSlideshow() {
     const swipeDistance = Math.abs(diff);
     
     // Natural feeling thresholds
-    const distanceThreshold = slideWidth * 0.2; // 20% of slide width
-    const velocityThreshold = 0.4; // Faster swipe
+    const distanceThreshold = slideWidth * 0.2;
+    const velocityThreshold = 0.4;
     
     let targetSlide = currentHeartSlide;
     
@@ -81,9 +103,16 @@ function initHeartSlideshow() {
         slideshow.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
       }, 10);
     }, 300);
-    
-    startSlideInterval();
+
+    // Restart auto-play after 5 seconds
+    setTimeout(() => {
+      autoPlayActive = true;
+      startAutoPlay();
+    }, 5000);
   });
+
+  // Initialize first slide
+  showHeartSlide(0);
 }
 
 function showHeartSlide(index) {
