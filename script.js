@@ -213,7 +213,7 @@ function createFloatingNote() {
 }
 
 function addSparkles() {
-  const frame = document.querySelector('.photo-frame');
+  const slideshow = document.querySelector('.heart-slideshow'); // ✅ Target the existing element
   const sparkles = ['✨', '🌟', '💫', '⭐'];
   for (let i = 0; i < 8; i++) {
     const sparkle = document.createElement("div");
@@ -222,7 +222,7 @@ function addSparkles() {
     sparkle.style.left = Math.random() * 100 + "%";
     sparkle.style.top = Math.random() * 100 + "%";
     sparkle.style.animationDelay = Math.random() * 1 + "s";
-    frame.appendChild(sparkle);
+    slideshow.appendChild(sparkle); // Append to slideshow instead of non-existent photo-frame
     setTimeout(() => sparkle.remove(), 1500);
   }
 }
