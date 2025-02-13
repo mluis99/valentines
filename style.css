@@ -412,15 +412,17 @@ h1 span {
       }
     
       nav ul {
-        display: none; /* Hide nav links by default on mobile */
+        display: none;
         flex-direction: column;
         background: #fff;
         position: absolute;
         top: 60px;
-        right: 20px;
+        left: 20px; /* Aligns dropdown to the left */
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         padding: 10px;
         border-radius: 5px;
+        z-index: 999;
+        animation: slideDown 0.3s ease;
       }
     
       nav ul.active {
@@ -431,6 +433,17 @@ h1 span {
         margin: 10px 0;
       }
 }
+
+@keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
 .music-gif {
     width: 100px;
