@@ -34,48 +34,56 @@ function initHeartSlideshow() {
     slideInterval = setInterval(() => {
       if (autoPlayActive) {
         currentHeartSlide = (currentHeartSlide + 1) % slides.length;
-        console.log("Auto-play Slide Index:", currentHeartSlide); // Debug log
         showHeartSlide(currentHeartSlide);
       }
-    }, 2000); // 2 seconds interval
+    }, 4000); // Increased to 4 seconds
   }
   startAutoPlay();
 
   // Touch handlers
-  slideshow.addEventListener('touchstart', (e) => {
-    autoPlayActive = false;
-    touchStartX = e.touches[0].clientX;
-    touchStartTime = Date.now();
-    clearInterval(slideInterval);
-  });
+slideshow.addEventListener('touchstart', (e) => {
+  autoPlayActive = false;
+  touchStartX = e.touches[0].clientX;
+  touchStartTime = Date.now();
+  clearInterval(slideInterval);
+  slideshow.classList.add('swiping'); // Add a CSS class for smooth transitions
+});
 
-  slideshow.addEventListener('touchmove', (e) => {
-    if (!autoPlayActive) {
-      touchEndX = e.touches[0].clientX;
-      const diff = touchStartX - touchEndX;
-      slideshow.style.transform = `translateX(${-diff * 0.3}px)`;
-    }
-  });
+slideshow.addEventListener('touchmove', (e) => {
+  if (!autoPlayActive) {
+    touchEndX = e.touches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    const slideWidth = slideshow.offsetWidth;
+    // Limit movement to 30% of slide width during swipe
+    slideshow.style.transform = `translateX(${-diff / slideWidth * 30}%)`;
+  }
+});
 
-  slideshow.addEventListener('touchend', () => {
-    if (!autoPlayActive) {
-      const diff = touchStartX - touchEndX;
-      const velocity = Math.abs(diff) / (Date.now() - touchStartTime);
-      
-      if (Math.abs(diff) > swipeThreshold || velocity > 0.3) {
-        currentHeartSlide += diff > 0 ? 1 : -1;
-        currentHeartSlide = (currentHeartSlide + slides.length) % slides.length;
-      }
-      
-      showHeartSlide(currentHeartSlide);
-      slideshow.style.transform = 'translateX(0)';
-      
-      setTimeout(() => {
-        autoPlayActive = true;
-        startAutoPlay();
-      }, 5000);
+slideshow.addEventListener('touchend', () => {
+  if (!autoPlayActive) {
+    const diff = touchStartX - touchEndX;
+    const velocity = Math.abs(diff) / (Date.now() - touchStartTime);
+    const slideWidth = slideshow.offsetWidth;
+    const swipeDistance = Math.abs(diff);
+
+    // Stricter threshold: 20% of slide width or high velocity
+    if (swipeDistance > slideWidth * 0.2 || velocity > 0.5) {
+      currentHeartSlide += diff > 0 ? 1 : -1;
+      currentHeartSlide = (currentHeartSlide + slides.length) % slides.length;
     }
-  });
+
+    // Smoothly reset the transform
+    slideshow.style.transform = 'translateX(0)';
+    showHeartSlide(currentHeartSlide);
+
+    // Delay restarting autoplay
+    setTimeout(() => {
+      autoPlayActive = true;
+      startAutoPlay();
+      slideshow.classList.remove('swiping');
+    }, 5000);
+  }
+});
 
   // Initialize first slide
   showHeartSlide(0);
