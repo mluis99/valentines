@@ -10,26 +10,30 @@
   <footer class="valentine-footer">Made with ♥︎ for Azalia</footer>
 </head>
 <body>
-    <header>
-        <nav>
-          <div class="hamburger" id="hamburger">
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-          <ul id="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-          </ul>
-        </nav>
-      </header>
-    <h1>
-        <span>Happy Valentine's Azalia! 💐</span>
-        <div class="rose-petal" style="left: 10%; animation-delay: 0.5s"></div>
-        <div class="rose-petal" style="left: 30%; animation-delay: 1.2s"></div>
-        <div class="rose-petal" style="left: 70%; animation-delay: 2.8s"></div>
-        <div class="rose-petal" style="left: 90%; animation-delay: 4.1s"></div>
-    </h1>
+  <!-- Header with Hamburger Menu -->
+  <header>
+    <nav>
+      <div class="hamburger" id="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <h1>
+    <span>Happy Valentine's Azalia! 💐</span>
+    <div class="rose-petal" style="left: 10%; animation-delay: 0.5s"></div>
+    <div class="rose-petal" style="left: 30%; animation-delay: 1.2s"></div>
+    <div class="rose-petal" style="left: 70%; animation-delay: 2.8s"></div>
+    <div class="rose-petal" style="left: 90%; animation-delay: 4.1s"></div>
+  </h1>
+
   <!-- Heart-shaped Slideshow -->
   <div class="heart-slideshow">
     <div class="heart-slide active">
@@ -47,22 +51,36 @@
     <div class="heart-dots"></div>
   </div>
 
+  <!-- Buttons -->
   <button class="heart-btn" onclick="showLoveMessage()">
     Click for More Love! 💌
   </button>
 
   <div class="audio-controls">
     <button class="audio-btn" onclick="toggleAudio()">
-        <span id="audioText">Play Music</span> 🎵
+      <span id="audioText">Play Music</span> �
     </button>
     <img src="music-note.gif" alt="Music Playing" class="music-gif" id="musicGif">
-</div>
+  </div>
 
+  <!-- Audio -->
   <audio id="valentineAudio">
     <source src="love-song.mp3" type="audio/mpeg">
     Your browser does not support audio
   </audio>
 
+  <!-- JavaScript -->
+  <script>
+    // Toggle hamburger menu for mobile devices
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("nav-links");
+
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("active");
+      navLinks.classList.toggle("active");
+    });
+
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
