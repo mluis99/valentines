@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery & Love Letter</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="hamburger" id="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="love-letter.html">Love Letter</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="gallery">
+      <h2>Gallery</h2>
+      <div class="gallery-grid">
+        <img src="photo1.jpg" alt="Memory 1">
+        <img src="photo2.jpg" alt="Memory 2">
+        <img src="photo3.jpg" alt="Memory 3">
+        <!-- Add more images as needed -->
+      </div>
+    </section>
+
+    <section class="love-letter">
+      <h2>Love Letter</h2>
+      <p>
+        My dearest, every moment with you is a treasure captured in time. Your smile lights up my day, and your love fills my heart with warmth. I cherish every memory we share and look forward to a lifetime of beautiful moments together.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    // Toggle hamburger menu for mobile devices
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("nav-links");
+
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  </script>
+</body>
+</html>
