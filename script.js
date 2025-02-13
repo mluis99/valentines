@@ -7,6 +7,8 @@ const swipeThreshold = 30;
 let touchStartTime = 0;
 let slideInterval;
 let autoPlayActive = true;
+let autoPlayTimeout;
+
 
 // Initialize audio
 function initAudio() {
