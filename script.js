@@ -271,9 +271,3 @@ function handleTouch(e) {
   const touch = e.touches[0];
   return touch.clientX;
 }
-
-// Initialize everything
-window.addEventListener('DOMContentLoaded', () => {
-  initAudio();
-  initHeartSlideshow();
-});
