@@ -31,12 +31,13 @@ function initHeartSlideshow() {
 
   // Auto-play functionality
   function startAutoPlay() {
+    clearInterval(slideInterval);
     slideInterval = setInterval(() => {
       if (autoPlayActive) {
-        currentHeartSlide = (currentHeartSlide + 1) % slides.length;
-        showHeartSlide(currentHeartSlide);
+      currentHeartSlide = (currentHeartSlide + 1) % slides.length;
+      showHeartSlide(currentHeartSlide);
       }
-    }, 4000); // Increased to 4 seconds
+    }, 4000);
   }
   startAutoPlay();
 
@@ -71,13 +72,14 @@ slideshow.addEventListener('touchend', () => {
       currentHeartSlide += diff > 0 ? 1 : -1;
       currentHeartSlide = (currentHeartSlide + slides.length) % slides.length;
     }
-
+    
     // Smoothly reset the transform
     slideshow.style.transform = 'translateX(0)';
     showHeartSlide(currentHeartSlide);
-
-    // Delay restarting autoplay
-    setTimeout(() => {
+    
+    // Clear any existing auto-play timeout before starting a new one
+    if (autoPlayTimeout) clearTimeout(autoPlayTimeout);
+    autoPlayTimeout = setTimeout(() => {
       autoPlayActive = true;
       startAutoPlay();
       slideshow.classList.remove('swiping');
