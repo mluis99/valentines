@@ -6,17 +6,74 @@ html {
     position: fixed;
     height: 100%;
 }
-/* Valentine-specific Body Styles */
-body.valentine {
-    background: linear-gradient(135deg, #ff99cc, #ff6699);
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
+/* Header and Navigation */
+header {
+    padding: 10px 20px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
   
-  /* Valentine Title Styles */
-h1.valentine-title {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Hamburger Menu Icon */
+  .hamburger {
+    display: none; /* Hidden by default on larger screens */
+    cursor: pointer;
+    flex-direction: column;
+    width: 30px;
+    height: 25px;
+    justify-content: space-between;
+  }
+  
+  .hamburger div {
+    height: 3px;
+    background: #333;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Navigation Links */
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+  
+  nav ul li a:hover {
+    color: #ff3366; /* Change to your preferred hover color */
+  }
+body {
+    background: linear-gradient(135deg, #ff99cc, #ff6699);
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    overflow: hidden;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+h1 {
     color: #ff6b8b;
     font-family: 'Playfair Display', cursive;
     font-size: clamp(2.5rem, 8vw, 4.5rem);
@@ -28,79 +85,102 @@ h1.valentine-title {
     box-shadow: 0 10px 30px rgba(255,107,139,0.2);
     transform-style: preserve-3d;
     animation: floatTitle 4s ease-in-out infinite;
-  }
-
-  /* Floral Border Elements */
-h1.valentine-title::before,
-h1.valentine-title::after {
-  content: '';
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23ff6b8b" d="M12 2C15.9 2 19 5.1 19 9c0 5.3-7 13-7 13S5 14.3 5 9c0-3.9 3.1-7 7-7zm0-2c-4.9 0-9 4.1-9 9 0 6.2 7 15 9 15s9-8.8 9-15c0-4.9-4.1-9-9-9z"/><path fill="%23ff6b8b" d="M12 5c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/></svg>');
-  background-size: contain;
-  animation: bloom 2s ease-out infinite;
 }
 
-h1.valentine-title::before {
+/* Floral Border Elements */
+h1::before,
+h1::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23ff6b8b" d="M12 2C15.9 2 19 5.1 19 9c0 5.3-7 13-7 13S5 14.3 5 9c0-3.9 3.1-7 7-7zm0-2c-4.9 0-9 4.1-9 9 0 6.2 7 15 9 15s9-8.8 9-15c0-4.9-4.1-9-9-9z"/><path fill="%23ff6b8b" d="M12 5c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/></svg>');
+    background-size: contain;
+    animation: bloom 2s ease-out infinite;
+}
+
+h1::before {
     left: -30px;
     top: -20px;
     transform: rotate(-15deg);
-  }
-  
-  h1.valentine-title::after {
+}
+h1::after {
     right: -30px;
     bottom: -20px;
     transform: rotate(165deg);
-  }
-  
-  /* Title Text Effects */
-  h1.valentine-title span {
+}
+/* Golden Outline Effect */
+h1 span {
     display: block;
     position: relative;
     z-index: 2;
     text-shadow: 
-      2px 2px 0 var(--white),
-      3px 3px 0 #ffd700,
-      5px 5px 15px rgba(0,0,0,0.1);
-  }
-/* Heart Slideshow Container */
+        2px 2px 0 #fff,
+        3px 3px 0 #ffd700,
+        5px 5px 15px rgba(0,0,0,0.1);
+}
+/* Floating Animation */
+@keyframes floatTitle {
+    0%, 100% { transform: translateY(0) rotate(-1deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+}
+/* Flower Bloom Animation */
+@keyframes bloom {
+    0% { transform: scale(0) rotate(0deg); opacity: 0; }
+    80% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+    100% { transform: scale(1) rotate(360deg); opacity: 1; }
+}
+/* Rose Petal Fall Effect */
+.rose-petal {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: linear-gradient(45deg, #ff6b8b, #ff3366);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    animation: petalFall 8s linear infinite;
+}
+@keyframes petalFall {
+    0% { transform: translateY(-100vh) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(720deg); }
+}
+/* Convert photo-frame to heart-shaped slideshow */
+/* Heart-shaped Slideshow */
 .heart-slideshow {
     width: min(250px, 70vw);
     height: min(250px, 70vw);
     margin: 1.5em auto;
     position: relative;
     clip-path: polygon(
-      50% 15%,
-      85% 0%,
-      100% 25%,
-      100% 75%,
-      50% 100%,
-      0% 75%,
-      0% 25%,
-      15% 0%
+        50% 15%,
+        85% 0%,
+        100% 25%,
+        100% 75%,
+        50% 100%,
+        0% 75%,
+        0% 25%,
+        15% 0%
     );
-    border: 2px solid var(--pink);
-    background: var(--white);
+    border: 2px solid #ff3366;
+    background: #fff;
     filter: drop-shadow(0 0 15px rgba(255, 60, 110, 0.4));
     z-index: 5;
     animation: heartbeat 2s infinite;
     overflow: hidden;
-  }
-  
-  /* Slideshow Elements */
-  .heart-slide {
+    touch-action: pan-y;
+    /* Updated transition timing */
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+}
+.heart-slide {
     opacity: 0;
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     z-index: 1;
-  }
-  
-  .heart-slide.active {
+}
+.heart-slide.active {
     opacity: 1;
-    z-index: 2;
-  }
-  
-  .heart-slide img {
+    z-index: 2; /* Ensure active slide is on top */
+}
+.heart-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -108,74 +188,48 @@ h1.valentine-title::before {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-  }
-  
-  /* Navigation Dots */
-  .heart-dots {
+    /* Remove temporary debug outline */
+    /* box-shadow: inset 0 0 0 1px rgba(255,0,0,0.3); */
+}
+/* Navigation Dots */
+.heart-dots {
     position: absolute;
-    bottom: 15px;
+    bottom: 15px; /* Increased from 10px */
     width: 100%;
     display: flex;
     justify-content: center;
     gap: 8px;
     z-index: 10;
-  }
-  
-  .heart-dot {
+}
+.heart-dot {
     width: 12px;
     height: 12px;
     border-radius: 50%;
     background: rgba(255,255,255,0.7);
-    border: 1px solid var(--pink);
+    border: 1px solid #ff3366;
+    cursor: pointer;
     transition: all 0.3s ease;
-  }
-  
-  .heart-dot.active {
-    background: var(--pink);
+}
+.heart-dot.active {
+    background: #ff3366;
     transform: scale(1.4);
-  }
-  
-  /* Interactive Buttons */
-  .heart-btn, .audio-btn {
-    background: var(--pink);
-    color: var(--white);
+}
+/* Rest of your existing styles remain unchanged */
+.heart-btn, .audio-btn {
+    animation: none;
+    background: #ff3366;
+    color: white;
     font-size: clamp(1.2rem, 4vw, 1.5rem);
     padding: clamp(12px, 4vw, 15px) clamp(25px, 6vw, 35px);
-    border: 3px solid var(--white);
+    border: 3px solid white;
     border-radius: 30px;
     margin: 1.5em auto;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(255, 51, 102, 0.3);
+    z-index: 20;
     position: relative;
     width: fit-content;
-  }
-
-/* Animation Effects */
-.rose-petal {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background: linear-gradient(45deg, #ff6b8b, var(--pink));
-    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-    animation: petalFall 8s linear infinite;
-  }
-  
-  .floating-heart {
-    position: absolute;
-    font-size: 2em;
-    animation: float 5s linear forwards;
-    opacity: 0.8;
-  }
-  
-  .audio-controls {
-    position: fixed;
-    bottom: 15px;
-    left: 15px;
-    z-index: 25;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+}
 
 @keyframes bounce {
     0% { transform: scale(1); }
@@ -185,27 +239,6 @@ h1.valentine-title::before {
     100% { transform: scale(1); }
 }
 
-/* Keyframe Animations */
-@keyframes floatTitle {
-    0%, 100% { transform: translateY(0) rotate(-1deg); }
-    50% { transform: translateY(-10px) rotate(1deg); }
-  }
-  
-  @keyframes bloom {
-    0% { transform: scale(0) rotate(0deg); opacity: 0; }
-    80% { transform: scale(1.2) rotate(180deg); opacity: 1; }
-    100% { transform: scale(1) rotate(360deg); opacity: 1; }
-  }
-
-  @keyframes petalFall {
-    0% { transform: translateY(-100vh) rotate(0deg); }
-    100% { transform: translateY(100vh) rotate(720deg); }
-  }
-  
-  @keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-  }
 .heart-btn:active {
     animation: bounce 600ms cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
@@ -214,6 +247,14 @@ h1.valentine-title::before {
     animation: bounce 600ms ease-out;
 }
 
+.floating-heart {
+    position: absolute;
+    font-size: 2em;
+    animation: float 5s linear forwards;
+    pointer-events: none;
+    opacity: 0.8;
+    z-index: 8;
+}
 .floating-flower {
     position: absolute;
     font-size: 2em;
@@ -223,6 +264,15 @@ h1.valentine-title::before {
     z-index: 8;
 }
 
+.audio-controls {
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    z-index: 25;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 .floating-note {
     position: absolute;
     color: #ff0066;
@@ -248,9 +298,9 @@ h1.valentine-title::before {
 }
 
 @keyframes float {
-    0% { transform: translateY(100vh) rotate(0deg) scale(0.8); }
+    0%   { transform: translateY(100vh) rotate(0deg) scale(0.8); }
     100% { transform: translateY(-30vh) rotate(360deg) scale(1.2); opacity: 0; }
-  }
+}
 
 @keyframes flower-float {
     0%   { transform: translateY(100vh) rotate(0deg); opacity: 1; }
@@ -263,6 +313,10 @@ h1.valentine-title::before {
     100% { transform: scale(1); }
 }
 
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
 @keyframes sparkleAnim {
     0%   { opacity: 1; transform: scale(1); }
     100% { opacity: 0; transform: scale(2); }
@@ -301,24 +355,24 @@ h1.valentine-title::before {
         justify-content: flex-start;
         padding-top: 5vh;
     }
-    
+
     h1 {
         margin: 0.5rem auto 1rem !important;
         transform: translateY(-10px);
     }
-    
+
     /* Slideshow positioning */
     .heart-slideshow {
         margin: 1rem auto !important;
         transform: translateY(-15px);
     }
-    
+
     /* Button adjustments */
     .heart-btn {
         margin: 1rem auto !important;
         transform: translateY(-20px);
     }
-    
+
     /* Footer styling */
     .valentine-footer {
         height: 22px !important;
@@ -326,7 +380,7 @@ h1.valentine-title::before {
         font-size: 0.75rem !important;
         line-height: 1 !important;
     }
-    
+
     .valentine-footer::before,
     .valentine-footer::after {
         font-size: 10px !important;
@@ -336,7 +390,7 @@ h1.valentine-title::before {
     .hamburger {
         display: flex; /* Show hamburger on smaller screens */
       }
-    
+
       nav ul {
         display: none;
         flex-direction: column;
@@ -350,11 +404,11 @@ h1.valentine-title::before {
         z-index: 999;
         animation: slideDown 0.3s ease;
       }
-    
+
       nav ul.active {
         display: flex; /* Show nav links when active */
       }
-    
+
       nav ul li {
         margin: 10px 0;
       }
