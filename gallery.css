@@ -2,7 +2,7 @@
 
 /* Gallery specific styles */
 .gallery {
-  padding: 20px;
+  padding: 10px;
   max-width: 1600px;
   margin: 0 auto;
   position: relative;
@@ -18,7 +18,7 @@
 .gallery h1 {
   font-size: 2.5em;
   color: #333;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   text-align: center;
   font-weight: bold;
 }
