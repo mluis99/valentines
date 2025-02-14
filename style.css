@@ -358,7 +358,7 @@ h1 span {
     
     body {
         justify-content: flex-start;
-        padding-top: 5vh;
+        padding-top: 0;
     }
 
     h1 {
