@@ -47,6 +47,25 @@
   </main>
 
   <script>
+    // Cursor effect
+    let cursorIndex = 0;
+    const cursorSymbols = ["❤️", "💕", "💞", "🌸", "🌺", "🌷"];
+
+    function createCursorEffect(e) {
+      const cursorEl = document.createElement("div");
+      cursorEl.classList.add("cursor-effect");
+      cursorEl.innerHTML = cursorSymbols[cursorIndex];
+      cursorIndex = (cursorIndex + 1) % cursorSymbols.length;
+      cursorEl.style.left = e.clientX + "px";
+      cursorEl.style.top = e.clientY + "px";
+      document.body.appendChild(cursorEl);
+      setTimeout(() => {
+        cursorEl.remove();
+      }, 800);
+    }
+
+    document.addEventListener("click", createCursorEffect);
+
     // Toggle hamburger menu for mobile devices
     const hamburger = document.getElementById("hamburger");
     const navLinks = document.getElementById("nav-links");

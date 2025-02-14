@@ -156,6 +156,26 @@ body {
   }
 
   /* Add to gallery.css */
+/* Cursor Effect */
+.cursor-effect {
+    position: fixed;
+    pointer-events: none;
+    z-index: 100;
+    font-size: 2em;
+    animation: cursorEffectAnim 0.8s ease-out forwards;
+}
+
+@keyframes cursorEffectAnim {
+    0% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2) rotate(360deg);
+        opacity: 0;
+    }
+}
+
 /* Spotify Playlist Button */
 .spotify-button {
     display: block;
