@@ -376,3 +376,43 @@ h1.our-memories {
   font-weight: bold;
   margin-bottom: 10px; /* Consistent margin */
 }
+
+/* Dragon Ball Easter Egg */
+.dragonball-container {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+  padding: 15px 25px;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 50px;
+  z-index: 10000;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.dragonball-container.visible {
+  bottom: 30px;
+}
+
+.dragonball {
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 5px rgba(255, 223, 0, 0.5));
+}
+
+.dragonball:hover {
+  transform: scale(1.2) rotate(15deg);
+  filter: drop-shadow(0 4px 10px rgba(255, 223, 0, 0.8));
+}
+
+/* Mobile disable */
+@media (max-width: 768px) {
+  .dragonball-container {
+      display: none !important;
+  }
+}
