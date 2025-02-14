@@ -29,9 +29,9 @@ body {
 
 /* Main Content */
 main {
-  min-height: 100vh; /* Allow for scrolling if content exceeds viewport height */
+  height: auto; /* Allow height to expand based on content */
   overflow-y: auto; /* Allows vertical scrolling */
-  padding-bottom: 200px; /* Increased padding for better accessibility */
+  padding-bottom: 200px; /* Ensure enough padding for the Spotify button */
   display: flex;
   flex-direction: column;
   -webkit-overflow-scrolling: touch;
