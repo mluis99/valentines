@@ -122,9 +122,9 @@ main {
 
     .mobile-slideshow {
         display: block; /* Show on mobile */
-        width: 100vw; /* Set to full viewport width */
+        width: 90vw; /* Set width to 90% of viewport width */
         height: 70vh; /* Set height to 70% of viewport height */
-        margin: 20px 0;
+        margin: 20px auto; /* Center the slideshow */
         background: white;
         border-radius: 10px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
