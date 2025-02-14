@@ -31,7 +31,7 @@ body {
 main {
   min-height: 100vh; /* Allow for scrolling if content exceeds viewport height */
   overflow-y: auto; /* Allows vertical scrolling */
-  padding-bottom: 150px; /* Adjusted padding for better accessibility */
+  padding-bottom: 200px; /* Increased padding for better accessibility */
   display: flex;
   flex-direction: column;
   -webkit-overflow-scrolling: touch;
