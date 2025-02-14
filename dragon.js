@@ -92,18 +92,34 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
     }
 
+    // Track clicked dragon balls using a set
+    const clickedDragonBalls = new Set();
+
     // Click handler for the dragon balls
-    let dragonBallClicked = 0;
     container.addEventListener('click', (e) => {
         if (e.target.classList.contains('dragonball')) {
-            e.target.classList.add('clicked');
-            dragonBallClicked++;
+            const clickedBall = e.target.alt; // Get the ball's name (Dragon Ball X)
 
-            if (dragonBallClicked === 7) {
+            // Add the clicked ball to the set
+            clickedDragonBalls.add(clickedBall);
+
+            e.target.classList.add('clicked');
+
+            if (clickedDragonBalls.size === 7) {
+                // After clicking all 7 distinct dragon balls, display the wish message
                 const wishMessage = document.createElement('div');
                 wishMessage.classList.add('wish-message');
                 wishMessage.textContent = 'Your wish has been fulfilled; Luis will love Azalia eternally.';
                 document.body.appendChild(wishMessage);
+                
+                // Optionally apply the Dragon Ball Z font (or similar) to the wish message
+                wishMessage.style.fontFamily = '"Dragonball Z", sans-serif';
+                wishMessage.style.fontSize = '3rem';
+                wishMessage.style.color = 'gold';
+                wishMessage.style.textAlign = 'center';
+                wishMessage.style.textShadow = '2px 2px 10px rgba(0, 0, 0, 0.7)';
+                
+                // Show the wish message for 3 seconds
                 setTimeout(() => wishMessage.remove(), 3000);
             }
         }
