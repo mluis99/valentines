@@ -415,15 +415,15 @@ h1.our-memories {
 
 /* Dragon Ball Easter Egg Container */
 .dragonball-container {
-  position: fixed;  /* Fixed position over the entire page */
+  position: absolute;  /* Changed to absolute to allow scrolling */
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   display: none;  /* Hidden initially */
   z-index: 9999; /* High z-index to ensure it's on top of other elements */
-  pointer-events: all;  /* Ensure it can be clicked */
-  overflow: hidden;  /* Allow the page to scroll but keep balls within container */
+  pointer-events: none; /* Allow interaction with underlying content */
+  overflow: visible;  /* Make sure the container allows scrolling */
 }
 
 /* Individual Dragon Balls */
