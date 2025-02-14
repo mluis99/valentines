@@ -35,6 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 height: areaRect.height
             });
         });
+
+        // Add the entire viewport to the available space
+        spaces.push({
+            x: 0,
+            y: 0,
+            width: window.innerWidth,
+            height: window.innerHeight
+        });
+
         return spaces;
     }
 
@@ -44,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dragonballs = container.querySelectorAll('.dragonball');
         const maxAttempts = 300; // Increased max attempts to try placing all balls
         const placedPositions = [];
-        const minimumDistance = 130; // Minimum distance between the balls to avoid overlap
+        const minimumDistance = 120; // Minimum distance between the balls to avoid overlap
 
         dragonballs.forEach((ball, i) => {
             let placed = false;
@@ -84,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (attempts >= maxAttempts) {
-                console.warn("Max placement attempts reached.");
+                console.warn("Max placement attempts reached for dragon ball ", i + 1);
             }
         });
     }
