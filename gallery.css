@@ -279,6 +279,19 @@ main {
     .love-letter h2 {
       font-size: 1.5rem;
     }
+    /* Footer styling */
+    .valentine-footer {
+      height: 22px !important;
+      padding: 3px 8px !important;
+      font-size: 0.75rem !important;
+      line-height: 1 !important;
+  }
+
+  .valentine-footer::before,
+  .valentine-footer::after {
+      font-size: 10px !important;
+      margin: 0 3px !important;
+  }
   }
 
   /* Add to gallery.css */
