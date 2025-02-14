@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     let clickCount = 0;
     let clickTimeout;
+    let isDragonBallsVisible = false; // Track if dragon balls have been shown
     const container = document.createElement('div');
     container.className = 'dragonball-container';
     
@@ -110,6 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Once the user clicks 7 times, show the find message
     document.addEventListener("click", function(e) {
+        if (isDragonBallsVisible) return; // Prevent triggering the "Find the Dragon Balls" logic after scatter
+
         clickCount++;
         clearTimeout(clickTimeout);
         clickTimeout = setTimeout(() => clickCount = 0, 1000);
@@ -125,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Make the dragon balls appear
             container.style.display = 'block';
             placeDragonBalls();
+            isDragonBallsVisible = true; // Mark dragon balls as visible
             clickCount = 0; // Reset click count
         }
     });
