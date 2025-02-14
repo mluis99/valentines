@@ -170,28 +170,58 @@ function initHamburgerMenu() {
 }
 
 // Hamburger Menu
-function toggleMenu() {
+function setupMobileMenu() {
+  console.log('Setting up mobile menu...');
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('nav-links');
-  if (hamburger && navLinks) {
+
+  if (!hamburger || !navLinks) {
+    console.error('Menu elements not found:', { hamburger: !!hamburger, navLinks: !!navLinks });
+    return;
+  }
+
+  hamburger.addEventListener('click', (e) => {
+    console.log('Hamburger clicked');
+    e.preventDefault();
+    e.stopPropagation();
     hamburger.classList.toggle('active');
     navLinks.classList.toggle('active');
-  }
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (navLinks.classList.contains('active') && 
+        !navLinks.contains(e.target) && 
+        !hamburger.contains(e.target)) {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+    }
+  });
+
+  console.log('Mobile menu setup complete');
 }
 
 // Initialize everything
 window.addEventListener('DOMContentLoaded', () => {
-  initAudio();
-  initHeartSlideshow();
+  console.log('DOM Content Loaded');
+  setupMobileMenu();
 
-  // Setup hamburger menu
-  const hamburger = document.getElementById('hamburger');
-  if (hamburger) {
-    hamburger.addEventListener('click', toggleMenu);
+  // Initialize other features if their elements exist
+  const audioElement = document.getElementById('valentineAudio');
+  if (audioElement) {
+    console.log('Initializing audio...');
+    initAudio();
   }
 
-  // Only initialize slideshow if we're on gallery page
-  if (document.querySelector('.mobile-slideshow')) {
+  const heartSlideshow = document.querySelector('.heart-slideshow');
+  if (heartSlideshow) {
+    console.log('Initializing heart slideshow...');
+    initHeartSlideshow();
+  }
+
+  const mobileSlideshow = document.querySelector('.mobile-slideshow');
+  if (mobileSlideshow) {
+    console.log('Initializing mobile slideshow...');
     initMobileSlideshow();
   }
 });
