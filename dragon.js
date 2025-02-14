@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function placeDragonBalls() {
         const spaces = getAvailableSpace();
         const dragonballs = container.querySelectorAll('.dragonball');
-        const maxAttempts = 100;
+        const maxAttempts = 200; // Increased max attempts to try placing all balls
         const placedPositions = [];
 
         dragonballs.forEach((ball, i) => {
@@ -54,15 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const randomX = randomSpace.x + Math.random() * randomSpace.width;
                 const randomY = randomSpace.y + Math.random() * randomSpace.height;
 
-                const maxX = window.innerWidth - 100;
-                const maxY = window.innerHeight - 100;
+                const maxX = window.innerWidth - 100;  // Limit ball placement to within screen width
+                const maxY = window.innerHeight - 100; // Limit ball placement to within screen height
 
                 const posX = Math.min(randomX, maxX);
                 const posY = Math.min(randomY, maxY);
 
                 // Check for collisions with other balls or elements
                 const collisionWithBalls = placedPositions.some(pos => 
-                    Math.abs(pos.x - posX) < 150 && Math.abs(pos.y - posY) < 150
+                    Math.abs(pos.x - posX) < 120 && Math.abs(pos.y - posY) < 120
                 );
 
                 // Temporarily position to check element collision
