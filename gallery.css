@@ -441,6 +441,7 @@ h1.our-memories {
 .dragonball-container .dragonball {
   position: absolute;
   transition: all 0.3s ease;
+  pointer-events: all; /* Ensures clickability */
 }
 
 @media (max-width: 768px) {
