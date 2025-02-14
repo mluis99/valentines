@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Add the wish message text
                 const wishMessage = document.createElement('div');
                 wishMessage.className = 'wish-message';
-                wishMessage.textContent = "Your wish has been fulfilled;\nLuis will love Azalia eternally.";
+                wishMessage.textContent = 'Your wish has been fulfilled; Luis will love Azalia eternally.';
                 wishMessageContainer.appendChild(wishMessage);
 
                 document.body.appendChild(wishMessageContainer);

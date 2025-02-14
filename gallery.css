@@ -460,4 +460,11 @@ h1.our-memories {
   .dragonball-container {
     display: none !important;
   }
+  .find-message {
+    display: none;
+  }
+/* Ensure Spotify button is above footer on mobile */
+.spotify-button {
+  margin-bottom: 80px; /* Move it above the footer for better mobile accessibility */
+}
 }
