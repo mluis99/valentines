@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const gallery = document.querySelector('.gallery');
     const loveLetter = document.querySelector('.love-letter');
 
-    // Function to calculate available space
+    // Function to calculate available space for placing dragon balls
     function getAvailableSpace() {
         const spaces = [];
         const contentAreas = [gallery, loveLetter];
