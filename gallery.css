@@ -337,7 +337,7 @@ main {
     width: fit-content;
     margin-top: 5px;
     margin-bottom: calc(40px + env(safe-area-inset-bottom)); /* Increased margin for better accessibility */
-    margin-bottom: 60px; /* Set a specific height above the footer */
+    margin-bottom: 80px; /* Set a specific height above the footer */
 }
 
 .spotify-button:hover {
