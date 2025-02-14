@@ -407,7 +407,6 @@ h1.our-memories {
   font-size: 3rem;
   color: gold;
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-  display: none;
   z-index: 1000;
   text-align: center;
   pointer-events: none;
