@@ -49,10 +49,25 @@ function initMobileSlideshow() {
 }
 
 // Initialize slideshow when DOM is loaded
+// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  // Wait a short moment to ensure script.js has initialized
-  setTimeout(() => {
+  // Let script.js initialize first
+  requestAnimationFrame(() => {
+    // Initialize slideshow
     initMobileSlideshow();
     console.log('Mobile slideshow initialized from gallery.js');
-  }, 100);
+
+    // Ensure menu is properly initialized
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    
+    if (hamburger && navLinks) {
+      console.log('Menu elements found in gallery.js');
+      // Force menu to closed state initially
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+    } else {
+      console.error('Menu elements not found in gallery.js');
+    }
+  });
 });

@@ -175,9 +175,15 @@ function setupMobileMenu() {
     navLinks.classList.toggle('active', show);
     // Prevent body scroll when menu is open
     body.style.overflow = show ? 'hidden' : '';
+    console.log('Menu toggled:', show ? 'open' : 'closed');
   }
 
-  hamburger.addEventListener('click', (e) => {
+  // Remove any existing event listeners
+  const newHamburger = hamburger.cloneNode(true);
+  hamburger.parentNode.replaceChild(newHamburger, hamburger);
+
+  // Add click handler to new hamburger
+  newHamburger.addEventListener('click', (e) => {
     console.log('Hamburger clicked');
     e.preventDefault();
     e.stopPropagation();
@@ -189,7 +195,7 @@ function setupMobileMenu() {
   document.addEventListener('click', (e) => {
     if (navLinks.classList.contains('active') && 
         !navLinks.contains(e.target) && 
-        !hamburger.contains(e.target)) {
+        !newHamburger.contains(e.target)) {
       toggleMenu(false);
     }
   });
@@ -197,14 +203,40 @@ function setupMobileMenu() {
   // Handle touch events
   let touchStartX = 0;
   let touchEndX = 0;
+  let isSwiping = false;
 
   document.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
+    isSwiping = true;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!isSwiping) return;
+    
+    const currentX = e.touches[0].clientX;
+    const diff = currentX - touchStartX;
+
+    // If menu is open, allow dragging it closed
+    if (navLinks.classList.contains('active')) {
+      const translateX = Math.min(0, diff);
+      navLinks.style.transform = `translateX(${translateX}px)`;
+    }
+    // If starting from left edge, allow dragging menu open
+    else if (touchStartX < 30) {
+      const translateX = Math.max(-250, -250 + diff); // 250px is menu width
+      navLinks.style.transform = `translateX(${translateX}px)`;
+    }
   }, { passive: true });
 
   document.addEventListener('touchend', (e) => {
+    if (!isSwiping) return;
+    
+    isSwiping = false;
     touchEndX = e.changedTouches[0].clientX;
     const swipeDistance = touchEndX - touchStartX;
+
+    // Reset transform
+    navLinks.style.transform = '';
 
     // If menu is open and user swipes left, close it
     if (navLinks.classList.contains('active') && swipeDistance < -50) {
@@ -218,6 +250,11 @@ function setupMobileMenu() {
   }, { passive: true });
 
   console.log('Mobile menu setup complete');
+
+  // Initial state check
+  if (navLinks.classList.contains('active')) {
+    toggleMenu(true);
+  }
 }
 
 // Initialize everything

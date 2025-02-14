@@ -1,5 +1,6 @@
 /* gallery.css - Styles specific to the gallery page */
 /* General Styles for Gallery Page */
+/* Inherit core styles from style.css */
 body {
     margin: 0;
     font-family: 'Comic Sans MS', cursive, sans-serif; 
@@ -7,16 +8,16 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-  }
-  /* Main content starts below header */
-  main {
-    padding-top: 60px;
+    padding-top: 60px; /* Space for fixed header */
   }
 
+  /* Gallery specific styles */
   .gallery {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
 
   @media (max-width: 768px) {
