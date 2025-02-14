@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const gallery = document.querySelector('.gallery');
     const loveLetter = document.querySelector('.love-letter');
-    
+
     // Function to calculate available space
     function getAvailableSpace() {
         const spaces = [];
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function isCollision(ball) {
         const ballRect = ball.getBoundingClientRect();
         const elements = document.querySelectorAll('.gallery img, .love-letter');
-        
+
         for (let el of elements) {
             const elRect = el.getBoundingClientRect();
             if (
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             findMessage.className = 'find-message';
             findMessage.textContent = 'Find the Dragon Balls!';
             document.body.appendChild(findMessage);
-            
+
             // Styling find message
             findMessage.style.position = 'fixed';
             findMessage.style.top = '50%';
