@@ -353,7 +353,7 @@ h1 span {
 @media (max-width: 767px) {
     /* Body and header adjustments */
     header {
-        margin-bottom: 0;
+        margin-bottom: auto;
     }
     
     body {
