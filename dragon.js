@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Check for collisions with other balls or elements
                 const collisionWithBalls = placedPositions.some(pos => 
-                    Math.abs(pos.x - posX) < 100 && Math.abs(pos.y - posY) < 100
+                    Math.abs(pos.x - posX) < 150 && Math.abs(pos.y - posY) < 150
                 );
 
                 // Temporarily position to check element collision
