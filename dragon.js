@@ -39,11 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function placeDragonBalls() {
         const spaces = getAvailableSpace();
         const dragonballs = container.querySelectorAll('.dragonball');
+        let attempts = 0;
+        const maxAttempts = 100; // Maximum number of attempts to find a valid position
 
         dragonballs.forEach(ball => {
             let placed = false;
 
-            while (!placed) {
+            while (!placed && attempts < maxAttempts) {
                 const randomSpace = spaces[Math.floor(Math.random() * spaces.length)];
                 const randomX = randomSpace.x + Math.random() * randomSpace.width;
                 const randomY = randomSpace.y + Math.random() * randomSpace.height;
@@ -55,6 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!isCollision(ball)) {
                     placed = true;
                 }
+
+                attempts++;
+            }
+
+            if (attempts >= maxAttempts) {
+                console.warn("Max attempts reached while placing dragon balls.");
             }
         });
     }
