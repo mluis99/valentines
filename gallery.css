@@ -397,6 +397,7 @@ main {
     border: 2px solid #fff;
     width: fit-content;
     margin-top: 5px;
+    margin-bottom: calc(20px + env(safe-area-inset-bottom));
 }
 
 .spotify-button:hover {
