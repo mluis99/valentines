@@ -358,7 +358,7 @@ h1 span {
     
     body {
         justify-content: flex-start;
-        padding-top: 10;
+        padding-top: 0;
     }
 
     h1 {
