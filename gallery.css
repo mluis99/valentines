@@ -8,11 +8,9 @@
   position: relative;
   z-index: 1;
   padding-top: 80px; /* Additional space below fixed header */
-  margin-bottom: 40px;
+  margin-bottom: 0; /* Remove bottom margin since grid has margin */
   display: flex;
   flex-direction: column;
-  height: auto;
-  min-height: calc(100vh - 60px); /* Subtract header height */
 }
 
 /* Override any necessary styles from style.css */
@@ -33,6 +31,29 @@ main {
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
+/* Love Letter Section */
+.love-letter {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.love-letter h2 {
+  color: #ff3366;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.love-letter p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+  font-size: 1.1em;
+  color: #333;
+}
+
 .gallery h2 {
   text-align: center;
   margin-bottom: 15px;
@@ -48,6 +69,7 @@ main {
   padding: 20px;
   max-width: 1400px;
   margin: 0 auto;
+  margin-bottom: 60px; /* Add space before love letter */
 }
 
 .gallery-grid img {
