@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isDragonBallsVisible = false;
     const container = document.createElement('div');
     container.className = 'dragonball-container';
+    container.style.position = 'absolute'; // Position them in a fixed space
     container.style.display = 'none'; // Hide initially
 
     // Create dragon balls
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         img.src = `dragonballs/dragonball-${i}.png`;
         img.alt = `Dragon Ball ${i}`;
         img.classList.add('dragonball');
+        img.style.position = 'absolute'; // Set the dragon ball to absolute positioning
         container.appendChild(img);
     }
     document.body.appendChild(container);
