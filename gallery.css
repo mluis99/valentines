@@ -30,8 +30,7 @@ body {
 /* Main Content */
 main {
   padding-bottom: 100px;
-  min-height: 100vh;
-  display: flex;
+  min-height: calc(100vh + 100px);  display: flex;
   flex-direction: column;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
