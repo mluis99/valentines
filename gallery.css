@@ -287,8 +287,8 @@ main {
     }
     /* Footer styling */
     .valentine-footer {
-      height: 22px !important;
-      padding: 3px 8px !important;
+      height: 50px !important; /* Increased height for better touch accessibility */
+      padding: 10px !important; /* Added padding for more space */
       font-size: 0.75rem !important;
       line-height: 1 !important;
   }
