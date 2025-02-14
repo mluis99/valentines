@@ -110,6 +110,10 @@ main {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
+.mobile-slideshow {
+  display: none; /* Ensures it's hidden on desktop */
+}
+
 @media (max-width: 768px) {
     .gallery-grid {
         display: none;
