@@ -7,11 +7,19 @@
   margin: 0 auto;
   position: relative;
   z-index: 1;
-  padding-top: 40px; /* Reduced space below header */
+  padding-top: 20px;
   margin-bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.gallery h1 {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: bold;
 }
 
 /* Override any necessary styles from style.css */
