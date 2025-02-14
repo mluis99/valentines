@@ -82,6 +82,7 @@ body {
     justify-content: flex-start;
     align-items: center;
     margin-top: 55px;
+    padding-top: 0;
 }
 
 h1 {
@@ -159,7 +160,7 @@ h1 span {
 .heart-slideshow {
     width: min(250px, 70vw);
     height: min(250px, 70vw);
-    margin: 0.5em auto;
+    margin: 1em auto;
     position: relative;
     clip-path: polygon(
         50% 15%,
@@ -234,7 +235,7 @@ h1 span {
     padding: clamp(12px, 4vw, 15px) clamp(25px, 6vw, 35px);
     border: 3px solid white;
     border-radius: 30px;
-    margin: 0.5em auto;
+    margin: 1em auto !important;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(255, 51, 102, 0.3);
     z-index: 20;
