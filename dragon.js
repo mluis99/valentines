@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     let clickCount = 0;
     let clickTimeout;
-    let isDragonBallsVisible = false; // Track if dragon balls have been shown
     const container = document.createElement('div');
     container.className = 'dragonball-container';
     
@@ -18,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const gallery = document.querySelector('.gallery');
     const loveLetter = document.querySelector('.love-letter');
     
-    // Function to calculate available space
+    // Function to calculate empty space
     function getAvailableSpace() {
         const spaces = [];
         const contentAreas = [gallery, loveLetter];
@@ -40,38 +39,22 @@ document.addEventListener('DOMContentLoaded', () => {
     function placeDragonBalls() {
         const spaces = getAvailableSpace();
         const dragonballs = container.querySelectorAll('.dragonball');
+        let attempts = 0;
         const maxAttempts = 100; // Maximum number of attempts to find a valid position
-        const placedPositions = []; // To track the positions of the placed dragon balls
 
-        dragonballs.forEach((ball, index) => {
+        dragonballs.forEach(ball => {
             let placed = false;
-            let attempts = 0;
 
             while (!placed && attempts < maxAttempts) {
                 const randomSpace = spaces[Math.floor(Math.random() * spaces.length)];
                 const randomX = randomSpace.x + Math.random() * randomSpace.width;
                 const randomY = randomSpace.y + Math.random() * randomSpace.height;
 
-                // Ensure dragon balls stay within viewport bounds
-                const maxX = window.innerWidth - 100; // Max x-position, minus ball width
-                const maxY = window.innerHeight - 100; // Max y-position, minus ball height
+                ball.style.left = `${randomX}px`;
+                ball.style.top = `${randomY}px`;
 
-                const posX = Math.min(randomX, maxX);
-                const posY = Math.min(randomY, maxY);
-
-                // Check for collision with previously placed dragon balls
-                const collision = placedPositions.some(pos => {
-                    return (
-                        Math.abs(pos.x - posX) < 100 && // Ball width (or buffer area) is 100px
-                        Math.abs(pos.y - posY) < 100 // Ball height (or buffer area) is 100px
-                    );
-                });
-
-                if (!collision) {
-                    ball.style.left = `${posX}px`;
-                    ball.style.top = `${posY}px`;
-                    ball.style.opacity = '1';  // Make the ball visible once positioned
-                    placedPositions.push({ x: posX, y: posY }); // Store the position
+                // Check for collision with other elements
+                if (!isCollision(ball)) {
                     placed = true;
                 }
 
@@ -84,48 +67,52 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Track clicked dragon balls using a set
+    // Function to check if a dragon ball overlaps any other elements
+    function isCollision(ball) {
+        const ballRect = ball.getBoundingClientRect();
+        const elements = document.querySelectorAll('.gallery img, .love-letter');
+        
+        for (let el of elements) {
+            const elRect = el.getBoundingClientRect();
+            if (
+                ballRect.left < elRect.right &&
+                ballRect.right > elRect.left &&
+                ballRect.top < elRect.bottom &&
+                ballRect.bottom > elRect.top
+            ) {
+                return true; // Collision detected
+            }
+        }
+        return false;
+    }
+
+    // Set to track the clicked dragon balls (so they can't be clicked again)
     const clickedDragonBalls = new Set();
 
     // Click handler for the dragon balls
     container.addEventListener('click', (e) => {
-        if (e.target.classList.contains('dragonball')) {
-            const clickedBall = e.target.alt; // Get the ball's name (Dragon Ball X)
-
-            // Add the clicked ball to the set
-            clickedDragonBalls.add(clickedBall);
-
+        if (e.target.classList.contains('dragonball') && !clickedDragonBalls.has(e.target)) {
             e.target.classList.add('clicked');
+            clickedDragonBalls.add(e.target); // Track the clicked dragon ball
 
+            // If all 7 balls have been clicked, show the wish message
             if (clickedDragonBalls.size === 7) {
-                // After clicking all 7 distinct dragon balls, display the wish message
                 const wishMessage = document.createElement('div');
                 wishMessage.classList.add('wish-message');
                 wishMessage.textContent = 'Your wish has been fulfilled; Luis will love Azalia eternally.';
                 document.body.appendChild(wishMessage);
-                
-                // Optionally apply the Dragon Ball Z font (or similar) to the wish message
-                wishMessage.style.fontFamily = '"Dragonball Z", sans-serif';
-                wishMessage.style.fontSize = '3rem';
-                wishMessage.style.color = 'gold';
-                wishMessage.style.textAlign = 'center';
-                wishMessage.style.textShadow = '2px 2px 10px rgba(0, 0, 0, 0.7)';
-                
-                // Show the wish message for 3 seconds
-                setTimeout(() => wishMessage.remove(), 3000);
+                setTimeout(() => wishMessage.remove(), 3000); // Remove after 3 seconds
             }
         }
     });
 
     // Once the user clicks 7 times, show the find message
     document.addEventListener("click", function(e) {
-        if (isDragonBallsVisible) return; // Prevent triggering the "Find the Dragon Balls" logic after scatter
-
         clickCount++;
         clearTimeout(clickTimeout);
         clickTimeout = setTimeout(() => clickCount = 0, 1000);
 
-        if (clickCount >= 7) {
+        if (clickCount >= 7 && !container.style.display) {
             const findMessage = document.createElement('div');
             findMessage.classList.add('find-message');
             findMessage.textContent = 'Find the Dragon Balls!';
@@ -136,7 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Make the dragon balls appear
             container.style.display = 'block';
             placeDragonBalls();
-            isDragonBallsVisible = true; // Mark dragon balls as visible
             clickCount = 0; // Reset click count
         }
     });
