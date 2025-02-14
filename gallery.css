@@ -121,7 +121,7 @@ main {
   }
 
   .mobile-slideshow {
-    display: block !important;
+    display: show !important;
     width: 100%;
     height: 400px;
     margin: 20px 0;
