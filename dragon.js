@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clearTimeout(clickTimeout);
         clickTimeout = setTimeout(() => clickCount = 0, 1000);
 
-        if (clickCount >= 7 && !container.style.display) {
+        if (clickCount >= 7 && container.style.display === 'none') {
             const findMessage = document.createElement('div');
             findMessage.classList.add('find-message');
             findMessage.textContent = 'Find the Dragon Balls!';
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Make the dragon balls appear
             container.style.display = 'block';
-            placeDragonBalls();
+            placeDragonBalls(); // Ensure the dragon balls are scattered
             clickCount = 0; // Reset click count
         }
     });
