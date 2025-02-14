@@ -449,6 +449,7 @@ h1.our-memories {
   position: absolute;  /* Make sure they are positioned relative to the container */
   transition: all 0.3s ease;
   pointer-events: all;  /* Ensures they are clickable */
+  z-index: 10000; /* Make sure balls are clickable */
 }
 
 /* Mobile Disable */

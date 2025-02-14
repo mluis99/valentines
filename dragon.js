@@ -39,22 +39,26 @@ document.addEventListener('DOMContentLoaded', () => {
     function placeDragonBalls() {
         const spaces = getAvailableSpace();
         const dragonballs = container.querySelectorAll('.dragonball');
-        let attempts = 0;
         const maxAttempts = 100; // Maximum number of attempts to find a valid position
 
-        dragonballs.forEach(ball => {
+        dragonballs.forEach((ball, index) => {
             let placed = false;
+            let attempts = 0;
 
             while (!placed && attempts < maxAttempts) {
                 const randomSpace = spaces[Math.floor(Math.random() * spaces.length)];
                 const randomX = randomSpace.x + Math.random() * randomSpace.width;
                 const randomY = randomSpace.y + Math.random() * randomSpace.height;
 
-                ball.style.left = `${randomX}px`;
-                ball.style.top = `${randomY}px`;
+                // Ensure dragon balls stay within viewport bounds
+                const maxX = window.innerWidth - 100; // Max x-position, minus ball width
+                const maxY = window.innerHeight - 100; // Max y-position, minus ball height
+
+                ball.style.left = `${Math.min(randomX, maxX)}px`;
+                ball.style.top = `${Math.min(randomY, maxY)}px`;
                 ball.style.opacity = '1';  // Make the ball visible once positioned
                 
-                // Check for collision with other elements
+                // Check for collision with other elements (balls or content)
                 if (!isCollision(ball)) {
                     placed = true;
                 }
