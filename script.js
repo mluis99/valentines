@@ -279,68 +279,44 @@ function handleTouch(e) {
 
 // Mobile Gallery Slideshow
 let currentSlideIndex = 0;
-let mobileSlideshow, slideImage, slideCounter, prevButton, nextButton, closeButton, galleryImages, imagePaths;
 
 // Initialize mobile slideshow
 function initMobileSlideshow() {
-  mobileSlideshow = document.querySelector('.mobile-slideshow');
+  const mobileSlideshow = document.querySelector('.mobile-slideshow');
   if (!mobileSlideshow) return; // Only initialize on gallery page
-  
-  slideImage = document.querySelector('.slide-image');
-  slideCounter = document.querySelector('.slide-counter');
-  prevButton = document.getElementById('prev-slide');
-  nextButton = document.getElementById('next-slide');
-  closeButton = document.querySelector('.close-slideshow');
 
-  // Get all gallery images
-  galleryImages = document.querySelectorAll('.gallery-grid img');
-  imagePaths = Array.from(galleryImages).map(img => img.src);
+  const slides = document.querySelectorAll('.slide');
+  const slideCounter = document.querySelector('.slide-counter');
+  const prevButton = document.getElementById('prev-slide');
+  const nextButton = document.getElementById('next-slide');
 
   function updateSlide() {
-    slideImage.src = imagePaths[currentSlideIndex];
-    slideCounter.textContent = `${currentSlideIndex + 1} / ${imagePaths.length}`;
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[currentSlideIndex].classList.add('active');
+    slideCounter.textContent = `${currentSlideIndex + 1} / ${slides.length}`;
   }
-
-  function showSlideshow(index) {
-    currentSlideIndex = index;
-    updateSlide();
-    mobileSlideshow.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function hideSlideshow() {
-    mobileSlideshow.classList.remove('active');
-    document.body.style.overflow = '';
-}
-
-  // Add click events to gallery images
-  galleryImages.forEach((img, index) => {
-    img.addEventListener('click', () => showSlideshow(index));
-  });
 
   // Navigation buttons
   prevButton.addEventListener('click', () => {
-    currentSlideIndex = (currentSlideIndex - 1 + imagePaths.length) % imagePaths.length;
+    currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
     updateSlide();
   });
 
   nextButton.addEventListener('click', () => {
-    currentSlideIndex = (currentSlideIndex + 1) % imagePaths.length;
+    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
     updateSlide();
   });
 
-  closeButton.addEventListener('click', hideSlideshow);
-
   // Swipe handling for slideshow
-  let slideshowTouchStartX = 0;
+  let touchStartX = 0;
 
   mobileSlideshow.addEventListener('touchstart', (e) => {
-    slideshowTouchStartX = e.touches[0].clientX;
+    touchStartX = e.touches[0].clientX;
   });
 
   mobileSlideshow.addEventListener('touchend', (e) => {
     const touchEndX = e.changedTouches[0].clientX;
-    const swipeDistance = touchEndX - slideshowTouchStartX;
+    const swipeDistance = touchEndX - touchStartX;
     
     if (Math.abs(swipeDistance) > 50) { // Minimum swipe distance
       if (swipeDistance > 0) {
@@ -352,4 +328,7 @@ function initMobileSlideshow() {
       }
     }
   });
+
+  // Initialize first slide
+  updateSlide();
 }
