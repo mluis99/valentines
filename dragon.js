@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const gallery = document.querySelector('.gallery');
     const loveLetter = document.querySelector('.love-letter');
     
-    // Function to calculate empty space
+    // Function to calculate available space
     function getAvailableSpace() {
         const spaces = [];
         const contentAreas = [gallery, loveLetter];
@@ -52,7 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 ball.style.left = `${randomX}px`;
                 ball.style.top = `${randomY}px`;
-
+                ball.style.opacity = '1';  // Make the ball visible once positioned
+                
                 // Check for collision with other elements
                 if (!isCollision(ball)) {
                     placed = true;

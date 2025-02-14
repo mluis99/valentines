@@ -414,9 +414,10 @@ h1.our-memories {
 
 /* Dragon Ball Easter Egg Container */
 .dragonball-container {
-  position: absolute;  /* Position relative to the document */
+  position: absolute; /* Ensure it's positioned in the document */
   display: none;  /* Hidden initially */
   z-index: 1000;
+  pointer-events: none;  /* So it doesn't block clicks */
 }
 
 /* Individual Dragon Balls */
@@ -440,9 +441,9 @@ h1.our-memories {
 
 /* Positioning for scattered Dragon Balls */
 .dragonball-container .dragonball {
-  position: absolute;  /* Ensure they're positioned relative to the container */
+  position: absolute;  /* Make sure they are positioned relative to the container */
   transition: all 0.3s ease;
-  pointer-events: all;  /* Ensures clickability */
+  pointer-events: all;  /* Ensures they are clickable */
 }
 
 /* Mobile Disable */
