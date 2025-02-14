@@ -434,3 +434,8 @@ main {
         height: 16px;
     }
 }
+
+/* Adjusting the header margin */
+h1.our-memories {
+    margin-bottom: 5px; /* Adjust this value as needed */
+}
