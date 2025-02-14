@@ -275,3 +275,73 @@ function handleTouch(e) {
   const touch = e.touches[0];
   return touch.clientX;
 }
+
+// Mobile Gallery Slideshow
+let currentSlideIndex = 0;
+const mobileSlideshow = document.querySelector('.mobile-slideshow');
+const slideImage = document.querySelector('.slide-image');
+const slideCounter = document.querySelector('.slide-counter');
+const prevButton = document.getElementById('prev-slide');
+const nextButton = document.getElementById('next-slide');
+const closeButton = document.querySelector('.close-slideshow');
+
+// Get all gallery images
+const galleryImages = document.querySelectorAll('.gallery-grid img');
+const imagePaths = Array.from(galleryImages).map(img => img.src);
+
+function updateSlide() {
+  slideImage.src = imagePaths[currentSlideIndex];
+  slideCounter.textContent = `${currentSlideIndex + 1} / ${imagePaths.length}`;
+}
+
+function showSlideshow(index) {
+  currentSlideIndex = index;
+  updateSlide();
+  mobileSlideshow.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function hideSlideshow() {
+  mobileSlideshow.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Add click events to gallery images
+galleryImages.forEach((img, index) => {
+  img.addEventListener('click', () => showSlideshow(index));
+});
+
+// Navigation buttons
+prevButton.addEventListener('click', () => {
+  currentSlideIndex = (currentSlideIndex - 1 + imagePaths.length) % imagePaths.length;
+  updateSlide();
+});
+
+nextButton.addEventListener('click', () => {
+  currentSlideIndex = (currentSlideIndex + 1) % imagePaths.length;
+  updateSlide();
+});
+
+closeButton.addEventListener('click', hideSlideshow);
+
+// Swipe handling for slideshow
+let slideshowTouchStartX = 0;
+
+mobileSlideshow.addEventListener('touchstart', (e) => {
+  slideshowTouchStartX = e.touches[0].clientX;
+});
+
+mobileSlideshow.addEventListener('touchend', (e) => {
+  const touchEndX = e.changedTouches[0].clientX;
+  const swipeDistance = touchEndX - slideshowTouchStartX;
+  
+  if (Math.abs(swipeDistance) > 50) { // Minimum swipe distance
+    if (swipeDistance > 0) {
+      // Swipe right - show previous
+      prevButton.click();
+    } else {
+      // Swipe left - show next
+      nextButton.click();
+    }
+  }
+});
