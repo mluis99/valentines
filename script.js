@@ -156,18 +156,7 @@ function toggleAudio() {
   }
 }
 
-// Hamburger Menu
-function initHamburgerMenu() {
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('nav-links');
-  
-  if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-      hamburger.classList.toggle('active');
-    });
-  }
-}
+
 
 // Hamburger Menu
 function setupMobileMenu() {
@@ -232,9 +221,15 @@ function setupMobileMenu() {
 }
 
 // Initialize everything
+// Initialize everything when DOM is ready
 window.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM Content Loaded');
-  setupMobileMenu();
+  console.log('DOM Content Loaded - Initializing...');
+  
+  // Setup mobile menu first
+  requestAnimationFrame(() => {
+    setupMobileMenu();
+    console.log('Mobile menu initialization complete');
+  });
 
   // Initialize other features if their elements exist
   const audioElement = document.getElementById('valentineAudio');

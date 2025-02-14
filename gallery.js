@@ -50,5 +50,9 @@ function initMobileSlideshow() {
 
 // Initialize slideshow when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  initMobileSlideshow();
+  // Wait a short moment to ensure script.js has initialized
+  setTimeout(() => {
+    initMobileSlideshow();
+    console.log('Mobile slideshow initialized from gallery.js');
+  }, 100);
 });
