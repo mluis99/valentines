@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             findMessage.style.display = 'block';
             setTimeout(() => findMessage.remove(), 3000);
 
-            // Make the dragon balls appear
+            // Make the dragon balls appear and scatter
             container.style.display = 'block';
             placeDragonBalls(); // Ensure the dragon balls are scattered
             clickCount = 0; // Reset click count
