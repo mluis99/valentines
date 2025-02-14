@@ -42,7 +42,7 @@ main {
 .love-letter {
   max-width: 800px;
   margin: 40px auto;
-  padding: 20px;
+  padding: 5px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -74,7 +74,7 @@ main {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
-  padding: 20px;
+  padding: 5px;
   width: 95%;
   max-width: 1600px;
   margin: 0 auto;
