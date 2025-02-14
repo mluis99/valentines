@@ -31,7 +31,6 @@ body {
 main {
   height: auto; /* Allow height to expand based on content */
   overflow-y: auto; /* Allows vertical scrolling */
-  padding-bottom: 200px; /* Ensure enough padding for the Spotify button */
   display: flex;
   flex-direction: column;
   -webkit-overflow-scrolling: touch;
