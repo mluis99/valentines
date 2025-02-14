@@ -409,12 +409,14 @@ h1.our-memories {
   background: rgba(0, 0, 0, 0.9);
   border-radius: 50px;
   z-index: 10000;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  transition: all 0.5s ease, opacity 0.3s ease;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .dragonball-container.visible {
   bottom: 30px;
+  opacity: 1;
 }
 
 .dragonball {
