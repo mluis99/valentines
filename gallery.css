@@ -3,7 +3,7 @@
 body {
     margin: 0;
     font-family: 'Comic Sans MS', cursive, sans-serif; 
-    background: url('heart-wallpaper.jpg');
+    background: url('images/heart-wallpaper.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
