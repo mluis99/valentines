@@ -32,12 +32,18 @@ body {
   nav {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     padding: 10px 20px;
     position: relative;
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
     box-sizing: border-box;
+  }
+
+  .hamburger {
+    margin-right: 15px;
+    margin-left: 0;
   }
   
   /* Hamburger Menu Icon */
@@ -435,6 +441,9 @@ h1 span {
     }
 
     /* Mobile menu styles */
+    .nav-links {
+        display: none;
+        position: fixed;
         top: 60px; /* Height of header */
         left: 0;
         width: 250px;
@@ -451,10 +460,6 @@ h1 span {
     .nav-links.active {
         display: flex !important;
         transform: translateX(0);
-    }
-
-    .nav-links.active {
-        display: flex !important;
     }
 
     .nav-links li {
