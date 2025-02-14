@@ -359,6 +359,7 @@ h1 span {
     body {
         justify-content: flex-start;
         padding-top: 0;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
     }
 
     h1 {
