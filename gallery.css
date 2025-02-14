@@ -410,9 +410,10 @@ h1.our-memories {
   display: none;
   z-index: 1000;
   text-align: center;
+  pointer-events: none; /* Prevent messages from blocking clicks */
 }
 
-/* Dragon Ball Easter Egg Container (fixed overlay) */
+/* Dragon Ball Easter Egg Container */
 .dragonball-container {
   position: fixed;  /* Fixed position over the entire page */
   top: 0;
@@ -427,16 +428,18 @@ h1.our-memories {
 
 /* Individual Dragon Balls */
 .dragonball {
+  position: absolute; /* Ensure it's positioned within the container */
   width: 100px;
   height: 100px;
   cursor: pointer;
   opacity: 0;  /* Invisible initially */
-  transition: opacity 0.5s ease, transform 0.3s ease;
+  transition: opacity 0.3s, transform 0.3s ease;
+  z-index: 10000; /* Make sure the balls are on top and clickable */
   filter: drop-shadow(0 2px 5px rgba(255, 223, 0, 0.5));
 }
 
 .dragonball.clicked {
-  opacity: 1;  /* Make solid after clicked */
+  opacity: 0.5; /* Example style for clicked balls */
 }
 
 .dragonball:hover {
@@ -446,10 +449,7 @@ h1.our-memories {
 
 /* Positioning for scattered Dragon Balls */
 .dragonball-container .dragonball {
-  position: absolute;  /* Make sure they are positioned relative to the container */
-  transition: all 0.3s ease;
-  pointer-events: all;  /* Ensures they are clickable */
-  z-index: 10000; /* Make sure balls are clickable */
+  pointer-events: all;  /* Ensure they are clickable */
 }
 
 /* Mobile Disable */
