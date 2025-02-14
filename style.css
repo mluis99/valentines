@@ -354,7 +354,7 @@ h1 span {
     /* Body and header adjustments */
     header {
         position: fixed;
-        top: 0;
+        top: 5;
         left: 0;
         right: 0; 
         margin-bottom: 0;
