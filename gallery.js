@@ -12,18 +12,22 @@ function initMobileSlideshow() {
   function showSlide(index) {
     slides.forEach(slide => slide.classList.remove('active'));
     slides[index].classList.add('active');
-    counter.textContent = `${index + 1} / ${slides.length}`;
+    if (counter) counter.textContent = `${index + 1} / ${slides.length}`;
   }
 
-  prevBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-    showSlide(currentIndex);
-  });
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      showSlide(currentIndex);
+    });
+  }
 
-  nextBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % slides.length;
-    showSlide(currentIndex);
-  });
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    });
+  }
 
   let touchStart = 0;
   slideshow.addEventListener('touchstart', e => {
@@ -35,12 +39,13 @@ function initMobileSlideshow() {
     const diff = touchEnd - touchStart;
     
     if (Math.abs(diff) > 50) {
-      if (diff > 0) prevBtn.click();
-      else nextBtn.click();
+      if (diff > 0 && prevBtn) prevBtn.click();
+      else if (diff < 0 && nextBtn) nextBtn.click();
     }
   });
 
   showSlide(0);
+  console.log('Mobile slideshow initialized with', slides.length, 'slides');
 }
 
 // Hamburger Menu
