@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         img.alt = `Dragon Ball ${i}`;
         img.classList.add('dragonball');
         img.style.position = 'absolute'; // Each ball is absolutely positioned
-        img.style.opacity = '0'; // Initially invisible
+        img.style.opacity = '0.3'; // Initially slightly transparent
         container.appendChild(img);
     }
     document.body.appendChild(container);
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const collisionWithElements = isCollision(ball);
 
                 if (!collisionWithBalls && !collisionWithElements) {
-                    ball.style.opacity = '1'; // Make the ball visible
+                    ball.style.opacity = '0.3'; // Slightly transparent by default
                     placedPositions.push({ x: posX, y: posY });
                     placed = true;
                 } else {
@@ -125,6 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const clickedBall = e.target.alt;
             clickedDragonBalls.add(clickedBall);
             e.target.classList.add('clicked');
+
+            // Make the ball solid after it's clicked
+            e.target.style.opacity = '1'; 
 
             if (clickedDragonBalls.size === 7) {
                 const wishMessage = document.createElement('div');

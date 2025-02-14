@@ -403,7 +403,7 @@ h1.our-memories {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'Dancing Script', cursive;
+  font-family: 'Dragonball Z', sans-serif; /* DBZ font */
   font-size: 3rem;
   color: gold;
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
@@ -431,14 +431,14 @@ h1.our-memories {
   width: 100px;
   height: 100px;
   cursor: pointer;
-  opacity: 0;
+  opacity: 0.3; /* Slightly transparent by default */
   transition: opacity 0.3s, transform 0.3s ease;
   z-index: 10000;
   filter: drop-shadow(0 2px 5px rgba(255, 223, 0, 0.5));
 }
 
 .dragonball.clicked {
-  opacity: 0.5;
+  opacity: 1; /* Solid after clicked */
 }
 
 .dragonball:hover {
