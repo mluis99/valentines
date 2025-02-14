@@ -84,25 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Function to check if a dragon ball overlaps any other elements
-    function isCollision(ball) {
-        const ballRect = ball.getBoundingClientRect();
-        const elements = document.querySelectorAll('.gallery img, .love-letter');
-        
-        for (let el of elements) {
-            const elRect = el.getBoundingClientRect();
-            if (
-                ballRect.left < elRect.right &&
-                ballRect.right > elRect.left &&
-                ballRect.top < elRect.bottom &&
-                ballRect.bottom > elRect.top
-            ) {
-                return true; // Collision detected
-            }
-        }
-        return false;
-    }
-
     // Track clicked dragon balls using a set
     const clickedDragonBalls = new Set();
 
