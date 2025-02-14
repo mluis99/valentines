@@ -465,10 +465,11 @@ h1.our-memories {
   }
 /* Ensure Spotify button is above footer on mobile */
 .spotify-button {
-  position: absolute; /* Use absolute positioning */
-  bottom: 120px; /* 120px above the footer */
-  left: 50%; /* Center the button horizontally */
-  transform: translateX(-50%); /* Correct the centering */
-  margin-bottom: 0; /* Remove any default margin-bottom */
+  position: fixed; /* Fixed positioning to keep the button visible */
+  bottom: 100px; /* 100px above the footer (adjustable if necessary) */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Correct centering */
+  z-index: 1000; /* Ensure it appears above everything */
+  margin-bottom: 0; /* Remove default bottom margin */
 }
 }
