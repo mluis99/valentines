@@ -465,6 +465,6 @@ h1.our-memories {
   }
 /* Ensure Spotify button is above footer on mobile */
 .spotify-button {
-  margin-bottom: 80px; /* Move it above the footer for better mobile accessibility */
+  margin-bottom: 120px; /* Move it above the footer for better mobile accessibility */
 }
 }
