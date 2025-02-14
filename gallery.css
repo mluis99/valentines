@@ -412,24 +412,25 @@ h1.our-memories {
   text-align: center;
 }
 
-/* Dragon Ball Easter Egg */
+/* Dragon Ball Easter Egg Container */
 .dragonball-container {
-  position: absolute;
-  display: none; /* Hidden initially */
+  position: absolute;  /* Position relative to the document */
+  display: none;  /* Hidden initially */
   z-index: 1000;
 }
 
+/* Individual Dragon Balls */
 .dragonball {
   width: 100px;
   height: 100px;
   cursor: pointer;
-  opacity: 0; /* Invisible initially */
+  opacity: 0;  /* Invisible initially */
   transition: opacity 0.5s ease, transform 0.3s ease;
   filter: drop-shadow(0 2px 5px rgba(255, 223, 0, 0.5));
 }
 
 .dragonball.clicked {
-  opacity: 1; /* Make solid after clicked */
+  opacity: 1;  /* Make solid after clicked */
 }
 
 .dragonball:hover {
@@ -437,13 +438,14 @@ h1.our-memories {
   filter: drop-shadow(0 4px 10px rgba(255, 223, 0, 0.8));
 }
 
-/* Styling for the scattered dragon balls */
+/* Positioning for scattered Dragon Balls */
 .dragonball-container .dragonball {
-  position: absolute;
+  position: absolute;  /* Ensure they're positioned relative to the container */
   transition: all 0.3s ease;
-  pointer-events: all; /* Ensures clickability */
+  pointer-events: all;  /* Ensures clickability */
 }
 
+/* Mobile Disable */
 @media (max-width: 768px) {
   .dragonball-container {
     display: none !important;
