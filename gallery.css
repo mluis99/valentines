@@ -465,25 +465,10 @@ h1.our-memories {
   }
 /* Ensure Spotify button is above footer on mobile */
 .spotify-button {
-  display: block;
-  margin-top: 30px; /* Adjust margin to push the button below the love letter */
-  padding: 12px 30px;
-  background: #ff3366;
-  color: white;
-  text-decoration: none;
-  border-radius: 25px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  margin: 0 auto; /* Center the button horizontally */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: fit-content;
-  font-size: 1rem;
-}
-
-/* Optional: Adjust button size for mobile */
-.spotify-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  background: #ff1a52;
-}
+    position: absolute; /* Use absolute positioning */
+    bottom: 120px; /* 120px above the footer */
+    left: 50%; /* Center the button horizontally */
+    transform: translateX(-50%); /* Correct the centering */
+    margin-bottom: 0; /* Remove any default margin-bottom */
+  }
 }
