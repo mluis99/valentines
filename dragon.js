@@ -4,16 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let isDragonBallsVisible = false;
     const container = document.createElement('div');
     container.className = 'dragonball-container';
-    container.style.position = 'absolute'; // Position them in a fixed space
-    container.style.display = 'none'; // Hide initially
+    container.style.position = 'absolute'; // Set the position to absolute to control positioning
+    container.style.display = 'none'; // Initially hidden
 
     // Create dragon balls
     for (let i = 1; i <= 7; i++) {
         const img = document.createElement('img');
-        img.src = `dragonballs/dragonball-${i}.png`;
+        img.src = `dragonballs/dragonball-${i}.png`;  // Ensure this path is correct and files exist
         img.alt = `Dragon Ball ${i}`;
         img.classList.add('dragonball');
-        img.style.position = 'absolute'; // Set the dragon ball to absolute positioning
+        img.style.position = 'absolute'; // Each ball is absolutely positioned
+        img.style.opacity = '0'; // Initially invisible
         container.appendChild(img);
     }
     document.body.appendChild(container);
@@ -21,11 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const gallery = document.querySelector('.gallery');
     const loveLetter = document.querySelector('.love-letter');
 
-    // Function to calculate available space for placing dragon balls
+    // Function to calculate available space in the content areas
     function getAvailableSpace() {
         const spaces = [];
         const contentAreas = [gallery, loveLetter];
-
         contentAreas.forEach(area => {
             const areaRect = area.getBoundingClientRect();
             spaces.push({
@@ -35,18 +35,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 height: areaRect.height
             });
         });
-
         return spaces;
     }
 
-    // Function to place dragon balls without collisions
+    // Function to place dragon balls within available space
     function placeDragonBalls() {
         const spaces = getAvailableSpace();
         const dragonballs = container.querySelectorAll('.dragonball');
         const maxAttempts = 100;
         const placedPositions = [];
 
-        dragonballs.forEach((ball) => {
+        dragonballs.forEach((ball, i) => {
             let placed = false;
             let attempts = 0;
 
@@ -61,10 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const posX = Math.min(randomX, maxX);
                 const posY = Math.min(randomY, maxY);
 
-                // Check collision with other dragon balls
+                // Check for collisions with other balls or elements
                 const collisionWithBalls = placedPositions.some(pos => 
-                    Math.abs(pos.x - posX) < 100 && 
-                    Math.abs(pos.y - posY) < 100
+                    Math.abs(pos.x - posX) < 100 && Math.abs(pos.y - posY) < 100
                 );
 
                 // Temporarily position to check element collision
@@ -73,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const collisionWithElements = isCollision(ball);
 
                 if (!collisionWithBalls && !collisionWithElements) {
-                    ball.style.opacity = '1';
+                    ball.style.opacity = '1'; // Make the ball visible
                     placedPositions.push({ x: posX, y: posY });
                     placed = true;
                 } else {
@@ -90,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Collision check with existing elements
+    // Function to check for collisions with existing elements
     function isCollision(ball) {
         const ballRect = ball.getBoundingClientRect();
         const elements = document.querySelectorAll('.gallery img, .love-letter');
@@ -109,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
     }
 
-    // Track clicked balls
+    // Track clicked dragon balls
     const clickedDragonBalls = new Set();
 
     container.addEventListener('click', (e) => {
@@ -155,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
             findMessage.textContent = 'Find the Dragon Balls!';
             document.body.appendChild(findMessage);
 
-            // Styling find message
+            // Styling the find message
             findMessage.style.position = 'fixed';
             findMessage.style.top = '50%';
             findMessage.style.left = '50%';
@@ -167,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             setTimeout(() => findMessage.remove(), 3000);
 
-            // Show and position dragon balls
+            // Show the container and position dragon balls
             container.style.display = 'block';
             placeDragonBalls();
             isDragonBallsVisible = true;
