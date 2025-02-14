@@ -110,11 +110,6 @@ main {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-/* Mobile Slideshow */
-.mobile-slideshow {
-    display: none; /* Default to none */
-}
-
 @media (max-width: 768px) {
     .gallery-grid {
         display: none;
@@ -166,7 +161,7 @@ main {
 
     .slide-nav {
         position: absolute;
-        bottom: 0; /* Position controls at the bottom */
+        bottom: 10px; /* Position controls at the bottom */
         left: 0;
         right: 0;
         display: flex;
@@ -258,12 +253,6 @@ main {
       margin-bottom: 20px;
       color: white;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    }
-    .slide-nav {
-      position: relative;
-      bottom: 0;
-      padding: 15px;
-      background: none;
     }
     .slide-counter {
       position: relative;
