@@ -175,7 +175,6 @@ window.addEventListener('DOMContentLoaded', () => {
   initHeartSlideshow();
   initHamburgerMenu();
   initMobileSlideshow();
-  initMobileSlideshow(); // Initialize mobile slideshow if on gallery page
 });
 
 // Hearts and Flowers Animation
@@ -293,57 +292,46 @@ function handleTouch(e) {
 }
 
 // Mobile Gallery Slideshow
-let currentSlideIndex = 0;
-
-// Initialize mobile slideshow
 function initMobileSlideshow() {
-  const mobileSlideshow = document.querySelector('.mobile-slideshow');
-  if (!mobileSlideshow) return; // Only initialize on gallery page
+  const slideshow = document.querySelector('.mobile-slideshow');
+  if (!slideshow) return;
 
-  const slides = document.querySelectorAll('.slide');
-  const slideCounter = document.querySelector('.slide-counter');
-  const prevButton = document.getElementById('prev-slide');
-  const nextButton = document.getElementById('next-slide');
+  const slides = slideshow.querySelectorAll('.slide');
+  const counter = slideshow.querySelector('.slide-counter');
+  const prevBtn = slideshow.querySelector('#prev-slide');
+  const nextBtn = slideshow.querySelector('#next-slide');
+  let currentIndex = 0;
 
-  function updateSlide() {
+  function showSlide(index) {
     slides.forEach(slide => slide.classList.remove('active'));
-    slides[currentSlideIndex].classList.add('active');
-    slideCounter.textContent = `${currentSlideIndex + 1} / ${slides.length}`;
+    slides[index].classList.add('active');
+    counter.textContent = `${index + 1} / ${slides.length}`;
   }
 
-  // Navigation buttons
-  prevButton.addEventListener('click', () => {
-    currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
-    updateSlide();
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    showSlide(currentIndex);
   });
 
-  nextButton.addEventListener('click', () => {
-    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-    updateSlide();
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
   });
 
-  // Swipe handling for slideshow
-  let touchStartX = 0;
-
-  mobileSlideshow.addEventListener('touchstart', (e) => {
-    touchStartX = e.touches[0].clientX;
+  let touchStart = 0;
+  slideshow.addEventListener('touchstart', e => {
+    touchStart = e.touches[0].clientX;
   });
 
-  mobileSlideshow.addEventListener('touchend', (e) => {
-    const touchEndX = e.changedTouches[0].clientX;
-    const swipeDistance = touchEndX - touchStartX;
+  slideshow.addEventListener('touchend', e => {
+    const touchEnd = e.changedTouches[0].clientX;
+    const diff = touchEnd - touchStart;
     
-    if (Math.abs(swipeDistance) > 50) { // Minimum swipe distance
-      if (swipeDistance > 0) {
-        // Swipe right - show previous
-        prevButton.click();
-      } else {
-        // Swipe left - show next
-        nextButton.click();
-      }
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) prevBtn.click();
+      else nextBtn.click();
     }
   });
 
-  // Initialize first slide
-  updateSlide();
+  showSlide(0);
 }
