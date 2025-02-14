@@ -426,7 +426,7 @@ h1 span {
         flex-direction: column;
         position: absolute;
         top: 60px;
-        right: 20px;
+        left: 20px;
         background: white;
         border: 1px solid #ddd;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -441,6 +441,7 @@ h1 span {
 
     .nav-links li {
         margin: 10px 0;
+        text-align: left;
     }
 
     .nav-links li a {
