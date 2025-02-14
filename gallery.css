@@ -166,7 +166,7 @@ main {
 
     .slide-nav {
         position: absolute;
-        bottom: 10px;
+        bottom: 10px; /* Position controls at the bottom */
         left: 0;
         right: 0;
         display: flex;
