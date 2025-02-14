@@ -345,7 +345,14 @@ h1.our-memories {
     margin-bottom: 0;
 }
 .gallery {
-    margin-top: 5px;
+  max-width: 1600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .love-letter {
     margin-top: 5px;
@@ -353,7 +360,7 @@ h1.our-memories {
 .gallery h1 {
   font-size: 2.5em;
   color: #333;
-  margin-bottom: 10px;
   text-align: center;
   font-weight: bold;
+  margin-bottom: 10px; /* Consistent margin */
 }
