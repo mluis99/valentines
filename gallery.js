@@ -48,21 +48,7 @@ function initMobileSlideshow() {
   console.log('Mobile slideshow initialized with', slides.length, 'slides');
 }
 
-// Hamburger Menu
-function initHamburgerMenu() {
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('nav-links');
-  
-  if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-      hamburger.classList.toggle('active');
-    });
-  }
-}
-
-// Initialize everything when the DOM is loaded
+// Initialize slideshow when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  initHamburgerMenu();
   initMobileSlideshow();
 });

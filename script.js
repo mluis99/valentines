@@ -169,12 +169,31 @@ function initHamburgerMenu() {
   }
 }
 
+// Hamburger Menu
+function toggleMenu() {
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  if (hamburger && navLinks) {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  }
+}
+
 // Initialize everything
 window.addEventListener('DOMContentLoaded', () => {
   initAudio();
   initHeartSlideshow();
-  initHamburgerMenu();
-  initMobileSlideshow();
+
+  // Setup hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  if (hamburger) {
+    hamburger.addEventListener('click', toggleMenu);
+  }
+
+  // Only initialize slideshow if we're on gallery page
+  if (document.querySelector('.mobile-slideshow')) {
+    initMobileSlideshow();
+  }
 });
 
 // Hearts and Flowers Animation
