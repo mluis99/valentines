@@ -123,7 +123,7 @@ main {
     .mobile-slideshow {
         display: block; /* Show on mobile */
         width: 100vw; /* Set to full viewport width */
-        height: auto; /* Adjust height as needed */
+        height: 70vh; /* Set height to 70% of viewport height */
         margin: 20px 0;
         background: white;
         border-radius: 10px;
