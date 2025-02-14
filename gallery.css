@@ -39,7 +39,7 @@ main {
 
 @media (max-width: 600px) {
     main {
-        padding-bottom: 400px; /* Increased padding for mobile devices */
+        padding-bottom: 600px; /* Increased padding for mobile devices */
     }
 }
 
