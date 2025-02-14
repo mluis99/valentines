@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 5px;
 }
 
 .gallery h1 {
@@ -48,6 +49,7 @@ main {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
 }
 
 .love-letter h2 {
@@ -402,6 +404,7 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 2px solid #fff;
     width: fit-content;
+    margin-top: 5px;
 }
 
 .spotify-button:hover {
@@ -437,5 +440,5 @@ main {
 
 /* Adjusting the header margin */
 h1.our-memories {
-    margin-bottom: 5px; /* Adjust this value as needed */
+    margin-bottom: 5px;
 }
