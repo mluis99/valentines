@@ -174,18 +174,26 @@ function setupMobileMenu() {
   console.log('Setting up mobile menu...');
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('nav-links');
+  const body = document.body;
 
   if (!hamburger || !navLinks) {
     console.error('Menu elements not found:', { hamburger: !!hamburger, navLinks: !!navLinks });
     return;
   }
 
+  function toggleMenu(show) {
+    hamburger.classList.toggle('active', show);
+    navLinks.classList.toggle('active', show);
+    // Prevent body scroll when menu is open
+    body.style.overflow = show ? 'hidden' : '';
+  }
+
   hamburger.addEventListener('click', (e) => {
     console.log('Hamburger clicked');
     e.preventDefault();
     e.stopPropagation();
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('active');
+    const isOpening = !navLinks.classList.contains('active');
+    toggleMenu(isOpening);
   });
 
   // Close menu when clicking outside
@@ -193,10 +201,32 @@ function setupMobileMenu() {
     if (navLinks.classList.contains('active') && 
         !navLinks.contains(e.target) && 
         !hamburger.contains(e.target)) {
-      hamburger.classList.remove('active');
-      navLinks.classList.remove('active');
+      toggleMenu(false);
     }
   });
+
+  // Handle touch events
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].clientX;
+    const swipeDistance = touchEndX - touchStartX;
+
+    // If menu is open and user swipes left, close it
+    if (navLinks.classList.contains('active') && swipeDistance < -50) {
+      toggleMenu(false);
+    }
+    // If menu is closed and user swipes right from edge, open it
+    else if (!navLinks.classList.contains('active') && 
+             touchStartX < 30 && swipeDistance > 50) {
+      toggleMenu(true);
+    }
+  }, { passive: true });
 
   console.log('Mobile menu setup complete');
 }
