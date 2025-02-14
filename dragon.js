@@ -140,14 +140,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 wishMessage.style.fontSize = '3rem';
                 wishMessage.style.color = 'gold';
                 wishMessage.style.textAlign = 'center';
-                wishMessage.style.textShadow = '2px 2px 10px rgba(0, 0, 0, 0.7)';
+                wishMessage.style.textShadow = '3px 3px 12px rgba(0, 0, 0, 0.9)';
+                wishMessage.style.padding = '20px 40px';
                 wishMessage.style.position = 'fixed';
                 wishMessage.style.top = '50%';
                 wishMessage.style.left = '50%';
                 wishMessage.style.transform = 'translate(-50%, -50%)';
                 wishMessage.style.zIndex = '10000';
+                wishMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
+                wishMessage.style.borderRadius = '10px';
+                wishMessage.style.border = '5px solid gold';
 
-                setTimeout(() => wishMessage.remove(), 3000);
+                setTimeout(() => wishMessage.remove(), 5000); // Stay visible for 5 seconds
             }
         }
     });
@@ -175,8 +179,13 @@ document.addEventListener('DOMContentLoaded', () => {
             findMessage.style.color = '#ff0000';
             findMessage.style.textShadow = '2px 2px 5px rgba(0, 0, 0, 0.5)';
             findMessage.style.zIndex = '10000';
+            findMessage.style.fontFamily = '"Dragonball Z", sans-serif';
+            findMessage.style.padding = '15px 30px';
+            findMessage.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+            findMessage.style.borderRadius = '10px';
+            findMessage.style.border = '3px solid #ff0000';
 
-            setTimeout(() => findMessage.remove(), 3000);
+            setTimeout(() => findMessage.remove(), 4000); // Stay visible for 4 seconds
 
             // Show the container and position dragon balls
             container.style.display = 'block';
