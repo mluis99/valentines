@@ -352,6 +352,10 @@ h1 span {
 
 @media (max-width: 767px) {
     /* Body and header adjustments */
+    header {
+        margin-bottom: 0;
+    }
+    
     body {
         justify-content: flex-start;
         padding-top: 5vh;
