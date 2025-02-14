@@ -465,11 +465,17 @@ h1.our-memories {
   }
 /* Ensure Spotify button is above footer on mobile */
 .spotify-button {
-  position: fixed; /* Fixed positioning to keep the button visible */
-  bottom: 100px; /* 100px above the footer (adjustable if necessary) */
+  position: fixed; /* Keep the button fixed on screen */
+  bottom: 150px; /* Space above the footer (increase this if needed) */
   left: 50%; /* Center horizontally */
   transform: translateX(-50%); /* Correct centering */
-  z-index: 1000; /* Ensure it appears above everything */
-  margin-bottom: 0; /* Remove default bottom margin */
+  z-index: 10000; /* Ensure it's above other content */
+  padding: 12px 30px; /* Optional: Add some padding to make the button clickable */
+  font-size: 1rem; /* Optional: Adjust font size if needed */
+  background: #ff3366; /* Customize color */
+  color: white; /* Text color */
+  border-radius: 20px; /* Rounded corners */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for visibility */
 }
 }
