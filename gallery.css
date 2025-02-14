@@ -37,6 +37,12 @@ main {
   -webkit-overflow-scrolling: touch;
 }
 
+@media (max-width: 600px) {
+    main {
+        padding-bottom: 250px; /* Increased padding for mobile devices */
+    }
+}
+
 /* Love Letter Section */
 .love-letter {
   max-width: 800px;
