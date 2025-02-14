@@ -440,5 +440,12 @@ main {
 
 /* Adjusting the header margin */
 h1.our-memories {
+    margin-top: 0;
     margin-bottom: 5px;
+}
+.gallery {
+    margin-top: 5px;
+}
+.love-letter {
+    margin-top: 5px;
 }
