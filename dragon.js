@@ -130,10 +130,23 @@ document.addEventListener('DOMContentLoaded', () => {
             e.target.style.opacity = '1'; 
 
             if (clickedDragonBalls.size === 7) {
+                const wishMessageContainer = document.createElement('div');
+                wishMessageContainer.className = 'wish-message-container';
+                // Add Shenron image above the wish message
+                const shenronImg = document.createElement('img');
+                shenronImg.src = 'images/shenron.png';
+                shenronImg.alt = 'Shenron';
+                shenronImg.style.display = 'block';
+                shenronImg.style.margin = '0 auto';
+                wishMessageContainer.appendChild(shenronImg);
+
+                // Add the wish message text
                 const wishMessage = document.createElement('div');
                 wishMessage.className = 'wish-message';
-                wishMessage.textContent = 'Your wish has been fulfilled; Luis will love Azalia eternally.';
-                document.body.appendChild(wishMessage);
+                wishMessage.textContent = "Your wish has been fulfilled;\nLuis will love Azalia eternally.";
+                wishMessageContainer.appendChild(wishMessage);
+
+                document.body.appendChild(wishMessageContainer);
 
                 // Styling the wish message
                 wishMessage.style.fontFamily = '"Dragonball Z", sans-serif';
@@ -151,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 wishMessage.style.borderRadius = '10px';
                 wishMessage.style.border = '5px solid gold';
 
-                setTimeout(() => wishMessage.remove(), 5000); // Stay visible for 5 seconds
+                setTimeout(() => wishMessageContainer.remove(), 7000); // Stay visible for 7 seconds
             }
         }
     });
