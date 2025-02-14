@@ -121,7 +121,7 @@ main {
   }
 
   .mobile-slideshow {
-    display: show !important;
+    display: block; /* use block or flex, not “show” */
     width: 100%;
     height: 400px;
     margin: 20px 0;
@@ -133,7 +133,7 @@ main {
   }
 
   .slide {
-    display: show;
+    display: block; /* corrected from “show” */
     width: 100%;
     height: 100%;
     position: absolute;
@@ -142,7 +142,7 @@ main {
   }
 
   .slide.active {
-    display: show;
+    display: block;
   }
 
   .slide img {
