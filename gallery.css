@@ -1,24 +1,22 @@
 /* gallery.css - Styles specific to the gallery page */
-/* General Styles for Gallery Page */
-/* Inherit core styles from style.css */
-body {
-    margin: 0;
-    font-family: 'Comic Sans MS', cursive, sans-serif; 
-    background: url('images/heart-wallpaper.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    padding-top: 60px; /* Space for fixed header */
-  }
 
-  /* Gallery specific styles */
-  .gallery {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-  }
+/* Gallery specific styles */
+.gallery {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  padding-top: 80px; /* Additional space below fixed header */
+}
+
+/* Override any necessary styles from style.css */
+body {
+  background: url('images/heart-wallpaper.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
 
   @media (max-width: 768px) {
     .hamburger {
