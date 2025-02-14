@@ -397,34 +397,39 @@ h1.our-memories {
   margin-bottom: 10px; /* Consistent margin */
 }
 
-/* Dragon Ball Easter Egg */
-.dragonball-container {
+//* Dragon Ball Messages */
+.find-message, .wish-message {
   position: fixed;
-  bottom: -100px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 15px;
-  padding: 15px 25px;
-  background: rgba(0, 0, 0, 0.9);
-  border-radius: 50px;
-  z-index: 10000;
-  opacity: 0;
-  transition: all 0.5s ease, opacity 0.3s ease;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, -50%);
+  font-family: 'Dancing Script', cursive;
+  font-size: 3rem;
+  color: gold;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+  display: none;
+  z-index: 1000;
+  text-align: center;
 }
 
-.dragonball-container.visible {
-  bottom: 30px;
-  opacity: 1;
+/* Dragon Ball Easter Egg */
+.dragonball-container {
+  position: absolute;
+  display: none; /* Hidden initially */
+  z-index: 1000;
 }
 
 .dragonball {
-  width: 40px;
-  height: 40px;
-  transition: all 0.3s ease;
+  width: 100px;
+  height: 100px;
   cursor: pointer;
+  opacity: 0; /* Invisible initially */
+  transition: opacity 0.5s ease, transform 0.3s ease;
   filter: drop-shadow(0 2px 5px rgba(255, 223, 0, 0.5));
+}
+
+.dragonball.clicked {
+  opacity: 1; /* Make solid after clicked */
 }
 
 .dragonball:hover {
@@ -432,9 +437,14 @@ h1.our-memories {
   filter: drop-shadow(0 4px 10px rgba(255, 223, 0, 0.8));
 }
 
-/* Mobile disable */
+/* Styling for the scattered dragon balls */
+.dragonball-container .dragonball {
+  position: absolute;
+  transition: all 0.3s ease;
+}
+
 @media (max-width: 768px) {
   .dragonball-container {
-      display: none !important;
+    display: none !important;
   }
 }
