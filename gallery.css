@@ -9,9 +9,10 @@
   z-index: 1;
   padding-top: 80px; /* Additional space below fixed header */
   margin-bottom: 40px;
-  flex: 1;
   display: flex;
   flex-direction: column;
+  height: auto;
+  min-height: calc(100vh - 60px); /* Subtract header height */
 }
 
 /* Override any necessary styles from style.css */
@@ -28,6 +29,8 @@ main {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .gallery h2 {
