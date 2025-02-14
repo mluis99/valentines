@@ -465,6 +465,10 @@ h1.our-memories {
   }
 /* Ensure Spotify button is above footer on mobile */
 .spotify-button {
-  margin-bottom: 120px; /* Move it above the footer for better mobile accessibility */
+  position: absolute; /* Use absolute positioning */
+  bottom: 120px; /* 120px above the footer */
+  left: 50%; /* Center the button horizontally */
+  transform: translateX(-50%); /* Correct the centering */
+  margin-bottom: 0; /* Remove any default margin-bottom */
 }
 }
