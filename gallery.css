@@ -250,6 +250,13 @@ main {
     main {
       padding: 10px;
     }
+    
+    body {
+      background-size: contain; /* Ensures the image fits within the viewport */
+      background-attachment: scroll; /* Allow scrolling background on mobile */
+      background-image: url('images/heart-wallpaper-mobile.jpg'); /* Optionally use a different image for mobile */
+  }
+
     .gallery {
       margin-bottom: 20px;
     }
