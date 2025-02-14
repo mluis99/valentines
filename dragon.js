@@ -1,48 +1,37 @@
-// dragon.js - Dragon Ball Easter Egg
-document.addEventListener('DOMContentLoaded', () => {
-    // Only run on desktop
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+// Variable to track number of clicks
+let clickCount = 0;
 
-    let clickCount = 0;
-    let clickTimeout;
-    const requiredClicks = 7;
-    const clickWindow = 1000; // 1 second
+// Function to check if the user is on a mobile device
+function isMobile() {
+  return window.innerWidth <= 768; // Adjust this width to match your mobile breakpoint
+}
 
-    // Create container
-    const container = document.createElement('div');
-    container.className = 'dragonball-container';
-    
-    // Add dragon balls
-    for (let i = 1; i <= 7; i++) {
-        const img = document.createElement('img');
-        img.src = `dragonballs/dragonball-${i}.png`;
-        img.alt = `Dragon Ball ${i}`;
-        img.classList.add('dragonball');
-        container.appendChild(img);
-    }
-    
-    document.body.appendChild(container);
+// Function to trigger the Dragon Ball Easter Egg
+function activateDragonBallEasterEgg() {
+  if (!isMobile() && clickCount === 7) { // Only activate on desktop
+    // Trigger the Dragon Ball Easter Egg
+    alert("You've unlocked the Dragon Ball Easter Egg!");
 
-    // Click handler
-    function handleClick() {
-        clickCount++;
-        
-        // Reset timeout on each click
-        clearTimeout(clickTimeout);
-        clickTimeout = setTimeout(() => {
-            clickCount = 0;
-        }, clickWindow);
+    // Optionally, create the animation or image sequence
+    const dragonBall = document.createElement('img');
+    const i = Math.floor(Math.random() * 7) + 1; // Random number from 1 to 7 for the Dragon Ball image
+    dragonBall.src = `dragonballs/dragonball-${i}.png`; // Dynamically assign image source
+    dragonBall.alt = 'Dragon Ball Easter Egg';
+    dragonBall.classList.add('dragon-ball-animation');
+    document.body.appendChild(dragonBall);
 
-        if (clickCount >= requiredClicks) {
-            container.classList.add('visible');
-            clickCount = 0;
-            
-            // Auto-hide after 10 seconds
-            setTimeout(() => {
-                container.classList.remove('visible');
-            }, 10000);
-        }
-    }
+    // Reset the click counter
+    clickCount = 0;
+  }
+}
 
-    document.addEventListener('click', handleClick);
+// Function to handle click event
+document.addEventListener("click", function(e) {
+  // Check if the click was on an image in the gallery and it's not on mobile
+  if (!isMobile() && e.target.tagName === 'IMG') {
+    clickCount++; // Increase click count
+
+    // Check if we reached 7 clicks and activate the Easter egg
+    activateDragonBallEasterEgg();
+  }
 });
