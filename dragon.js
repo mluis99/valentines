@@ -179,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 wishMessageContainer.style.left = '50%';
                 wishMessageContainer.style.transform = 'translate(-50%, -50%)';
                 wishMessageContainer.style.zIndex = '10000'; // Ensure it's above everything else
+                wishMessageContainer.style.textAlign = 'center'; // Center the content
     
                 // Add Shenron image above the wish message
                 const shenronImg = document.createElement('img');
@@ -190,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 shenronImg.style.margin = '0 auto 20px'; // Center horizontally and add bottom margin to create space for the message
                 wishMessageContainer.appendChild(shenronImg);
     
-                // Add the wish message text
+                // Add the wish message text below the Shenron image
                 const wishMessage = document.createElement('div');
                 wishMessage.className = 'wish-message';
                 wishMessage.style.fontSize = 'clamp(1.5rem, 5vw, 3rem)'; // Responsive font size
@@ -211,21 +212,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-
     // 7-click handler to show dragon balls
     document.addEventListener("click", (e) => {
         if (isDragonBallsVisible) return;
-
+    
         clickCount++;
         clearTimeout(clickTimeout);
         clickTimeout = setTimeout(() => clickCount = 0, 1000);
-
+    
         if (clickCount >= 7) {
             const findMessage = document.createElement('div');
             findMessage.className = 'find-message';
             findMessage.textContent = 'Find the Dragon Balls!';
             document.body.appendChild(findMessage);
-
+    
             // Styling the find message
             findMessage.style.position = 'fixed';
             findMessage.style.top = '50%';
@@ -240,9 +240,9 @@ document.addEventListener('DOMContentLoaded', () => {
             findMessage.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
             findMessage.style.borderRadius = '10px';
             findMessage.style.border = '3px solid #ff0000';
-
+    
             setTimeout(() => findMessage.remove(), 4000); // Stay visible for 4 seconds
-
+    
             // Show the container and position dragon balls
             container.style.display = 'block';
             placeDragonBalls();
