@@ -460,7 +460,6 @@ h1.our-memories {
   .dragonball-container {
     display: block; /* Ensure dragon ball container is visible on mobile */
     z-index: 9999; /* Make sure it's above other content */
-    pointer-events: none; /* Allow interaction with other elements behind */
 }
 
 .dragonball {
