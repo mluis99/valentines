@@ -167,13 +167,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const clickedBall = e.target.alt;
             clickedDragonBalls.add(clickedBall);
             e.target.classList.add('clicked');
-
+    
             // Make the ball solid after it's clicked
             e.target.style.opacity = '1'; 
-
+    
             if (clickedDragonBalls.size === 7) {
                 const wishMessageContainer = document.createElement('div');
                 wishMessageContainer.className = 'wish-message-container';
+                wishMessageContainer.style.position = 'fixed';
+                wishMessageContainer.style.top = '50%';
+                wishMessageContainer.style.left = '50%';
+                wishMessageContainer.style.transform = 'translate(-50%, -50%)';
+                wishMessageContainer.style.zIndex = '10000'; // Ensure it's above everything else
+    
                 // Add Shenron image above the wish message
                 const shenronImg = document.createElement('img');
                 shenronImg.src = 'images/shenron.png';
@@ -181,46 +187,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 shenronImg.style.maxWidth = 'min(90vw, 600px)'; // Responsive width
                 shenronImg.style.height = 'auto'; // Maintain aspect ratio
                 shenronImg.style.display = 'block';
-                shenronImg.style.margin = '20px auto'; // Center horizontally and add margin at the top                
+                shenronImg.style.margin = '0 auto 20px'; // Center horizontally and add bottom margin to create space for the message
                 wishMessageContainer.appendChild(shenronImg);
-
+    
                 // Add the wish message text
                 const wishMessage = document.createElement('div');
-                wishMessageContainer.style.position = 'fixed';
-                wishMessageContainer.style.top = '50%';
-                wishMessageContainer.style.left = '50%';
-                wishMessageContainer.style.transform = 'translate(-50%, -50%)';
-                wishMessageContainer.style.zIndex = '10000'; // Ensure it's above everything else
-                wishMessage.style.fontSize = 'clamp(1.5rem, 5vw, 3rem)'; // Responsive font size
-                wishMessage.style.maxWidth = '90vw'; // Prevent overflow
-                wishMessage.style.whiteSpace = 'pre-wrap'; // Allow text wrapping
-                wishMessage.style.padding = '15px 25px'; // Adjust padding for mobile
                 wishMessage.className = 'wish-message';
-                wishMessage.textContent = 'Your wish has been fulfilled; Luis will love Azalia eternally.';
-                wishMessageContainer.appendChild(wishMessage);
-
-                document.body.appendChild(wishMessageContainer);
-
-                // Styling the wish message
-                wishMessage.style.fontFamily = '"Dragonball Z", sans-serif';
-                wishMessage.style.fontSize = '3rem';
+                wishMessage.style.fontSize = 'clamp(1.5rem, 5vw, 3rem)'; // Responsive font size
                 wishMessage.style.color = 'gold';
                 wishMessage.style.textAlign = 'center';
                 wishMessage.style.textShadow = '3px 3px 12px rgba(0, 0, 0, 0.9)';
-                wishMessage.style.padding = '20px 40px';
-                wishMessage.style.position = 'fixed';
-                wishMessage.style.top = '50%';
-                wishMessage.style.left = '50%';
-                wishMessage.style.transform = 'translate(-50%, -50%)';
-                wishMessage.style.zIndex = '9999'; // Ensure it's on top                
+                wishMessage.style.padding = '15px 25px';
                 wishMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
                 wishMessage.style.borderRadius = '10px';
                 wishMessage.style.border = '5px solid gold';
-
+                wishMessage.textContent = 'Your wish has been fulfilled; Luis will love Azalia eternally.';
+                wishMessageContainer.appendChild(wishMessage);
+    
+                document.body.appendChild(wishMessageContainer);
+    
                 setTimeout(() => wishMessageContainer.remove(), 7000); // Stay visible for 7 seconds
             }
         }
     }
+    
 
     // 7-click handler to show dragon balls
     document.addEventListener("click", (e) => {
