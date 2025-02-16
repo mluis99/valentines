@@ -480,21 +480,16 @@ h1 span {
         padding: 12px 30px;
         background: #ff3366;
         color: white;
-        font-size: clamp(1.2rem, 4vw, 1.5rem); /* Responsive font size */
+        font-size: clamp(1rem, 4vw, 1.2rem); /* Responsive font size for mobile */
         border-radius: 25px;
         font-weight: 600;
         transition: all 0.3s ease;
-        max-width: 300px; /* Set a maximum width */
-        width: 80%; /* Ensure buttons fit well on smaller screens */
+        max-width: 90%; /* Allow buttons to take up 90% of the screen width */
+        width: 90%; /* Ensure buttons fit well on smaller screens */
         box-shadow: 0 4px 10px rgba(255, 51, 102, 0.3); /* Add a shadow for better visibility */
-        margin-bottom: 20px; /* Ensure space between buttons */
+        margin-bottom: 30px; /* Increased space between buttons */
+        box-sizing: border-box; /* Ensure padding and border are included in width */
     }
-
-    /* Adjust button text for mobile */
-    .heart-btn, .audio-btn {
-        font-size: 1rem; /* Slightly smaller font size for mobile */
-    }
-
     /* Footer styling */
     .valentine-footer {
         height: 22px !important;
