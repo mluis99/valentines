@@ -66,11 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const randomX = randomSpace.x + Math.random() * randomSpace.width;
                 const randomY = randomSpace.y + Math.random() * randomSpace.height;
 
-                const maxX = window.innerWidth - ballWidth;  // Limit ball placement to within screen width
-                const maxY = window.innerHeight - ballHeight; // Limit ball placement to within screen height
+                const maxX = window.innerWidth - ballWidth;  // Ensure the ball stays within screen width
+                const maxY = window.innerHeight - ballHeight; // Ensure the ball stays within screen height
 
-                const posX = Math.min(randomX, maxX);
-                const posY = Math.min(randomY, maxY);
+                const posX = Math.min(randomX, maxX); // Limit X to the screen width minus ball width
+                const posY = Math.min(randomY, maxY); // Limit Y to the screen height minus ball height
 
                 // Ensure that no ball is placed too close to another ball
                 const collisionWithBalls = placedPositions.some(pos => 
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const collisionWithElements = isCollision(ball);
 
                 if (!collisionWithBalls && !collisionWithElements) {
-                    ball.style.opacity = '0.3'; // Slightly transparent by default
+                    ball.style.opacity = '1'; // Solid after being placed
                     placedPositions.push({ x: posX, y: posY });
                     placed = true;
                 } else {
