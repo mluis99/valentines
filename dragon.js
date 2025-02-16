@@ -51,9 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function placeDragonBalls() {
         const spaces = getAvailableSpace();
         const dragonballs = container.querySelectorAll('.dragonball');
-        const maxAttempts = 300; // Increased max attempts to try placing all balls
+        const maxAttempts = window.innerWidth <= 768 ? 500 : 300; // More attempts on mobile
         const placedPositions = [];
-        const minimumDistance = 120; // Minimum distance between the balls to avoid overlap
+        const minimumDistance = window.innerWidth <= 768 ? 80 : 120; // Smaller gap on mobile
+        const ballWidth = 60; // Size of the ball
+        const ballHeight = 60;
 
         dragonballs.forEach((ball, i) => {
             let placed = false;
@@ -64,15 +66,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const randomX = randomSpace.x + Math.random() * randomSpace.width;
                 const randomY = randomSpace.y + Math.random() * randomSpace.height;
 
-                const maxX = window.innerWidth - 100;  // Limit ball placement to within screen width
-                const maxY = window.innerHeight - 100; // Limit ball placement to within screen height
+                const maxX = window.innerWidth - ballWidth;  // Limit ball placement to within screen width
+                const maxY = window.innerHeight - ballHeight; // Limit ball placement to within screen height
 
                 const posX = Math.min(randomX, maxX);
                 const posY = Math.min(randomY, maxY);
 
                 // Ensure that no ball is placed too close to another ball
                 const collisionWithBalls = placedPositions.some(pos => 
-                    Math.abs(pos.x - posX) < minimumDistance && Math.abs(pos.y - posY) < minimumDistance
+                    Math.abs(pos.x - posX) < (minimumDistance + ballWidth) && 
+                    Math.abs(pos.y - posY) < (minimumDistance + ballHeight)
                 );
 
                 // Temporarily position to check element collision
@@ -120,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Track clicked dragon balls
     const clickedDragonBalls = new Set();
 
-    container.addEventListener('click', (e) => {
+    function handleDragonBallClick(e) {
         if (e.target.classList.contains('dragonball')) {
             const clickedBall = e.target.alt;
             clickedDragonBalls.add(clickedBall);
@@ -167,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => wishMessageContainer.remove(), 7000); // Stay visible for 7 seconds
             }
         }
-    });
+    }
 
     // 7-click handler to show dragon balls
     document.addEventListener("click", (e) => {
@@ -207,4 +210,8 @@ document.addEventListener('DOMContentLoaded', () => {
             clickCount = 0;
         }
     });
+
+    // Add touch support for mobile devices
+    container.addEventListener('click', handleDragonBallClick);
+    container.addEventListener('touchend', handleDragonBallClick); // Add touch support
 });
