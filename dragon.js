@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const randomX = randomSpace.x + Math.random() * randomSpace.width;
                 const randomY = randomSpace.y + Math.random() * randomSpace.height;
 
+                // Ensure the balls stay within the screen boundaries
                 const maxX = window.innerWidth - ballWidth;  // Ensure the ball stays within screen width
                 const maxY = window.innerHeight - ballHeight; // Ensure the ball stays within screen height
 
