@@ -491,16 +491,6 @@ h1 span {
         box-sizing: border-box; /* Ensure padding and border are included in width */
     }
 
-    /* Ensure there's enough space between buttons */
-    .heart-btn {
-        margin-bottom: 40px; /* Increased space to further separate buttons */
-    }
-
-    /* Adjust other button settings */
-    .audio-btn {
-        margin-bottom: 40px; /* Increased space to separate this button from the next element */
-    }
-
     /* Footer styling */
     .valentine-footer {
         height: 22px !important;
