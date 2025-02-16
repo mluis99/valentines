@@ -51,72 +51,94 @@ document.addEventListener('DOMContentLoaded', () => {
     function placeDragonBalls() {
         const spaces = getAvailableSpace();
         const dragonballs = container.querySelectorAll('.dragonball');
-        const maxAttempts = window.innerWidth <= 768 ? 800 : 500; // More attempts on mobile
+        const maxAttempts = window.innerWidth <= 768 ? 1500 : 1000; // Increased attempts
         const placedPositions = [];
-        const minimumDistance = window.innerWidth <= 768 ? 80 : 120;
-
+        
         // Get actual rendered size of balls
         const sampleBall = dragonballs[0];
         const ballWidth = sampleBall.offsetWidth;
         const ballHeight = sampleBall.offsetHeight;
+        const minimumDistance = Math.max(ballWidth, ballHeight) * 1.8; // Dynamic spacing
 
-        // Get current viewport boundaries
-        const viewportLeft = window.scrollX;
-        const viewportTop = window.scrollY;
-        const viewportRight = viewportLeft + window.innerWidth;
-        const viewportBottom = viewportTop + window.innerHeight;
+        // Get viewport dimensions
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
 
         dragonballs.forEach((ball, i) => {
             let placed = false;
             let attempts = 0;
+            let bestPosition = null;
+            let leastCollisions = Infinity;
 
-            while (!placed && attempts < maxAttempts) {
+            while (attempts < maxAttempts && !placed) {
                 const randomSpace = spaces[Math.floor(Math.random() * spaces.length)];
                 let randomX = randomSpace.x + Math.random() * (randomSpace.width - ballWidth);
                 let randomY = randomSpace.y + Math.random() * (randomSpace.height - ballHeight);
 
-                // Ensure full visibility within viewport
-                randomX = Math.max(viewportLeft, Math.min(randomX, viewportRight - ballWidth));
-                randomY = Math.max(viewportTop, Math.min(randomY, viewportBottom - ballHeight));
+                // Ensure positions stay within viewport
+                randomX = Math.max(0, Math.min(randomX, viewportWidth - ballWidth));
+                randomY = Math.max(0, Math.min(randomY, viewportHeight - ballHeight));
 
-                // Check collisions
-                const collisionWithBalls = placedPositions.some(pos => 
-                    Math.abs(pos.x - randomX) < (minimumDistance + ballWidth) && 
-                    Math.abs(pos.y - randomY) < (minimumDistance + ballHeight)
-                );
+                // Calculate true distance from other balls
+                let collisions = 0;
+                placedPositions.forEach(pos => {
+                    const dx = pos.x - randomX;
+                    const dy = pos.y - randomY;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < minimumDistance) collisions++;
+                });
 
-                // Set temporary position
-                ball.style.left = `${randomX}px`;
-                ball.style.top = `${randomY}px`;
-                
-                // Enhanced collision check
-                const collisionWithElements = isCollision(ball);
-                const inViewport = (
-                    randomX >= viewportLeft &&
-                    randomX + ballWidth <= viewportRight &&
-                    randomY >= viewportTop &&
-                    randomY + ballHeight <= viewportBottom
-                );
+                // Track best possible position
+                if (collisions < leastCollisions) {
+                    leastCollisions = collisions;
+                    bestPosition = { x: randomX, y: randomY };
+                }
 
-                if (!collisionWithBalls && !collisionWithElements && inViewport) {
+                if (collisions === 0 && !isCollision(ball)) {
                     placedPositions.push({ x: randomX, y: randomY });
+                    ball.style.left = `${randomX}px`;
+                    ball.style.top = `${randomY}px`;
                     placed = true;
-                    ball.style.opacity = '0.3';
-                } else {
-                    ball.style.left = '';
-                    ball.style.top = '';
                 }
 
                 attempts++;
             }
 
-            if (!placed) {
-                console.warn(`Couldn't place ball ${i+1} after ${maxAttempts} attempts`);
-                // Fallback position in center
-                ball.style.left = `${viewportLeft + window.innerWidth/2 - ballWidth/2}px`;
-                ball.style.top = `${viewportTop + window.innerHeight/2 - ballHeight/2}px`;
-                ball.style.opacity = '0.3';
+            if (!placed && bestPosition) {
+                // Use best position with least collisions
+                placedPositions.push(bestPosition);
+                ball.style.left = `${bestPosition.x}px`;
+                ball.style.top = `${bestPosition.y}px`;
             }
+        });
+
+        // Final adjustment pass to eliminate overlaps
+        placedPositions.forEach((pos, i) => {
+            const ball = dragonballs[i];
+            let currentX = parseFloat(ball.style.left);
+            let currentY = parseFloat(ball.style.top);
+            
+            placedPositions.forEach((otherPos, j) => {
+                if (i === j) return;
+                const dx = otherPos.x - currentX;
+                const dy = otherPos.y - currentY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < minimumDistance) {
+                    const adjustX = (dx / distance) * (minimumDistance - distance);
+                    const adjustY = (dy / distance) * (minimumDistance - distance);
+                    currentX -= adjustX * 0.5;
+                    currentY -= adjustY * 0.5;
+                }
+            });
+
+            // Keep within viewport
+            currentX = Math.max(0, Math.min(currentX, viewportWidth - ballWidth));
+            currentY = Math.max(0, Math.min(currentY, viewportHeight - ballHeight));
+
+            ball.style.left = `${currentX}px`;
+            ball.style.top = `${currentY}px`;
+            placedPositions[i] = { x: currentX, y: currentY };
         });
     }
 
@@ -126,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const elements = document.querySelectorAll('.gallery img, .love-letter, .dragonball-container');
 
         return Array.from(elements).some(el => {
-            if (el === ball) return false; // Ignore self
+            if (el === ball || el.contains(ball)) return false;
             const elRect = el.getBoundingClientRect();
             return (
                 ballRect.left < elRect.right &&

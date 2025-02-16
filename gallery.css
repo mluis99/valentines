@@ -431,16 +431,11 @@ h1.our-memories {
 
 /* Individual Dragon Balls */
 .dragonball {
-  position: absolute;
   width: 100px;
   height: 100px;
-  cursor: pointer;
-  opacity: 0.3; /* Slightly transparent by default */
-  transition: opacity 0.3s, transform 0.3s ease;
-  z-index: 10000;
-  filter: drop-shadow(0 2px 5px rgba(255, 223, 0, 0.5));
-  box-sizing: border-box;
-  pointer-events: all !important;
+  transform: translateZ(0); /* Hardware acceleration */
+  will-change: transform; /* Optimization */
+  touch-action: manipulation; /* Better mobile response */
 }
 
 .dragonball.clicked {
@@ -460,11 +455,11 @@ h1.our-memories {
 /* Mobile Disable */
 @media (max-width: 768px) {
   .dragonball {
-    width: 60px;
-    height: 60px;
-    min-width: 60px;
-    min-height: 60px;
-  } 
+      width: 60px;
+      height: 60px;
+      min-width: 60px;
+      min-height: 60px;
+  }
 
   .dragonball-container {
       touch-action: none; /* Prevent scroll interference */
