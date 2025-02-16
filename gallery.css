@@ -439,6 +439,8 @@ h1.our-memories {
   transition: opacity 0.3s, transform 0.3s ease;
   z-index: 10000;
   filter: drop-shadow(0 2px 5px rgba(255, 223, 0, 0.5));
+  box-sizing: border-box;
+  pointer-events: all !important;
 }
 
 .dragonball.clicked {
@@ -458,12 +460,11 @@ h1.our-memories {
 /* Mobile Disable */
 @media (max-width: 768px) {
   .dragonball {
-    width: 60px !important; /* Slightly larger for better touch */
-    height: 60px !important;
-    min-width: 60px; /* Prevent size collapse */
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
     min-height: 60px;
-    touch-action: manipulation; /* Improve touch responsiveness */
-  }
+  } 
 
   .dragonball-container {
       touch-action: none; /* Prevent scroll interference */

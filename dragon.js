@@ -51,11 +51,20 @@ document.addEventListener('DOMContentLoaded', () => {
     function placeDragonBalls() {
         const spaces = getAvailableSpace();
         const dragonballs = container.querySelectorAll('.dragonball');
-        const maxAttempts = window.innerWidth <= 768 ? 500 : 300; // More attempts on mobile
+        const maxAttempts = window.innerWidth <= 768 ? 800 : 500; // More attempts on mobile
         const placedPositions = [];
-        const minimumDistance = window.innerWidth <= 768 ? 80 : 120; // Smaller gap on mobile
-        const ballWidth = 60; // Size of the ball
-        const ballHeight = 60;
+        const minimumDistance = window.innerWidth <= 768 ? 80 : 120;
+
+        // Get actual rendered size of balls
+        const sampleBall = dragonballs[0];
+        const ballWidth = sampleBall.offsetWidth;
+        const ballHeight = sampleBall.offsetHeight;
+
+        // Get current viewport boundaries
+        const viewportLeft = window.scrollX;
+        const viewportTop = window.scrollY;
+        const viewportRight = viewportLeft + window.innerWidth;
+        const viewportBottom = viewportTop + window.innerHeight;
 
         dragonballs.forEach((ball, i) => {
             let placed = false;
@@ -63,32 +72,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
             while (!placed && attempts < maxAttempts) {
                 const randomSpace = spaces[Math.floor(Math.random() * spaces.length)];
-                const randomX = randomSpace.x + Math.random() * randomSpace.width;
-                const randomY = randomSpace.y + Math.random() * randomSpace.height;
+                let randomX = randomSpace.x + Math.random() * (randomSpace.width - ballWidth);
+                let randomY = randomSpace.y + Math.random() * (randomSpace.height - ballHeight);
 
-                // Ensure the balls stay fully within the screen boundaries
-                const maxX = window.innerWidth - ballWidth;  // Ensure the ball stays within screen width
-                const maxY = window.innerHeight - ballHeight; // Ensure the ball stays within screen height
+                // Ensure full visibility within viewport
+                randomX = Math.max(viewportLeft, Math.min(randomX, viewportRight - ballWidth));
+                randomY = Math.max(viewportTop, Math.min(randomY, viewportBottom - ballHeight));
 
-                // Adjust positions to prevent balls from being partially off-screen
-                const posX = Math.min(randomX, maxX); // Limit X to the screen width minus ball width
-                const posY = Math.min(randomY, maxY); // Limit Y to the screen height minus ball height
-
-                // Ensure that no ball is placed too close to another ball
+                // Check collisions
                 const collisionWithBalls = placedPositions.some(pos => 
-                    Math.abs(pos.x - posX) < (minimumDistance + ballWidth) && 
-                    Math.abs(pos.y - posY) < (minimumDistance + ballHeight)
+                    Math.abs(pos.x - randomX) < (minimumDistance + ballWidth) && 
+                    Math.abs(pos.y - randomY) < (minimumDistance + ballHeight)
                 );
 
-                // Temporarily position to check element collision
-                ball.style.left = `${posX}px`;
-                ball.style.top = `${posY}px`;
+                // Set temporary position
+                ball.style.left = `${randomX}px`;
+                ball.style.top = `${randomY}px`;
+                
+                // Enhanced collision check
                 const collisionWithElements = isCollision(ball);
+                const inViewport = (
+                    randomX >= viewportLeft &&
+                    randomX + ballWidth <= viewportRight &&
+                    randomY >= viewportTop &&
+                    randomY + ballHeight <= viewportBottom
+                );
 
-                if (!collisionWithBalls && !collisionWithElements) {
-                    ball.style.opacity = '0.3'; // Slightly transparent by default
-                    placedPositions.push({ x: posX, y: posY });
+                if (!collisionWithBalls && !collisionWithElements && inViewport) {
+                    placedPositions.push({ x: randomX, y: randomY });
                     placed = true;
+                    ball.style.opacity = '0.3';
                 } else {
                     ball.style.left = '';
                     ball.style.top = '';
@@ -97,29 +110,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 attempts++;
             }
 
-            if (attempts >= maxAttempts) {
-                console.warn("Max placement attempts reached for dragon ball ", i + 1);
+            if (!placed) {
+                console.warn(`Couldn't place ball ${i+1} after ${maxAttempts} attempts`);
+                // Fallback position in center
+                ball.style.left = `${viewportLeft + window.innerWidth/2 - ballWidth/2}px`;
+                ball.style.top = `${viewportTop + window.innerHeight/2 - ballHeight/2}px`;
+                ball.style.opacity = '0.3';
             }
         });
     }
 
-    // Function to check for collisions with existing elements
+    // Enhanced collision detection
     function isCollision(ball) {
         const ballRect = ball.getBoundingClientRect();
-        const elements = document.querySelectorAll('.gallery img, .love-letter');
+        const elements = document.querySelectorAll('.gallery img, .love-letter, .dragonball-container');
 
-        for (let el of elements) {
+        return Array.from(elements).some(el => {
+            if (el === ball) return false; // Ignore self
             const elRect = el.getBoundingClientRect();
-            if (
+            return (
                 ballRect.left < elRect.right &&
                 ballRect.right > elRect.left &&
                 ballRect.top < elRect.bottom &&
                 ballRect.bottom > elRect.top
-            ) {
-                return true;
-            }
-        }
-        return false;
+            );
+        });
     }
 
     // Track clicked dragon balls
