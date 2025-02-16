@@ -476,7 +476,7 @@ h1 span {
     /* Button adjustments */
     .heart-btn, .audio-btn {
         display: block; /* Stack buttons vertically */
-        margin: 40px auto; /* Increase margin to 40px to ensure more space between the buttons */
+        margin: 30px auto; /* Center the buttons with margin for space */
         padding: 12px 30px;
         background: #ff3366;
         color: white;
@@ -492,17 +492,18 @@ h1 span {
 
     /* Further increase space between buttons */
     .heart-btn {
-        margin-bottom: 50px; /* Increased space to create more room between the buttons */
+        margin-bottom: 60px; /* Increased space to create more room between the buttons */
     }
-
+    
     .audio-btn {
-        margin-top: 50px; /* Increased space before the Play Music button */
+        margin-top: 60px; /* Increased space before the Play Music button */
     }
 
     /* Ensure the buttons fit on small screens */
     .heart-btn, .audio-btn {
-        width: 80%; /* Ensure the buttons don’t stretch too wide */
+        width: 80%; /* Make sure the buttons don’t stretch too wide */
         font-size: 1rem; /* Adjust font size for mobile */
+        box-sizing: border-box;
     }
 
     /* Footer styling */
