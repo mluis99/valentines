@@ -458,11 +458,15 @@ h1.our-memories {
 /* Mobile Disable */
 @media (max-width: 768px) {
   .dragonball-container {
-    display: none !important;
+    display: block; /* Ensure dragon ball container is visible on mobile */
+    z-index: 9999; /* Make sure it's above other content */
   }
-  .find-message {
-    display: none;
+
+  .dragonball {
+    width: 50px; /* Adjust size for mobile */
+    height: 50px; /* Adjust size for mobile */
   }
+  
 /* Ensure Spotify button is above footer on mobile */
 .spotify-button {
     position: absolute; /* Use absolute positioning */
