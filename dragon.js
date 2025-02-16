@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const collisionWithElements = isCollision(ball);
 
                 if (!collisionWithBalls && !collisionWithElements) {
-                    ball.style.opacity = '1'; // Solid after being placed
+                    ball.style.opacity = '0.3'; // Slightly transparent by default
                     placedPositions.push({ x: posX, y: posY });
                     placed = true;
                 } else {
