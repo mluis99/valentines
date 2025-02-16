@@ -487,9 +487,20 @@ h1 span {
         max-width: 90%; /* Allow buttons to take up 90% of the screen width */
         width: 90%; /* Ensure buttons fit well on smaller screens */
         box-shadow: 0 4px 10px rgba(255, 51, 102, 0.3); /* Add a shadow for better visibility */
-        margin-bottom: 30px; /* Increased space between buttons */
+        margin-bottom: 40px; /* Increased space between buttons to avoid overlap */
         box-sizing: border-box; /* Ensure padding and border are included in width */
     }
+
+    /* Ensure there's enough space between buttons */
+    .heart-btn {
+        margin-bottom: 40px; /* Increased space to further separate buttons */
+    }
+
+    /* Adjust other button settings */
+    .audio-btn {
+        margin-bottom: 40px; /* Increased space to separate this button from the next element */
+    }
+
     /* Footer styling */
     .valentine-footer {
         height: 22px !important;
