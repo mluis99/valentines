@@ -181,11 +181,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 shenronImg.style.maxWidth = 'min(90vw, 600px)'; // Responsive width
                 shenronImg.style.height = 'auto'; // Maintain aspect ratio
                 shenronImg.style.display = 'block';
-                shenronImg.style.margin = '20px auto 0'; // Add top margin
+                shenronImg.style.margin = '20px auto'; // Center horizontally and add margin at the top                
                 wishMessageContainer.appendChild(shenronImg);
 
                 // Add the wish message text
                 const wishMessage = document.createElement('div');
+                wishMessageContainer.style.position = 'fixed';
+                wishMessageContainer.style.top = '50%';
+                wishMessageContainer.style.left = '50%';
+                wishMessageContainer.style.transform = 'translate(-50%, -50%)';
+                wishMessageContainer.style.zIndex = '10000'; // Ensure it's above everything else
                 wishMessage.style.fontSize = 'clamp(1.5rem, 5vw, 3rem)'; // Responsive font size
                 wishMessage.style.maxWidth = '90vw'; // Prevent overflow
                 wishMessage.style.whiteSpace = 'pre-wrap'; // Allow text wrapping
@@ -205,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 wishMessage.style.top = '50%';
                 wishMessage.style.left = '50%';
                 wishMessage.style.transform = 'translate(-50%, -50%)';
-                wishMessage.style.zIndex = '10000';
+                wishMessage.style.zIndex = '9999'; // Ensure it's on top                
                 wishMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
                 wishMessage.style.borderRadius = '10px';
                 wishMessage.style.border = '5px solid gold';
