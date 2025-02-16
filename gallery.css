@@ -403,17 +403,17 @@ h1.our-memories {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'Dragonball Z', sans-serif; /* DBZ font */
+  font-family: 'Dragonball Z', sans-serif;
   font-size: 3rem;
   color: gold;
-  text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.9); /* Enhanced shadow */
-  z-index: 1000;
+  text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.9);
+  z-index: 10000;
   text-align: center;
   pointer-events: none;
   padding: 20px 40px;
-  background-color: rgba(0, 0, 0, 0.6); /* Dark background */
+  background-color: rgba(0, 0, 0, 0.6);
   border-radius: 10px;
-  border: 5px solid gold; /* Decorative border */
+  border: 5px solid gold;
 }
 
 /* Dragon Ball Easter Egg Container */
@@ -460,9 +460,10 @@ h1.our-memories {
   .dragonball-container {
     display: block; /* Ensure dragon ball container is visible on mobile */
     z-index: 9999; /* Make sure it's above other content */
+    pointer-events: none; /* Allow interaction with other elements behind */
 }
 
-  .dragonball {
+.dragonball {
     width: 50px; /* Adjust size for mobile */
     height: 50px; /* Adjust size for mobile */
     cursor: pointer; /* Make them clickable */
