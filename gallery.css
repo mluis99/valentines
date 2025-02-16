@@ -460,12 +460,13 @@ h1.our-memories {
   .dragonball-container {
     display: block; /* Ensure dragon ball container is visible on mobile */
     z-index: 9999; /* Make sure it's above other content */
-  }
+}
 
   .dragonball {
     width: 50px; /* Adjust size for mobile */
     height: 50px; /* Adjust size for mobile */
-  }
+    cursor: pointer; /* Make them clickable */
+}
   
 /* Ensure Spotify button is above footer on mobile */
 .spotify-button {
