@@ -457,16 +457,17 @@ h1.our-memories {
 
 /* Mobile Disable */
 @media (max-width: 768px) {
-  .dragonball-container {
-    display: block; /* Ensure dragon ball container is visible on mobile */
-    z-index: 9999; /* Make sure it's above other content */
-}
+  .dragonball {
+    width: 60px !important; /* Slightly larger for better touch */
+    height: 60px !important;
+    min-width: 60px; /* Prevent size collapse */
+    min-height: 60px;
+    touch-action: manipulation; /* Improve touch responsiveness */
+  }
 
-.dragonball {
-    width: 50px; /* Adjust size for mobile */
-    height: 50px; /* Adjust size for mobile */
-    cursor: pointer; /* Make them clickable */
-}
+  .dragonball-container {
+      touch-action: none; /* Prevent scroll interference */
+  }
   
 /* Ensure Spotify button is above footer on mobile */
 .spotify-button {
