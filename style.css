@@ -476,7 +476,7 @@ h1 span {
     /* Button adjustments */
     .heart-btn, .audio-btn {
         display: block; /* Stack buttons vertically */
-        margin: 20px auto; /* Center the buttons with margin for space */
+        margin: 30px auto; /* Add more margin to ensure no overlap */
         padding: 12px 30px;
         background: #ff3366;
         color: white;
@@ -487,8 +487,25 @@ h1 span {
         max-width: 90%; /* Allow buttons to take up 90% of the screen width */
         width: 90%; /* Ensure buttons fit well on smaller screens */
         box-shadow: 0 4px 10px rgba(255, 51, 102, 0.3); /* Add a shadow for better visibility */
-        margin-bottom: 40px; /* Increased space between buttons to avoid overlap */
+        margin-bottom: 40px; /* Ensure space between buttons to avoid overlap */
         box-sizing: border-box; /* Ensure padding and border are included in width */
+    }
+
+    /* Add additional bottom margin if needed */
+    .heart-btn {
+        margin-bottom: 45px; /* Increase space between buttons further */
+    }
+    
+    /* Make sure buttons are properly responsive */
+    .audio-btn {
+        margin-top: 45px; /* Ensure the next button is well spaced */
+    }
+
+    /* Adjust the width of the buttons for smaller screens */
+    .heart-btn, .audio-btn {
+        width: 80%; /* Make sure buttons don’t stretch too wide */
+        font-size: 1rem; /* Adjust font size for mobile */
+        box-sizing: border-box;
     }
 
     /* Footer styling */
