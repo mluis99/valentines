@@ -195,6 +195,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 wishMessage.style.maxWidth = '90vw'; // Prevent overflow
                 wishMessage.style.whiteSpace = 'pre-wrap'; // Allow text wrapping
                 wishMessage.style.padding = '15px 25px'; // Adjust padding for mobile
+                wishMessage.className = 'wish-message';
+                wishMessage.textContent = 'Your wish has been fulfilled; Luis will love Azalia eternally.';
                 wishMessageContainer.appendChild(wishMessage);
 
                 document.body.appendChild(wishMessageContainer);
