@@ -465,6 +465,17 @@ h1.our-memories {
       touch-action: none; /* Prevent scroll interference */
   }
   
+  .wish-message-container img {
+    width: 80vw;
+    margin-top: 10vh;
+  }
+
+.wish-message {
+    font-size: 1.8rem;
+    padding: 10px 20px;
+    margin: 10px 0;
+  }
+
 /* Ensure Spotify button is above footer on mobile */
 .spotify-button {
     position: absolute; /* Use absolute positioning */

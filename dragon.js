@@ -178,14 +178,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const shenronImg = document.createElement('img');
                 shenronImg.src = 'images/shenron.png';
                 shenronImg.alt = 'Shenron';
+                shenronImg.style.maxWidth = 'min(90vw, 600px)'; // Responsive width
+                shenronImg.style.height = 'auto'; // Maintain aspect ratio
                 shenronImg.style.display = 'block';
-                shenronImg.style.margin = '0 auto';
+                shenronImg.style.margin = '20px auto 0'; // Add top margin
                 wishMessageContainer.appendChild(shenronImg);
 
                 // Add the wish message text
                 const wishMessage = document.createElement('div');
-                wishMessage.className = 'wish-message';
-                wishMessage.textContent = 'Your wish has been fulfilled; Luis will love Azalia eternally.';
+                wishMessage.style.fontSize = 'clamp(1.5rem, 5vw, 3rem)'; // Responsive font size
+                wishMessage.style.maxWidth = '90vw'; // Prevent overflow
+                wishMessage.style.whiteSpace = 'pre-wrap'; // Allow text wrapping
+                wishMessage.style.padding = '15px 25px'; // Adjust padding for mobile
                 wishMessageContainer.appendChild(wishMessage);
 
                 document.body.appendChild(wishMessageContainer);
