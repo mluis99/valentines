@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(container);
 
     // Load the audio
-    const audio = document.getElementById('dragon-audio'); // Ensure this matches the id of your audio element.
+    const audio = new Audio('dragon_summoning.mp3'); // Use the direct path for loading
     audio.preload = 'auto'; // Preload the audio
 
     // Error handling for audio loading issues
@@ -201,9 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.appendChild(wishMessageContainer);
     
                 // Play the audio when the message appears
-                audio.play().then(() => {
-                    console.log("Audio is playing");
-                }).catch((err) => {
+                audio.play().catch((err) => {
                     console.error("Error playing audio:", err);
                 });
 
@@ -245,11 +243,9 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => findMessage.remove(), 4000); // Stay visible for 4 seconds
 
             // Play the audio when the message appears
-            if (audio) {
-                audio.play().catch(err => {
-                    console.error('Error playing audio:', err);
-                });
-            }
+            audio.play().catch(err => {
+                console.error('Error playing audio:', err);
+            });
 
             // Show the container and position dragon balls
             container.style.display = 'block';
