@@ -174,43 +174,23 @@ document.addEventListener('DOMContentLoaded', () => {
             if (clickedDragonBalls.size === 7) {
                 const wishMessageContainer = document.createElement('div');
                 wishMessageContainer.className = 'wish-message-container';
-                wishMessageContainer.style.position = 'fixed';
-                wishMessageContainer.style.top = '50%';
-                wishMessageContainer.style.left = '50%';
-                wishMessageContainer.style.transform = 'translate(-50%, -50%)';
-                wishMessageContainer.style.zIndex = '10000';
-                wishMessageContainer.style.display = 'flex'; // Use flexbox
-                wishMessageContainer.style.flexDirection = 'column'; // Stack vertically
-                wishMessageContainer.style.alignItems = 'center'; // Center horizontally
-                wishMessageContainer.style.gap = '20px'; // Space between elements
-            
+                
                 // Shenron image styling
                 const shenronImg = document.createElement('img');
                 shenronImg.src = 'images/shenron.png';
                 shenronImg.alt = 'Shenron';
                 shenronImg.style.maxWidth = 'min(90vw, 600px)';
                 shenronImg.style.height = 'auto';
-                shenronImg.style.display = 'block';
                 wishMessageContainer.appendChild(shenronImg);
-            
+    
                 // Wish message styling
                 const wishMessage = document.createElement('div');
                 wishMessage.className = 'wish-message';
                 wishMessage.textContent = 'Your wish has been fulfilled; Luis will love Azalia eternally.';
-                wishMessage.style.fontSize = 'clamp(1.5rem, 5vw, 3rem)';
-                wishMessage.style.color = 'gold';
-                wishMessage.style.textShadow = '3px 3px 12px rgba(0, 0, 0, 0.9)';
-                wishMessage.style.padding = '15px 25px';
-                wishMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
-                wishMessage.style.borderRadius = '10px';
-                wishMessage.style.border = '5px solid gold';
-                wishMessage.style.maxWidth = '90%'; // Prevent text overflow
-                wishMessage.style.textAlign = 'center';
-                wishMessage.style.whiteSpace = 'normal'; // Allow text wrapping
                 wishMessageContainer.appendChild(wishMessage);
-            
+    
                 document.body.appendChild(wishMessageContainer);
-            
+    
                 // Auto-remove after 7 seconds
                 setTimeout(() => wishMessageContainer.remove(), 7000);
             }
