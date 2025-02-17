@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     document.body.appendChild(container);
 
-    // Load the audio
-    const audio = new Audio('dragon_summoning.mp3'); // Use the direct path for loading
+    // Load the audio from the existing audio element
+    const audio = document.getElementById('dragon-audio');
     audio.preload = 'auto'; // Preload the audio
 
     // Error handling for audio loading issues
