@@ -24,9 +24,13 @@ document.addEventListener('DOMContentLoaded', () => {
     audio.preload = 'auto'; // Preload the audio
     let isAudioReady = false;
 
-    // Error handling for audio loading issues
+    document.getElementById('dragon-audio').addEventListener('error', (e) => {
+        console.error('Audio error:', e.target.error);
+    });
+      
+    // Keep your existing JS error handler
     audio.addEventListener('error', (err) => {
-        console.error('Error loading audio:', err);
+    console.error('Error playing audio:', err);
     });
 
     // Event listener to check when audio is ready to play
