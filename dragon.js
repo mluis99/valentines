@@ -25,7 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Error handling for audio loading issues
     audio.addEventListener('error', (err) => {
-        console.error('Error playing audio:', err);
+        console.error('Error loading audio:', err);
+    });
+
+    // Event listener to check when audio is ready to play
+    audio.addEventListener('canplaythrough', () => {
+        console.log('Audio is ready to play');
     });
 
     // Function to calculate available space in the content areas
