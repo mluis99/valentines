@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     document.body.appendChild(container);
 
+    // Load the audio
+    const audio = new Audio('dragon_summoning.mp3'); // Replace with your MP3 file path
+
     const gallery = document.querySelector('.gallery');
     const loveLetter = document.querySelector('.love-letter');
 
@@ -191,6 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
                 document.body.appendChild(wishMessageContainer);
     
+                // Play the audio when the message appears
+                audio.play();
+
                 // Auto-remove after 7 seconds
                 setTimeout(() => wishMessageContainer.remove(), 7000);
             }
@@ -225,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
             findMessage.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
             findMessage.style.borderRadius = '10px';
             findMessage.style.border = '3px solid #ff0000';
-    
+
             setTimeout(() => findMessage.remove(), 4000); // Stay visible for 4 seconds
     
             // Show the container and position dragon balls
