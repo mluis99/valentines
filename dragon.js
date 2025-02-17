@@ -201,9 +201,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.appendChild(wishMessageContainer);
     
                 // Play the audio when the message appears
-                audio.play().catch((err) => {
-                    console.error("Error playing audio:", err);
-                });
+                if (audio.readyState >= 2) {
+                    audio.play().catch((err) => {
+                        console.error("Error playing audio:", err);
+                    });
+                } else {
+                    console.error('Audio not ready to play');
+                }
 
                 // Auto-remove after 7 seconds
                 setTimeout(() => wishMessageContainer.remove(), 7000);
@@ -243,9 +247,13 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => findMessage.remove(), 4000); // Stay visible for 4 seconds
 
             // Play the audio when the message appears
-            audio.play().catch(err => {
-                console.error('Error playing audio:', err);
-            });
+            if (audio.readyState >= 2) {
+                audio.play().catch(err => {
+                    console.error('Error playing audio:', err);
+                });
+            } else {
+                console.error('Audio not ready to play');
+            }
 
             // Show the container and position dragon balls
             container.style.display = 'block';
