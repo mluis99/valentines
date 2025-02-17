@@ -20,14 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(container);
 
     // Load the audio
-    const audio = new Audio('dragon_summoning.mp3'); // Replace with your MP3 file path
+    const audio = new Audio('dragon_summoning.mp3'); // Make sure the path is correct
 
-    const gallery = document.querySelector('.gallery');
-    const loveLetter = document.querySelector('.love-letter');
+    // Error handling for audio loading issues
+    audio.addEventListener('error', (err) => {
+        console.error('Error playing audio:', err);
+    });
 
     // Function to calculate available space in the content areas
     function getAvailableSpace() {
         const spaces = [];
+        const gallery = document.querySelector('.gallery');
+        const loveLetter = document.querySelector('.love-letter');
+
         const contentAreas = [gallery, loveLetter];
         contentAreas.forEach(area => {
             const areaRect = area.getBoundingClientRect();
@@ -195,7 +200,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.appendChild(wishMessageContainer);
     
                 // Play the audio when the message appears
-                audio.play();
+                audio.play().then(() => {
+                    console.log("Audio is playing");
+                }).catch((err) => {
+                    console.error("Error playing audio:", err);
+                });
 
                 // Auto-remove after 7 seconds
                 setTimeout(() => wishMessageContainer.remove(), 7000);
