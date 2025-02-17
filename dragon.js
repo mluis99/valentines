@@ -22,15 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load the audio from the existing audio element
     const audio = document.getElementById('dragon-audio');
     audio.preload = 'auto'; // Preload the audio
+
+    // Track audio readiness
     let isAudioReady = false;
 
-    document.getElementById('dragon-audio').addEventListener('error', (e) => {
-        console.error('Audio error:', e.target.error);
-    });
-      
-    // Keep your existing JS error handler
+    // Error handling for audio loading issues
     audio.addEventListener('error', (err) => {
-    console.error('Error playing audio:', err);
+        console.error('Audio error:', err);
     });
 
     // Event listener to check when audio is ready to play
@@ -211,14 +209,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
                 document.body.appendChild(wishMessageContainer);
     
-                // Play the audio when the message appears
+                // Play the audio when the message appears, check if audio is ready
                 if (isAudioReady) {
-                    audio.play().catch(err => {
+                    audio.play().then(() => {
+                        console.log('Audio is playing');
+                    }).catch((err) => {
                         console.error('Error playing audio:', err);
                     });
                 } else {
                     console.error('Audio not ready to play');
-                    console.log('Current readyState:', audio.readyState);
                 }
 
                 // Auto-remove after 7 seconds
@@ -265,7 +264,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             } else {
                 console.error('Audio not ready to play');
-                console.log('Current readyState:', audio.readyState);
             }
 
             // Show the container and position dragon balls
