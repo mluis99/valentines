@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(container);
 
     // Load the audio
-    const audio = new Audio('dragon_summoning.mp3'); // Make sure the path is correct
+    const audio = document.getElementById('dragon-audio'); // Ensure this matches the id of your audio element.
     audio.preload = 'auto'; // Preload the audio
 
     // Error handling for audio loading issues
@@ -216,17 +216,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7-click handler to show dragon balls
     document.addEventListener("click", (e) => {
         if (isDragonBallsVisible) return;
-    
+
         clickCount++;
         clearTimeout(clickTimeout);
         clickTimeout = setTimeout(() => clickCount = 0, 1000);
-    
+
         if (clickCount >= 7) {
             const findMessage = document.createElement('div');
             findMessage.className = 'find-message';
             findMessage.textContent = 'Find the Dragon Balls!';
             document.body.appendChild(findMessage);
-    
+
             // Styling the find message
             findMessage.style.position = 'fixed';
             findMessage.style.top = '50%';
@@ -243,14 +243,14 @@ document.addEventListener('DOMContentLoaded', () => {
             findMessage.style.border = '3px solid #ff0000';
 
             setTimeout(() => findMessage.remove(), 4000); // Stay visible for 4 seconds
-            
+
             // Play the audio when the message appears
-            audio.play().then(() => {
-                console.log("Audio is playing");
-            }).catch((err) => {
-                console.error("Error playing audio:", err); // Log any error with audio
-            });
-            
+            if (audio) {
+                audio.play().catch(err => {
+                    console.error('Error playing audio:', err);
+                });
+            }
+
             // Show the container and position dragon balls
             container.style.display = 'block';
             placeDragonBalls();
