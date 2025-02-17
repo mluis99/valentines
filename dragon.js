@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load the audio
     const audio = new Audio('dragon_summoning.mp3'); // Make sure the path is correct
+    audio.preload = 'auto'; // Preload the audio
 
     // Error handling for audio loading issues
     audio.addEventListener('error', (err) => {
@@ -242,7 +243,14 @@ document.addEventListener('DOMContentLoaded', () => {
             findMessage.style.border = '3px solid #ff0000';
 
             setTimeout(() => findMessage.remove(), 4000); // Stay visible for 4 seconds
-    
+            
+            // Play the audio when the message appears
+            audio.play().then(() => {
+                console.log("Audio is playing");
+            }).catch((err) => {
+                console.error("Error playing audio:", err); // Log any error with audio
+            });
+            
             // Show the container and position dragon balls
             container.style.display = 'block';
             placeDragonBalls();
