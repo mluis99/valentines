@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load the audio from the existing audio element
     const audio = document.getElementById('dragon-audio');
     audio.preload = 'auto'; // Preload the audio
+    let isAudioReady = false;
 
     // Error handling for audio loading issues
     audio.addEventListener('error', (err) => {
@@ -31,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listener to check when audio is ready to play
     audio.addEventListener('canplaythrough', () => {
         console.log('Audio is ready to play');
+        isAudioReady = true; // Set the flag when audio is ready
     });
 
     // Function to calculate available space in the content areas
@@ -206,12 +208,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.appendChild(wishMessageContainer);
     
                 // Play the audio when the message appears
-                if (audio.readyState >= 2) {
-                    audio.play().catch((err) => {
-                        console.error("Error playing audio:", err);
+                if (isAudioReady) {
+                    audio.play().catch(err => {
+                        console.error('Error playing audio:', err);
                     });
                 } else {
                     console.error('Audio not ready to play');
+                    console.log('Current readyState:', audio.readyState);
                 }
 
                 // Auto-remove after 7 seconds
@@ -252,12 +255,13 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => findMessage.remove(), 4000); // Stay visible for 4 seconds
 
             // Play the audio when the message appears
-            if (audio.readyState >= 2) {
+            if (isAudioReady) {
                 audio.play().catch(err => {
                     console.error('Error playing audio:', err);
                 });
             } else {
                 console.error('Audio not ready to play');
+                console.log('Current readyState:', audio.readyState);
             }
 
             // Show the container and position dragon balls
