@@ -23,19 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const audio = document.getElementById('dragon-audio');
     audio.preload = 'auto'; // Preload the audio
 
-    // Track audio readiness
-    let isAudioReady = false;
-
-    // Error handling for audio loading issues
-    audio.addEventListener('error', (err) => {
-        console.error('Audio error:', err);
-    });
-
-    // Event listener to check when audio is ready to play
-    audio.addEventListener('canplaythrough', () => {
-        console.log('Audio is ready to play');
-        isAudioReady = true; // Set the flag when audio is ready
-    });
+    function playAudio() {
+        audio.currentTime = 0; // Reset audio to start
+        audio.play().catch(err => {
+            console.error('Audio play failed:', err);
+        });
+    }
 
     // Function to calculate available space in the content areas
     function getAvailableSpace() {
@@ -209,16 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
                 document.body.appendChild(wishMessageContainer);
     
-                // Play the audio when the message appears, check if audio is ready
-                if (isAudioReady) {
-                    audio.play().then(() => {
-                        console.log('Audio is playing');
-                    }).catch((err) => {
-                        console.error('Error playing audio:', err);
-                    });
-                } else {
-                    console.error('Audio not ready to play');
-                }
+                playAudio();
 
                 // Hide the dragon balls and wish message after 7 seconds
                 setTimeout(() => {
@@ -261,13 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => findMessage.remove(), 4000); // Stay visible for 4 seconds
 
             // Play the audio when the message appears
-            if (isAudioReady) {
-                audio.play().catch(err => {
-                    console.error('Error playing audio:', err);
-                });
-            } else {
-                console.error('Audio not ready to play');
-            }
+            playAudio();
 
             // Show the container and position dragon balls
             container.style.display = 'block';
