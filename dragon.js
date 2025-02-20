@@ -220,8 +220,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.error('Audio not ready to play');
                 }
 
-                // Auto-remove after 7 seconds
-                setTimeout(() => wishMessageContainer.remove(), 7000);
+                // Hide the dragon balls and wish message after 7 seconds
+                setTimeout(() => {
+                    wishMessageContainer.remove();  // Remove the wish message
+                    container.style.display = 'none';  // Hide dragon balls container
+                }, 7000);
             }
         }
     }
