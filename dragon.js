@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dragonballs = container.querySelectorAll('.dragonball');
         const maxAttempts = window.innerWidth <= 768 ? 1500 : 1000; // Increased attempts
         const placedPositions = [];
-        
+
         // Get actual rendered size of balls
         const sampleBall = dragonballs[0];
         const ballWidth = sampleBall.offsetWidth;
@@ -128,13 +128,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const ball = dragonballs[i];
             let currentX = parseFloat(ball.style.left);
             let currentY = parseFloat(ball.style.top);
-            
+
             placedPositions.forEach((otherPos, j) => {
                 if (i === j) return;
                 const dx = otherPos.x - currentX;
                 const dy = otherPos.y - currentY;
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                
+
                 if (distance < minimumDistance) {
                     const adjustX = (dx / distance) * (minimumDistance - distance);
                     const adjustY = (dy / distance) * (minimumDistance - distance);
@@ -155,32 +155,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Enhanced collision detection
     function isCollision(ball) {
-        // Get the ball's bounding rectangle
+
         const ballRect = ball.getBoundingClientRect();
-        
-        // Get the elements to check for collision
+
+
         const elements = document.querySelectorAll('.gallery img, .love-letter, .dragonball-container');
-        const walls = Array.from(elements).map(el => {
+
+        return Array.from(elements).some(el => {
+            if (el === ball || el.contains(ball)) return false;
             const elRect = el.getBoundingClientRect();
-            return {
-                x: elRect.left + window.scrollX,
-                y: elRect.top + window.scrollY,
-                width: elRect.width,
-                height: elRect.height
-            };
+            return (
+                ballRect.left < elRect.right &&
+                ballRect.right > elRect.left &&
+                ballRect.top < elRect.bottom &&
+                ballRect.bottom > elRect.top
+            );
         });
 
-        // Calculate the ball's radius
-        const ballRadius = Math.max(ballRect.width, ballRect.height) / 2;
 
-        // Check for collision with walls
-        for (let wall of walls) {
-            if (ballRect.left + ballRadius > wall.x && ballRect.left - ballRadius < wall.x + wall.width &&
-                ballRect.top + ballRadius > wall.y && ballRect.top - ballRadius < wall.y + wall.height) {
-                return true; // Collision detected
-            }
-        }
-        return false; // No collision
+
+
+
+
+
+
+
+
+
+
     }
 
     // Track clicked dragon balls
@@ -191,14 +193,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const clickedBall = e.target.alt;
             clickedDragonBalls.add(clickedBall);
             e.target.classList.add('clicked');
-    
+
             // Make the ball solid after it's clicked
             e.target.style.opacity = '1'; 
-    
+
             if (clickedDragonBalls.size === 7) {
                 const wishMessageContainer = document.createElement('div');
                 wishMessageContainer.className = 'wish-message-container';
-                
+
                 // Shenron image styling
                 const shenronImg = document.createElement('img');
                 shenronImg.src = 'images/shenron.png';
@@ -206,15 +208,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 shenronImg.style.maxWidth = 'min(90vw, 600px)';
                 shenronImg.style.height = 'auto';
                 wishMessageContainer.appendChild(shenronImg);
-    
+
                 // Wish message styling
                 const wishMessage = document.createElement('div');
                 wishMessage.className = 'wish-message';
                 wishMessage.textContent = 'Your wish has been fulfilled; Luis will love Azalia eternally.';
                 wishMessageContainer.appendChild(wishMessage);
-    
+
                 document.body.appendChild(wishMessageContainer);
-    
+
                 playAudio();
 
                 // Hide the dragon balls and wish message after 7 seconds
@@ -225,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-    
+
     // 7-click handler to show dragon balls
     document.addEventListener("click", (e) => {
         if (isDragonBallsVisible) return;

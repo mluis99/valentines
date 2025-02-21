@@ -74,11 +74,11 @@ slideshow.addEventListener('touchend', () => {
       currentHeartSlide += diff > 0 ? 1 : -1;
       currentHeartSlide = (currentHeartSlide + slides.length) % slides.length;
     }
-    
+
     // Smoothly reset the transform
     slideshow.style.transform = 'translateX(0)';
     showHeartSlide(currentHeartSlide);
-    
+
     // Clear any existing auto-play timeout before starting a new one
     if (autoPlayTimeout) clearTimeout(autoPlayTimeout);
     autoPlayTimeout = setTimeout(() => {
@@ -96,12 +96,12 @@ slideshow.addEventListener('touchend', () => {
 function showHeartSlide(index) {
   const slides = document.querySelectorAll('.heart-slide');
   const dots = document.querySelectorAll('.heart-dot');
-  
+
   // Validate index
   index = (index + slides.length) % slides.length;
-  
+
   console.log("Showing Slide Index:", index); // Debug log
-  
+
   // Update slides
   slides.forEach((slide, i) => {
     if (i === index) {
@@ -112,21 +112,21 @@ function showHeartSlide(index) {
       slide.style.zIndex = 1; // Send other slides to the back
     }
   });
-  
+
   // Update dots
   dots.forEach((dot, i) => {
     dot.classList.toggle('active', i === index);
   });
-  
+
   currentHeartSlide = index;
 }
 
 // Love message and effects
 function showLoveMessage() {  
-  // Create hearts and flowers effects
+
   createHeartsAndFlowers();
-  
-  // Check if audio has not been played yet
+
+
   if (!audioPlayed) {
     audioElement.play()
       .then(() => {
@@ -136,16 +136,16 @@ function showLoveMessage() {
       .catch(error => {
         console.log("Audio play failed:", error);
         alert("Please click anywhere first to allow audio!");
-        // Suggest user to retry playing audio
-        setTimeout(() => {
-          if (confirm("Would you like to try playing the audio again?")) {
-            audioElement.play();
-          }
-        }, 1000);
+
+
+
+
+
+
       });
   }
-  
-  // Prevent scrolling on small screens
+
+
   if (window.innerWidth <= 600) {
     document.body.style.overflow = "hidden";
   }
@@ -221,7 +221,7 @@ function setupMobileMenu() {
 
   document.addEventListener('touchmove', (e) => {
     if (!isSwiping) return;
-    
+
     const currentX = e.touches[0].clientX;
     const diff = currentX - touchStartX;
 
@@ -239,7 +239,7 @@ function setupMobileMenu() {
 
   document.addEventListener('touchend', (e) => {
     if (!isSwiping) return;
-    
+
     isSwiping = false;
     touchEndX = e.changedTouches[0].clientX;
     const swipeDistance = touchEndX - touchStartX;
@@ -270,7 +270,7 @@ function setupMobileMenu() {
 // Initialize everything when DOM is ready
 window.addEventListener('DOMContentLoaded', () => {
   console.log('DOM Content Loaded - Initializing...');
-  
+
   // Setup mobile menu first
   requestAnimationFrame(() => {
     setupMobileMenu();
@@ -380,11 +380,11 @@ window.addEventListener('load', () => {
   setInterval(createFloatingNote, 3000);
 });
 
-// Utility function to add event listeners
-function addEventListenerWithLogging(target, event, handler, options) {
-  target.addEventListener(event, handler, options);
-  console.log(`Added ${event} listener to ${target}`);
-}
+
+
+
+
+
 
 // Interactive Cursor Effect
 let cursorSymbols = ["❤️", "💕", "💞", "🌸", "🌺", "🌷"];
@@ -403,11 +403,13 @@ function createCursorEffect(e) {
   }, 800);
 }
 
-addEventListenerWithLogging(document, "click", createCursorEffect);
+document.addEventListener("click", createCursorEffect);
 
-addEventListenerWithLogging(document, 'dblclick', e => e.preventDefault());
 
-addEventListenerWithLogging(document, 'touchstart', e => {
+
+// Prevent unwanted zooming
+document.addEventListener('dblclick', e => e.preventDefault());
+document.addEventListener('touchstart', e => {
   if (e.touches.length > 1) e.preventDefault();
 }, { passive: false });
 
@@ -452,7 +454,7 @@ function initMobileSlideshow() {
   slideshow.addEventListener('touchend', e => {
     const touchEnd = e.changedTouches[0].clientX;
     const diff = touchEnd - touchStart;
-    
+
     if (Math.abs(diff) > 50) {
       if (diff > 0) prevBtn.click();
       else nextBtn.click();
