@@ -155,19 +155,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Enhanced collision detection
     function isCollision(ball) {
+        // Get the ball's bounding rectangle
         const ballRect = ball.getBoundingClientRect();
+        
+        // Get the elements to check for collision
         const elements = document.querySelectorAll('.gallery img, .love-letter, .dragonball-container');
-
-        return Array.from(elements).some(el => {
-            if (el === ball || el.contains(ball)) return false;
+        const walls = Array.from(elements).map(el => {
             const elRect = el.getBoundingClientRect();
-            return (
-                ballRect.left < elRect.right &&
-                ballRect.right > elRect.left &&
-                ballRect.top < elRect.bottom &&
-                ballRect.bottom > elRect.top
-            );
+            return {
+                x: elRect.left + window.scrollX,
+                y: elRect.top + window.scrollY,
+                width: elRect.width,
+                height: elRect.height
+            };
         });
+
+        // Calculate the ball's radius
+        const ballRadius = Math.max(ballRect.width, ballRect.height) / 2;
+
+        // Check for collision with walls
+        for (let wall of walls) {
+            if (ballRect.left + ballRadius > wall.x && ballRect.left - ballRadius < wall.x + wall.width &&
+                ballRect.top + ballRadius > wall.y && ballRect.top - ballRadius < wall.y + wall.height) {
+                return true; // Collision detected
+            }
+        }
+        return false; // No collision
     }
 
     // Track clicked dragon balls

@@ -123,8 +123,10 @@ function showHeartSlide(index) {
 
 // Love message and effects
 function showLoveMessage() {  
+  // Create hearts and flowers effects
   createHeartsAndFlowers();
   
+  // Check if audio has not been played yet
   if (!audioPlayed) {
     audioElement.play()
       .then(() => {
@@ -134,9 +136,16 @@ function showLoveMessage() {
       .catch(error => {
         console.log("Audio play failed:", error);
         alert("Please click anywhere first to allow audio!");
+        // Suggest user to retry playing audio
+        setTimeout(() => {
+          if (confirm("Would you like to try playing the audio again?")) {
+            audioElement.play();
+          }
+        }, 1000);
       });
   }
   
+  // Prevent scrolling on small screens
   if (window.innerWidth <= 600) {
     document.body.style.overflow = "hidden";
   }
@@ -371,6 +380,12 @@ window.addEventListener('load', () => {
   setInterval(createFloatingNote, 3000);
 });
 
+// Utility function to add event listeners
+function addEventListenerWithLogging(target, event, handler, options) {
+  target.addEventListener(event, handler, options);
+  console.log(`Added ${event} listener to ${target}`);
+}
+
 // Interactive Cursor Effect
 let cursorSymbols = ["❤️", "💕", "💞", "🌸", "🌺", "🌷"];
 let cursorIndex = 0;
@@ -388,11 +403,11 @@ function createCursorEffect(e) {
   }, 800);
 }
 
-document.addEventListener("click", createCursorEffect);
+addEventListenerWithLogging(document, "click", createCursorEffect);
 
-// Prevent unwanted zooming
-document.addEventListener('dblclick', e => e.preventDefault());
-document.addEventListener('touchstart', e => {
+addEventListenerWithLogging(document, 'dblclick', e => e.preventDefault());
+
+addEventListenerWithLogging(document, 'touchstart', e => {
   if (e.touches.length > 1) e.preventDefault();
 }, { passive: false });
 
