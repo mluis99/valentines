@@ -477,6 +477,9 @@ h1.our-memories {
   pointer-events: all;
 }
 
+.dragonball-cursor {
+    cursor: url('dragonballs/dragonball-cursor.png'), auto;
+}
 
 /* Mobile Disable */
 @media (max-width: 768px) {

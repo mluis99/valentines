@@ -223,6 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     wishMessageContainer.remove();  // Remove the wish message
                     container.style.display = 'none';  // Hide dragon balls container
+                    document.body.classList.remove('dragonball-cursor');
                 }, 7000);
             }
         }
@@ -263,6 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
             playAudio();
 
             // Show the container and position dragon balls
+            document.body.classList.add('dragonball-cursor');
             container.style.display = 'block';
             placeDragonBalls();
             isDragonBallsVisible = true;
