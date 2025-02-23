@@ -392,12 +392,6 @@ window.addEventListener('load', () => {
   setInterval(createFloatingNote, 3000);
 });
 
-
-
-
-
-
-
 // Interactive Cursor Effect
 let cursorSymbols = ["❤️", "💕", "💞", "🌸", "🌺", "🌷"];
 let cursorIndex = 0;
@@ -442,6 +436,21 @@ function initMobileSlideshow() {
   const nextBtn = slideshow.querySelector('#next-slide');
   let currentIndex = 0;
 
+  // Shuffle the slides before initializing
+  function shuffleSlides() {
+    const slidesArray = Array.from(slides);
+    for (let i = slidesArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [slidesArray[i], slidesArray[j]] = [slidesArray[j], slidesArray[i]];
+    }
+
+    // Append the shuffled slides back to the container
+    slidesArray.forEach(slide => slideshow.appendChild(slide));
+  }
+
+  shuffleSlides(); // Call this function to randomize the slides
+
+  // Function to show the current slide
   function showSlide(index) {
     slides.forEach(slide => slide.classList.remove('active'));
     slides[index].classList.add('active');
@@ -473,5 +482,5 @@ function initMobileSlideshow() {
     }
   });
 
-  showSlide(0);
+  showSlide(0); // Show the first slide initially
 }
