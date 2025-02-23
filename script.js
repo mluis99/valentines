@@ -135,31 +135,22 @@ function showHeartSlide(index) {
 
 // Love message and effects
 function showLoveMessage() {  
-
   createHeartsAndFlowers();
 
-
   if (!audioPlayed) {
-    audioElement.play()
-      .then(() => {
-        audioPlayed = true;
-        document.getElementById("audioText").innerText = "Pause Music";
-      })
-      .catch(error => {
-        console.log("Audio play failed:", error);
-        alert("Please click anywhere first to allow audio!");
-
-
-
-
-
-
-      });
+      audioElement.play()
+          .then(() => {
+              audioPlayed = true;
+              document.getElementById("audioText").innerText = "Pause Music";
+          })
+          .catch(error => {
+              console.log("Audio play failed:", error);
+              alert("Please click anywhere first to allow audio!");
+          });
   }
 
-
   if (window.innerWidth <= 600) {
-    document.body.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
   }
 }
 
